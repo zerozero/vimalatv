@@ -150,32 +150,6 @@ export class CollabComponent implements OnInit{
 }
 
 
-/*
-
- UPLOAD IMAGE DIALOG
-
- */
-@Component({
-    selector: 'upload-image-dialog',
-    templateUrl: './upload.image.modal.component.html',
-    styles: []
-})
-export class UploadImageDialog {
-
-
-    constructor(public dialogRef: MdDialogRef<UploadImageDialog>) {
-
-    }
-
-
-    onCancel(){
-        this.dialogRef.close();
-    }
-
-    onSubmit(){
-        // this.dialogRef.close(this.data);
-    }
-}
 
 /*
 
