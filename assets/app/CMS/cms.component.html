@@ -1,0 +1,20 @@
+<div class="mat-app-background ">
+
+    <md-toolbar color="accent">
+
+        <span>vimala.tv - CMS</span>
+        <span class="example-spacer"></span>
+        <span>
+      <button md-button (click)="login()" *ngIf="!authenticated()">Log In</button>
+      <button md-button (click)="logout()" *ngIf="authenticated()">Log Out</button>
+    </span>
+
+    </md-toolbar>
+
+    <div fxLayout="row" fxLayoutAlign="start center" class="cms-content">
+        <div fxFlex>
+            <cms-auth></cms-auth>
+        </div>
+    </div>
+
+</div>

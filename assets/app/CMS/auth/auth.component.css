@@ -1,0 +1,7 @@
+.containerX{
+    height: calc(100vh - 56px);
+}
+
+.auth-prompt{
+    text-align: center;
+}

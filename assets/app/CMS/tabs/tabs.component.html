@@ -1,0 +1,16 @@
+<div class="containerX" fxLayout="column" fxLayoutAlign="start center">
+    <div fxFlex="48px" ></div>
+    <div fxFlex >
+        <nav md-tab-nav-bar>
+            <a md-tab-link
+               *ngFor="let link of navLinks"
+               [routerLink]="link.route"
+               routerLinkActive #rla="routerLinkActive"
+               [active]="rla.isActive">
+                {{link.label}}
+            </a>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

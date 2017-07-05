@@ -1,0 +1,29 @@
+<form class="gig-container" #artistForm="ngForm" (ngSubmit)="onSubmit()">
+    <div fxLayout="column" fxLayoutGap="40px">
+
+        <h4 fxFlex>{{ data.collab.id ? 'Edit' : 'Create' }} Collaboration</h4>
+
+        <md-select class="artist-select" fxFlex="0 0 auto" placeholder="Artist" [(ngModel)]="selectedArtist" name="sel" ngDefaultControl>
+            <md-option *ngFor="let artist of data.artists" [value]="artist">
+                {{artist.name}}
+            </md-option>
+        </md-select>
+
+        <image-uploader-component fxFlex></image-uploader-component>
+
+        <div fxFlex fxlayout="row" fxLayoutAlign="end center">
+            <button md-raised-button
+                    fxFlex="0 0 auto"
+                    color="accent"
+                    type="submit"
+                    [disabled]="!artistForm.form.valid">SAVE</button>
+            <button md-raised-button
+                    fxFlex="0 0 auto"
+                    type="button"
+                    (click)="onCancel()">CANCEL</button>
+        </div>
+        <div fxFlex></div>
+    </div>
+</form>
+
+

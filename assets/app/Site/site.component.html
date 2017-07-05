@@ -1,0 +1,92 @@
+<md-toolbar color="accent" >
+    <span class="example-spacer"></span>
+
+
+    <md-menu #collabMenu="mdMenu"
+             class="flat-menu-panel"
+             [class]="classes"
+             [overlapTrigger]="false">
+        <button md-menu-item class="body-font" *ngFor="let artist of artists" (click)="showCollaboration(artist)">{{artist.name | uppercase}}</button>
+    </md-menu>
+
+    <button fxFlex="0 1 auto"
+            md-icon-button
+            fxHide="false"
+            fxHide.gt-sm="true"
+            (click)="sidenav.open()"
+            class="body-font">
+        <i class="material-icons">menu</i>
+    </button>
+
+    <div fxLayout="row"
+         fxHide="true"
+         fxHide.gt-sm="false">
+
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/home']"
+           class="body-font">HOME</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/bio']"
+           class="body-font">BIO</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/gigs']"
+           class="body-font">GIGS</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/media']"
+           class="body-font">MEDIA</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           [mdMenuTriggerFor]="collabMenu"
+           class="body-font">COLLABORATIONS</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/reviews']"
+           class="body-font">REVIEWS</a>
+        <span class="body-font separator">/</span>
+        <a fxFlex="auto"
+           md-button
+           routerLinkActive="active"
+           [routerLink]="['/contact']"
+           class="body-font">CONTACT</a>
+    </div>
+</md-toolbar>
+
+<md-sidenav-container>
+
+    <md-sidenav #sidenav mode="push" class="sidenav-menu">
+        <!-- sidenav content -->
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap.lt-md="0px" fxLayoutGap="12px" class="menu-layout-container">
+            <!--<div fxFlex="56px"></div>-->
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('home'); sidenav.close()">HOME</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('bio'); sidenav.close()">BIO</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('gigs'); sidenav.close()">GIGS</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('media'); sidenav.close()">MEDIA</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('collab'); sidenav.close()">COLLABORATIONS</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('reviews'); sidenav.close()">REVIEWS</button>
+            <button fxFlex="0 1 auto" md-button (click)="showCollaboration('contact'); sidenav.close()">CONTACT</button>
+        </div>
+    </md-sidenav>
+
+
+    <!-- primary content -->
+    <!--<div class="main-content" fxLayout="row">-->
+    <!--<app-quotes fxFlexFill></app-quotes>-->
+    <!--</div>-->
+
+    <router-outlet></router-outlet>
+
+</md-sidenav-container>

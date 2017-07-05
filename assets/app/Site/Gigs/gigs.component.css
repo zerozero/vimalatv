@@ -1,0 +1,49 @@
+.gigs-content{
+    height: 100%;
+    background: url("../../../images/Vimala-Rowe-website-gigs-pic.jpg") no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+h3, h4, p{
+    color: white;
+    font-size: 18px;
+}
+
+.website-link{
+    vertical-align: middle;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+}
+
+button{
+    margin-left: 50px;
+}
+
+.date-line{
+    color: #ff4081;
+}
+
+.mat-subheader{
+    color:#e7c130 !important;
+    font-size: 22px !important;
+    margin-bottom: 26px !important;
+}
+
+.list-container{
+    height: calc(100vh - 96px);
+    overflow: auto;
+}
+
+@media screen and (max-width: 959px){
+    .buy-tickets-large{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 960px){
+    .buy-tickets-small{
+        display: none;
+    }
+}

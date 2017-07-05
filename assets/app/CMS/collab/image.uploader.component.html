@@ -1,0 +1,24 @@
+<div fxLayout="column">
+
+    <div fxFlex="80%" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOver($event)"
+         (onFileDrop)="onFileDrop($event)"
+         [uploader]="uploader" class="well well-lg my-drop-zone">
+        Drag and drop image files here (.jpg or .png)
+    </div>
+
+    <md-progress-bar
+            fxFlex="1 0 auto"
+            [color]="'accent'"
+            [mode]="determinate"
+            [value]="percent">
+    </md-progress-bar>
+
+    <!--<md-progress-bar-->
+            <!--fxFlex-->
+            <!--class="example-margin"-->
+            <!--mode="determinate"-->
+            <!--[value]="percent">-->
+    <!--</md-progress-bar>-->
+</div>
+
+

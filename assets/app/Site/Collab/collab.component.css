@@ -1,0 +1,27 @@
+
+
+.content-component{
+    height: 200px;
+    padding: 10px;
+}
+
+.top-margin{
+    height: 10vh;
+}
+
+.component-layout{
+    max-width: 960px;
+}
+
+.collab-content{
+    height: 100%;
+    background: url("../../../images/Vimala-Rowe-website-cover-pic-dark.jpg") no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.content-container{
+    overflow: auto;
+    height: calc(100vh - 96px);
+    margin: 32px;
+}

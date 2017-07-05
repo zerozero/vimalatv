@@ -1,0 +1,28 @@
+<div class="gigs-content">
+
+    <div class="containerCMS" fxLayout="row" fxLayoutAlign="center start">
+        <div class="list-container" >
+            <div fxLayout="column" fxFlex.gt-sm="50vw" fxFlex="90vw">
+                <div fxFlex.gt-sm="10vh" fxFlex="5vh"></div>
+                <md-list class="gig-list" fxFlex="1 1 auto">
+                    <h4 md-subheader>Upcoming Dates</h4>
+                    <md-list-item *ngFor="let gig of filteredGigs">
+
+                            <h4 md-line class="date-line">{{gig.date | date:'fullDate'}} </h4>
+                            <h4 md-line><md-icon class="website-link"
+                                    (click)="gigService.gotoWebsite(gig)"
+                                    *ngIf="gigService.hasWebsite(gig)">launch</md-icon> {{gig.venue}}</h4>
+                            <h4 md-line>{{gig.description}}</h4>
+                            <button *ngIf="gigService.hasTicketURL(gig)" class="buy-tickets-small" md-mini-fab
+                                (click)="gigService.buyTickets(gig)"
+                                color="accent"><md-icon>credit_card</md-icon></button>
+                            <button *ngIf="gigService.hasTicketURL(gig)" class="buy-tickets-large" md-raised-button
+                                    (click)="gigService.buyTickets(gig)"
+                                    color="accent">Tickets</button>
+
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
+</div>

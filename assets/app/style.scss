@@ -1,0 +1,51 @@
+
+//@import '~@angular/material/_theming';
+//@include mat-core();
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+//@include mat-core();
+
+
+.flat-menu-panel {
+  box-shadow: none;
+  max-width: 300px;
+  background-color: #ff4081;
+}
+
+.mat-menu-content{
+  background-color: #ff4081;
+}
+
+.containerCMS{
+  height: calc(100vh - 160px);
+}
+
+.containerSite{
+  height: calc(100vh - 56px);
+}
+
+
+.body-font{
+  font-family: "acumin-pro-condensed",sans-serif;
+}
+
+.pink{
+  background-color: #ff4081;
+}
+
+
+.red{
+  background-color: red;
+}
+
+.green{
+  background-color: green;
+}
+
+.purple{
+  background-color: purple;
+}

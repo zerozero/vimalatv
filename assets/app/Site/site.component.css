@@ -1,0 +1,34 @@
+md-sidenav-container {
+    height: calc(100vh - 65px);
+}
+
+.sidenav-menu{
+    background-color: #ff4081 !important;
+}
+
+.menu-layout-container{
+    height: 100%;
+}
+
+.mat-button, .mat-menu-item {
+    font-size: 30px;
+    color: white;
+}
+
+a:focus{
+    outline:0 !important;
+    text-decoration: none;
+    color:#e7c130;
+}
+
+a:hover{
+    text-decoration: none;
+    color:#a82d56;
+}
+.active{
+    color:#e7c130;
+}
+
+.separator{
+    font-size: 26px;
+}

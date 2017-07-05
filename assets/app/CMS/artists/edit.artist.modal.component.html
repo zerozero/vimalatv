@@ -1,0 +1,25 @@
+<form class="gig-container" #gigForm="ngForm" (ngSubmit)="onSubmit()">
+    <h4>{{ data.id ? 'Edit' : 'Create' }} Artist</h4>
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="Artist Name"
+                   required
+                   [(ngModel)]="data.name"
+                   name="venue">
+        </md-input-container>
+    </p>
+    <div fxlayout="row" fxLayoutAlign="end center">
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                color="accent"
+                type="submit"
+                [disabled]="!gigForm.form.valid">SAVE</button>
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                type="button"
+                (click)="onCancel()">CANCEL</button>
+    </div>
+</form>
+
+

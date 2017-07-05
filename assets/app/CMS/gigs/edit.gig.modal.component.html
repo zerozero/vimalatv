@@ -1,0 +1,64 @@
+<form class="gig-container" #gigForm="ngForm" (ngSubmit)="onSubmit()">
+    <h4>{{ data.id ? 'Edit' : 'Create' }} Gig</h4>
+    <md-input-container class="full-width">
+        <input mdInput
+               [mdDatepicker]="picker"
+               required
+               placeholder="Choose a date"
+               [(ngModel)]="data.date"
+               name="date">
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+    </md-input-container>
+    <md-datepicker #picker></md-datepicker>
+
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="Venue"
+                   required
+                   [(ngModel)]="data.venue"
+                   name="venue">
+        </md-input-container>
+    </p>
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="Venue website"
+                   [(ngModel)]="data.website"
+                   name="venue">
+        </md-input-container>
+    </p>
+    <p>
+        <md-input-container class="full-width">
+            <textarea mdInput
+                      placeholder="Description"
+                      required
+                      maxlength="100"
+                      [(ngModel)]="data.description"
+                      name="desc">
+            </textarea>
+        </md-input-container>
+    </p>
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput type="url"
+                   placeholder="tickets url"
+                   [(ngModel)]="data.ticketUrl"
+                   name="url">
+        </md-input-container>
+    </p>
+    <div fxlayout="row" fxLayoutAlign="end center">
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                color="primary"
+                type="submit"
+                [disabled]="!gigForm.form.valid">SAVE</button>
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                type="button"
+                (click)="onCancel()">CANCEL</button>
+    </div>
+
+</form>
+
+

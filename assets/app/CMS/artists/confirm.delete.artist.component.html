@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxFlex fxFlexAlign="center center">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <i fxFlex="nogrow" class="material-icons delete">delete_forever</i>
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <h3 fxFlex>Are you sure you want to delete the artist?</h3>
+        <h4 fxFlex>{{data.name}}</h4>
+      </div>
+    </div>
+  </div>
+  <div fxFlex fxFlexAlign="center center">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button
+        (click)="onAccept()"
+        md-raised-button color="primary">Yes</button>
+      <button
+        (click)="onDecline()"
+        md-raised-button>No</button>
+    </div>
+  </div>
+</div>

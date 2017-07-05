@@ -1,0 +1,46 @@
+.add-button{
+    margin: 12px;
+}
+
+.inline-fab{
+    margin-left: 12px;
+}
+
+.gig-list{
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.checkbox{
+    margin: 12px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.website-link{
+    vertical-align: middle;
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 959px){
+    .buy-tickets-large{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 960px){
+    .buy-tickets-small{
+        display: none;
+    }
+}
+button{
+    margin-left: 50px;
+}
+
+md-slide-toggle{
+    margin-left: 12px;
+}

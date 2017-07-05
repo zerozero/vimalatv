@@ -1,0 +1,12 @@
+<div class="containerX" fxLayout="column" fxLayoutAlign="center center">
+    <div fxFlex="1 1 auto" *ngIf="authenticated()">
+
+            <cms-tabs></cms-tabs>
+
+    </div>
+
+    <div class="auth-prompt" fxFlex="0 0 auto" *ngIf="!authenticated()">
+        <p>Forgotten username or password?</p>
+        <p>Contact <a href="mailTo:info@jonrowe.com">info@jonrowe.com</a></p>
+    </div>
+</div>
