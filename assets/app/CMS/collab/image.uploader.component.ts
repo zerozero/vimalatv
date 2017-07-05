@@ -15,8 +15,49 @@ const URL = '/collab/upload/';
 
 @Component({
   selector: 'image-uploader-component',
-  templateUrl: './image.uploader.component.html',
-  styleUrls: ['./image.uploader.component.css'],
+  template: `
+      <div fxLayout="column">
+
+          <div fxFlex="32px"></div>
+          <div fxFlex="80%" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOver($event)"
+               (onFileDrop)="onFileDrop($event)"
+               [uploader]="uploader" class="well well-lg my-drop-zone">
+              <h4>Drag and drop image files here (.jpg or .png)</h4>
+          </div>
+
+          <md-progress-bar
+                  fxFlex="1 0 auto"
+                  [color]="'primary'"
+                  [mode]="determinate"
+                  [value]="percent">
+          </md-progress-bar>
+
+      </div>
+  `,
+  styles: [`
+      .well h4{
+          text-align: center;
+          color: darkgray;
+      }
+
+      .well {
+          min-height: 20px;
+          padding: 19px;
+          margin-bottom: 20px;
+          background-color: rgba(255, 64, 129, 0.12);
+          border: 1px solid darkgray;
+          border-radius: 10px;
+      }
+
+
+      .well-lg {
+          padding: 48px;
+          border-radius: 20px;
+      }
+
+      .my-drop-zone { border: dotted 3px lightgray; }
+      .nv-file-over { border: dotted 3px #ff4081; }
+  `],
   outputs:      ['onComplete']
 })
 export class ImageUploaderComponent implements OnInit{
