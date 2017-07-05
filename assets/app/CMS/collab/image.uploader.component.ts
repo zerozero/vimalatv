@@ -122,6 +122,7 @@ export class ImageUploaderComponent implements OnInit{
 
     this.uploader.onCompleteAll = () => {
       console.log('onCompleteAll');
+      this.percent = 0;
       this.onComplete.emit();
     }
 

@@ -27,7 +27,7 @@ import {TabsComponent} from "./tabs/tabs.component";
 import {HomeComponent} from "./home/home.component";
 import {BioComponent} from "./bio/bio.component";
 import {MediaComponent} from "./media/media.component";
-import {CollabComponent, DeleteCollabDialog, EditCollabDialog, UploadImageDialog} from "./collab/collab.component";
+import {CollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
 import {ContactComponent} from "./contact/contact.component";
@@ -35,6 +35,7 @@ import {FormsModule} from "@angular/forms";
 import {ArtistComponent, DeleteArtistDialog, EditArtistDialog} from "./artists/artist.component";
 import {ImageUploaderComponent} from "./collab/image.uploader.component";
 import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
+import {TextEditorComponent} from "./collab/text.editor.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -87,6 +88,7 @@ const MY_DATE_FORMATS = {
         ReviewsComponent,
         ContactComponent,
         ImageUploaderComponent,
+        TextEditorComponent,
         FileDropDirective,
         FileSelectDirective,
         DeleteGigDialog,
@@ -94,8 +96,7 @@ const MY_DATE_FORMATS = {
         EditArtistDialog,
         DeleteArtistDialog,
         EditCollabDialog,
-        DeleteCollabDialog,
-        UploadImageDialog
+        DeleteCollabDialog
     ],
     providers: [
         Auth,
@@ -112,8 +113,7 @@ const MY_DATE_FORMATS = {
         EditArtistDialog,
         DeleteArtistDialog,
         EditCollabDialog,
-        DeleteCollabDialog,
-        UploadImageDialog
+        DeleteCollabDialog
     ]
 })
 
