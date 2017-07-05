@@ -1,9 +1,14 @@
-
+.image-uploader{
+  height: 300px;
+}
 /* --------------------------------------------------
  Wells
  -------------------------------------------------- */
 
-
+.well h4{
+  text-align: center;
+  color: darkgray;
+}
 /* Base class */
 .well {
   min-height: 20px;

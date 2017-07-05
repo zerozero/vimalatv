@@ -9,7 +9,15 @@
             </md-option>
         </md-select>
 
-        <image-uploader-component fxFlex></image-uploader-component>
+        <md-tab-group fxFlex="280px" [dynamicHeight]="false">
+            <md-tab label="Image">
+                <image-uploader-component ></image-uploader-component>
+            </md-tab>
+            <md-tab label="Text">Enter Text...</md-tab>
+            <md-tab label="Video">Embed Video</md-tab>
+            <md-tab label="Audio">Embed Audio</md-tab>
+        </md-tab-group>
+
 
         <div fxFlex fxlayout="row" fxLayoutAlign="end center">
             <button md-raised-button
