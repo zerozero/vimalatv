@@ -13,7 +13,14 @@ var artistRoutes = require('./routes/artist');
 var collabRoutes = require('./routes/collab');
 
 var app = express();
-mongoose.connect('localhost:27017/vimala-tv');//the name of the database: vimala-tv
+
+console.log("connecting to  "+process.env.NODE_ENV);
+const URL = (process.env.NODE_ENV === 'production') ? process.env.MONGOHQ_URL
+    : 'localhost:27017/vimala-tv';
+
+mongoose.connect(URL);
+mongoose.connection.on('error', console.error.bind(console, 'An error occurred with the DB connection: '));
+// mongoose.connect('localhost:27017/vimala-tv');//the name of the database: vimala-tv
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
