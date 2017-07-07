@@ -10,7 +10,7 @@ import {Artist} from "../artists/artist.model";
     styleUrls: ['./collab.component.css'],
     templateUrl: './collab.component.html'
 })
-export class CollabComponent implements OnInit{
+export class CmsCollabComponent implements OnInit{
 
     collabs: Collab[] = [];
     artists: Artist[] = [];

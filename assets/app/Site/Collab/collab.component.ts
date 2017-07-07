@@ -1,5 +1,5 @@
 import {
-    Component, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, ViewChild,
+    Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, ViewChild,
     ViewContainerRef
 } from "@angular/core";
 import {ImageComponent, ImageModel} from "./image.component";
@@ -40,6 +40,11 @@ export class CollabComponent implements OnInit, OnDestroy{
 
     ];
 
+    txtFactory: ComponentFactory<TextComponent>;
+    imgFactory: ComponentFactory<ImageComponent>;
+    vidFactory: ComponentFactory<VideoComponent>;
+    audFactory: ComponentFactory<AudioComponent>;
+
     constructor(
         private _resolver: ComponentFactoryResolver,
         private route: ActivatedRoute) {
@@ -56,35 +61,58 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.sub.unsubscribe();
     }
 
+    createComponent( template: any ){
+        if (template instanceof ImageModel){
+            let cmp: ComponentRef<ImageComponent> = this._container.createComponent(this.imgFactory);
+            cmp.instance.initialise(template);
+        }
+
+        if (template instanceof TextModel){
+            let cmp: ComponentRef<TextComponent> = this._container.createComponent(this.txtFactory);
+            cmp.instance.initialise(template);
+        }
+
+        if (template instanceof VideoModel){
+            let cmp: ComponentRef<VideoComponent> = this._container.createComponent(this.vidFactory);
+            cmp.instance.initialise(template);
+        }
+
+        if (template instanceof AudioModel){
+            let cmp: ComponentRef<AudioComponent> = this._container.createComponent(this.audFactory);
+            cmp.instance.initialise(template);
+        }
+    }
+
     ngAfterViewInit() {
-        const txtFactory = this._resolver.resolveComponentFactory(TextComponent);
-        const imgFactory = this._resolver.resolveComponentFactory(ImageComponent);
-        const vidFactory = this._resolver.resolveComponentFactory(VideoComponent);
-        const audFactory = this._resolver.resolveComponentFactory(AudioComponent);
 
-        this.templateDef.forEach((template) => {
+        this.txtFactory = this._resolver.resolveComponentFactory(TextComponent);
+        this.imgFactory = this._resolver.resolveComponentFactory(ImageComponent);
+        this.vidFactory = this._resolver.resolveComponentFactory(VideoComponent);
+        this.audFactory = this._resolver.resolveComponentFactory(AudioComponent);
 
-            if (template instanceof ImageModel){
-               let cmp: ComponentRef<ImageComponent> = this._container.createComponent(imgFactory);
-                cmp.instance.initialise(template);
-           }
-
-           if (template instanceof TextModel){
-               let cmp: ComponentRef<TextComponent> = this._container.createComponent(txtFactory);
-               cmp.instance.initialise(template);
-           }
-
-            if (template instanceof VideoModel){
-                let cmp: ComponentRef<VideoComponent> = this._container.createComponent(vidFactory);
-                cmp.instance.initialise(template);
-            }
-
-            if (template instanceof AudioModel){
-                let cmp: ComponentRef<AudioComponent> = this._container.createComponent(audFactory);
-                cmp.instance.initialise(template);
-            }
-
-        });
+        // this.templateDef.forEach((template) => {
+        //
+        //     if (template instanceof ImageModel){
+        //        let cmp: ComponentRef<ImageComponent> = this._container.createComponent(imgFactory);
+        //         cmp.instance.initialise(template);
+        //    }
+        //
+        //    if (template instanceof TextModel){
+        //        let cmp: ComponentRef<TextComponent> = this._container.createComponent(txtFactory);
+        //        cmp.instance.initialise(template);
+        //    }
+        //
+        //     if (template instanceof VideoModel){
+        //         let cmp: ComponentRef<VideoComponent> = this._container.createComponent(vidFactory);
+        //         cmp.instance.initialise(template);
+        //     }
+        //
+        //     if (template instanceof AudioModel){
+        //         let cmp: ComponentRef<AudioComponent> = this._container.createComponent(audFactory);
+        //         cmp.instance.initialise(template);
+        //     }
+        //
+        // });
 
 
     }

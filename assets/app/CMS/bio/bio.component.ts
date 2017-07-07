@@ -4,6 +4,6 @@ import {Component} from "@angular/core";
     styleUrls: ['./bio.component.css'],
     templateUrl: './bio.component.html'
 })
-export class BioComponent{
+export class CmsBioComponent{
 
 }

@@ -9,17 +9,22 @@
             </md-option>
         </md-select>
 
-        <md-tab-group fxFlex="280px" [dynamicHeight]="false">
+        <md-tab-group fxFlex="300px" [dynamicHeight]="true">
+            <md-tab label="Text">
+                <text-editor-component (OnTextAdded)="preview.createComponent($event)" ></text-editor-component>
+            </md-tab>
             <md-tab label="Image">
                 <image-uploader-component ></image-uploader-component>
             </md-tab>
-            <md-tab label="Text">
-                <text-editor-component></text-editor-component>
+            <md-tab label="Video">
+                <embed-video-component></embed-video-component>
             </md-tab>
-            <md-tab label="Video">Embed Video</md-tab>
-            <md-tab label="Audio">Embed Audio</md-tab>
+            <md-tab label="Audio">
+                <embed-audio-component></embed-audio-component>
+            </md-tab>
         </md-tab-group>
 
+        <app-collab #preview></app-collab>
 
         <div fxFlex fxlayout="row" fxLayoutAlign="end center">
             <button md-raised-button

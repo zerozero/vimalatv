@@ -25,9 +25,9 @@ import {AuthGuard} from "./auth/auth-guard.service";
 import {Auth} from "./auth/auth.service";
 import {TabsComponent} from "./tabs/tabs.component";
 import {HomeComponent} from "./home/home.component";
-import {BioComponent} from "./bio/bio.component";
+import {CmsBioComponent} from "./bio/bio.component";
 import {MediaComponent} from "./media/media.component";
-import {CollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
+import {CmsCollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
 import {ContactComponent} from "./contact/contact.component";
@@ -36,6 +36,9 @@ import {ArtistComponent, DeleteArtistDialog, EditArtistDialog} from "./artists/a
 import {ImageUploaderComponent} from "./collab/image.uploader.component";
 import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
 import {TextEditorComponent} from "./collab/text.editor.component";
+import {EmbedVideoComponent} from "./collab/embed.video.component";
+import {EmbedAudioomponent} from "./collab/embed.audio.component";
+import {CommonModule} from "../common.module";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -54,6 +57,7 @@ const MY_DATE_FORMATS = {
 
 @NgModule({
     imports: [
+        CommonModule,
         BrowserModule,
         FormsModule,
         MdToolbarModule,
@@ -80,15 +84,17 @@ const MY_DATE_FORMATS = {
         AuthComponent,
         TabsComponent,
         HomeComponent,
-        BioComponent,
+        CmsBioComponent,
         MediaComponent,
-        CollabComponent,
+        CmsCollabComponent,
         ArtistComponent,
         GigsComponent,
         ReviewsComponent,
         ContactComponent,
         ImageUploaderComponent,
         TextEditorComponent,
+        EmbedVideoComponent,
+        EmbedAudioomponent,
         FileDropDirective,
         FileSelectDirective,
         DeleteGigDialog,
