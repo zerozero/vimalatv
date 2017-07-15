@@ -11,7 +11,8 @@
     "build:prod": "del public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del 'public/js/app/**/*.js' 'public/js/app/**/*.js.map' '!public/js/app/styles.bundle.js' '!public/js/app/app.bundle.js' '!public/js/app/*.chunk.js' 'assets/app/**/*.ngfactory.ts' 'assets/app/**/*.shim.ts' 'assets/app/**/*.ngsummary.json' 'assets/app/**/*.ngstyle.ts'",
     "build:prod1": "del public/js/app && webpack --config webpack.config.prod1.js --progress --profile --bail",
     "build:prod2": "webpack --config webpack.config.prod2.js --progress --profile --bail",
-    "build:prod3": "webpack --config webpack.config.prod3.js --progress --profile --bail"
+    "build:prod3": "webpack --config webpack.config.prod3.js --progress --profile --bail",
+    "postinstall": "npm run build:prod1"
   },
   "dependencies": {
     "@angular/animations": "^4.1.3",
