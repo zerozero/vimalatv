@@ -1,11 +1,17 @@
 {
   "name": "vimalatv",
   "version": "0.0.0",
+  "engines": {
+    "node": "6.11.1"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "build": "del public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch",
-    "build:prod": "del public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del 'public/js/app/**/*.js' 'public/js/app/**/*.js.map' '!public/js/app/bundle.js' '!public/js/app/*.chunk.js' 'assets/app/**/*.ngfactory.ts' 'assets/app/**/*.shim.ts' 'assets/app/**/*.ngsummary.json' 'assets/app/**/*.ngstyle.ts'"
+    "build:prod": "del public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del 'public/js/app/**/*.js' 'public/js/app/**/*.js.map' '!public/js/app/styles.bundle.js' '!public/js/app/app.bundle.js' '!public/js/app/*.chunk.js' 'assets/app/**/*.ngfactory.ts' 'assets/app/**/*.shim.ts' 'assets/app/**/*.ngsummary.json' 'assets/app/**/*.ngstyle.ts'",
+    "build:prod1": "del public/js/app && webpack --config webpack.config.prod1.js --progress --profile --bail",
+    "build:prod2": "webpack --config webpack.config.prod2.js --progress --profile --bail",
+    "build:prod3": "webpack --config webpack.config.prod3.js --progress --profile --bail"
   },
   "dependencies": {
     "@angular/animations": "^4.1.3",
@@ -45,13 +51,17 @@
     "angular-router-loader": "^0.5.0",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.1.3",
+    "css-loader": "^0.28.4",
+    "css-to-string-loader": "^0.1.3",
     "del-cli": "^1.0.0",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.2",
     "to-string-loader": "^1.1.5",
     "typescript": "^2.3.4",
     "url-loader": "^0.5.8",

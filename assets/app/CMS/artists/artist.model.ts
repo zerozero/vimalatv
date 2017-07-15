@@ -1,4 +1,7 @@
 export class Artist{
+
+    public id;
+
     constructor(public artist_id:string,
                 public name: string,
                 public enabled: boolean) {}

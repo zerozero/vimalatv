@@ -48,4 +48,12 @@ export class EmbedAudioomponent implements OnInit{
     ngOnInit(): void {
     }
 
+    onCancel(){
+
+    }
+
+    onSubmit(){
+
+    }
+
 }

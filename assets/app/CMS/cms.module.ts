@@ -34,7 +34,7 @@ import {ContactComponent} from "./contact/contact.component";
 import {FormsModule} from "@angular/forms";
 import {ArtistComponent, DeleteArtistDialog, EditArtistDialog} from "./artists/artist.component";
 import {ImageUploaderComponent} from "./collab/image.uploader.component";
-import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
+import {FileUploadModule} from "ng2-file-upload";
 import {TextEditorComponent} from "./collab/text.editor.component";
 import {EmbedVideoComponent} from "./collab/embed.video.component";
 import {EmbedAudioomponent} from "./collab/embed.audio.component";
@@ -60,6 +60,7 @@ const MY_DATE_FORMATS = {
         CommonModule,
         BrowserModule,
         FormsModule,
+        FileUploadModule,
         MdToolbarModule,
         MdButtonModule,
         MdSidenavModule,
@@ -95,8 +96,6 @@ const MY_DATE_FORMATS = {
         TextEditorComponent,
         EmbedVideoComponent,
         EmbedAudioomponent,
-        FileDropDirective,
-        FileSelectDirective,
         DeleteGigDialog,
         EditGigDialog,
         EditArtistDialog,

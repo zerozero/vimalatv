@@ -2,7 +2,7 @@ var path = require('path');
 
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./webpack.config.common.js');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = webpackMerge( commonConfig, {
     devtool: 'cheap-module-eval-source-map',
@@ -26,8 +26,5 @@ module.exports = webpackMerge( commonConfig, {
                 ]
             }
         ]
-    },
-    plugins: [
-        new ExtractTextPlugin('[name].css')
-    ]
+    }
 });

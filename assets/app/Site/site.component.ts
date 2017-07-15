@@ -38,4 +38,8 @@ export class SiteComponent implements OnInit{
     showCollaboration(artist: Artist){
         this.router.navigateByUrl('/collab/'+artist.artist_id);
     }
+
+    navigateToRoute(route: string){
+        this.router.navigateByUrl(route);
+    }
 }

@@ -178,7 +178,7 @@ export class CmsCollabComponent implements OnInit{
 export class EditCollabDialog {
 
     private clonedCollab: Collab;
-    private selectedArtist: Artist;
+    public selectedArtist: Artist;
 
     constructor(public dialogRef: MdDialogRef<EditCollabDialog>,
                 @Inject(MD_DIALOG_DATA) public data: any) {

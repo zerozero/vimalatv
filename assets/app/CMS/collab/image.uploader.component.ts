@@ -28,7 +28,7 @@ const URL = '/collab/upload/';
           <md-progress-bar
                   fxFlex="1 0 auto"
                   [color]="'primary'"
-                  [mode]="determinate"
+                  mode="determinate"
                   [value]="percent">
           </md-progress-bar>
 

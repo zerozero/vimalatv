@@ -48,4 +48,12 @@ export class EmbedVideoComponent implements OnInit{
     ngOnInit(): void {
     }
 
+    onCancel(){
+
+    }
+
+    onSubmit(){
+
+    }
+
 }

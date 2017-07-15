@@ -1,4 +1,7 @@
 export class Gig{
+
+    public id;
+
     constructor(public gig_id:string,
                 public date:Date,
                 public venue: string,
