@@ -49,3 +49,4 @@ npm-debug.log
 /public/js
 .DS_Store
 
+aot

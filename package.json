@@ -13,7 +13,7 @@
     "build:prodwin": "del public/js/app && webpack --config webpack.config.prod1.js --progress --profile --bail",
     "build:prod2": "webpack --config webpack.config.prod2.js --progress --profile --bail",
     "build:prod3": "webpack --config webpack.config.prod3.js --progress --profile --bail",
-    "postinstall": "npm install && npm run build:prodwin"
+    "postinstall": "npm run build:prodwin"
   },
   "dependencies": {
     "@angular/animations": "^4.1.3",
