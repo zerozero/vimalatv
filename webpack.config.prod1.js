@@ -22,7 +22,10 @@ module.exports = webpackMerge( commonConfig, {
     plugins: [
         new AotPlugin({
             tsConfigPath: './tsconfig.prod.json',
-            entryModule: helpers.root('assets/app/app.module#AppModule')
+            entryModule: helpers.root('assets/app/app.module#AppModule'),
+            compilerOptions: {
+                genDir: helpers.root('aot')
+            }
         })
     ]
 });
