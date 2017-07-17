@@ -49,6 +49,7 @@
     "zone.js": "^0.8.11"
   },
   "devDependencies": {
+    "@ngtools/webpack": "^1.5.1",
     "@types/core-js": "^0.9.41",
     "@types/node": "^7.0.23",
     "angular-router-loader": "^0.5.0",
