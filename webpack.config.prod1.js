@@ -15,7 +15,7 @@ var aotPlugin = new AotPlugin({
 aotPlugin._compilerHost._resolve = function(path_to_resolve) {
     path_1 = require("path");
     path_to_resolve = aotPlugin._compilerHost._normalizePath(path_to_resolve);
-    console.log("path: "+path_to_resolve);
+    // console.log("path: "+path_to_resolve);
     if (path_to_resolve[0] == '.') {
         return aotPlugin._compilerHost._normalizePath(path_1.join(aotPlugin._compilerHost.getCurrentDirectory(), path_to_resolve));
     }
