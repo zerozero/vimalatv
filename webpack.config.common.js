@@ -3,6 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
+        'polyfills': './assets/app/polyfills.ts',
         'app': './assets/app/main.ts',
         'styles': './assets/app/style.scss'
     },
