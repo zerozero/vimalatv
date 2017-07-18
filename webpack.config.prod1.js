@@ -12,23 +12,23 @@ var aotPlugin = new AotPlugin({
     }
 });
 
-aotPlugin._compilerHost._resolve = function(path_to_resolve) {
-    path_1 = require("path");
-    path_to_resolve = aotPlugin._compilerHost._normalizePath(path_to_resolve);
-    if (path_to_resolve[0] == '.') {
-        return aotPlugin._compilerHost._normalizePath(path_1.join(aotPlugin._compilerHost.getCurrentDirectory(), path_to_resolve));
-    }
-    else if (path_to_resolve[0] == '/' || path_to_resolve.match(/^\w:\//)) {
-        return path_to_resolve;
-    }
-    else {
-        // console.log("basePath: "+aotPlugin._compilerHost._basePath);
-        // console.log("path: "+path_to_resolve);
-        var p = aotPlugin._compilerHost._normalizePath(path_1.join(aotPlugin._compilerHost._basePath, path_to_resolve));
-        console.log(p);
-        return p;
-    }
-};
+// aotPlugin._compilerHost._resolve = function(path_to_resolve) {
+//     path_1 = require("path");
+//     path_to_resolve = aotPlugin._compilerHost._normalizePath(path_to_resolve);
+//     if (path_to_resolve[0] == '.') {
+//         return aotPlugin._compilerHost._normalizePath(path_1.join(aotPlugin._compilerHost.getCurrentDirectory(), path_to_resolve));
+//     }
+//     else if (path_to_resolve[0] == '/' || path_to_resolve.match(/^\w:\//)) {
+//         return path_to_resolve;
+//     }
+//     else {
+//         // console.log("basePath: "+aotPlugin._compilerHost._basePath);
+//         // console.log("path: "+path_to_resolve);
+//         var p = aotPlugin._compilerHost._normalizePath(path_1.join(aotPlugin._compilerHost._basePath, path_to_resolve));
+//         console.log(p);
+//         return p;
+//     }
+// };
 
 module.exports = webpackMerge( commonConfig, {
     devtool: 'cheap-module-eval-source-map',
