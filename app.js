@@ -14,10 +14,11 @@ var collabRoutes = require('./routes/collab');
 
 var app = express();
 
-console.log("connecting to  "+process.env.NODE_ENV);
+
 const URL = (process.env.NODE_ENV === 'production') ? process.env.MONGOHQ_URL
     : 'localhost:27017/vimala-tv';
 
+console.log("connecting to  "+URL);
 mongoose.connect(URL);
 mongoose.connection.on('error', console.error.bind(console, 'An error occurred with the DB connection: '));
 // mongoose.connect('localhost:27017/vimala-tv');//the name of the database: vimala-tv
