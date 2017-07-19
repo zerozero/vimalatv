@@ -15,7 +15,7 @@ var collabRoutes = require('./routes/collab');
 var app = express();
 
 
-const URL = (process.env.NODE_ENV === 'production') ? process.env.MONGOHQ_URL
+const URL = (process.env.NODE_ENV === 'production') ? process.env.MONGODB_URI
     : 'localhost:27017/vimala-tv';
 
 console.log("connecting to  "+URL);
