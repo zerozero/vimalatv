@@ -2,6 +2,7 @@ import {Inject, Injectable} from "@angular/core";
 import {Http,Headers,Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {Artist} from "./artist.model";
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ArtistService{

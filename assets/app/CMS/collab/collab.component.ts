@@ -7,7 +7,6 @@ import {Artist} from "../artists/artist.model";
 
 @Component({
     selector: 'cms-collab',
-    styleUrls: ['./collab.component.css'],
     templateUrl: './collab.component.html'
 })
 export class CmsCollabComponent implements OnInit{

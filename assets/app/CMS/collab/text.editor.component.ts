@@ -10,8 +10,8 @@ import {TextModel} from "../../Site/Collab/text.component";
                     <md-input-container class="full-width">
                         <textarea mdInput
                                   mdTextareaAutosize
-                                  [minRows]="1"
-                                  [maxRows]="2"
+                                  [mdAutosizeMinRows]="1"
+                                  [mdAutosizeMaxRows]="2"
                                   placeholder="Title"
                                   [(ngModel)]="data.title"
                                   name="title">
@@ -23,8 +23,8 @@ import {TextModel} from "../../Site/Collab/text.component";
                         <textarea mdInput
                                   placeholder="Body Text"
                                   mdTextareaAutosize
-                                  [minRows]="3"
-                                  [maxRows]="5"
+                                  [mdAutosizeMinRows]="3"
+                                  [mdAutosizeMaxRows]="5"
                                   required
                                   [(ngModel)]="data.content"
                                   name="body">
