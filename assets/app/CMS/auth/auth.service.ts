@@ -4,7 +4,7 @@ import { myConfig }        from './auth.config';
 import {Router} from "@angular/router";
 
 // Avoid name not found warnings
- declare var Auth0Lock: any;
+declare var Auth0Lock: any;
 // let Auth0Lock = require('auth0-lock').default;
 
 @Injectable()
