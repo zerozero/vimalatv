@@ -3,7 +3,8 @@
 
         <h4 fxFlex>{{ data.collab.id ? 'Edit' : 'Create' }} Collaboration</h4>
 
-        <md-select class="artist-select" fxFlex="0 0 auto" placeholder="Artist" [(ngModel)]="selectedArtist" name="sel" ngDefaultControl>
+        <md-select class="artist-select" fxFlex="0 0 auto" placeholder="Artist" [(ngModel)]="selectedArtist" name="sel"
+                   ngDefaultControl>
             <md-option *ngFor="let artist of data.artists" [value]="artist">
                 {{artist.name}}
             </md-option>
@@ -11,10 +12,10 @@
 
         <md-tab-group fxFlex="300px" [dynamicHeight]="true">
             <md-tab label="Text">
-                <text-editor-component (OnTextAdded)="preview.createComponent($event)" ></text-editor-component>
+                <text-editor-component (OnTextAdded)="preview.createComponent($event)"></text-editor-component>
             </md-tab>
             <md-tab label="Image">
-                <image-uploader-component ></image-uploader-component>
+                <image-uploader-component (OnComplete)="preview.createComponent($event)"></image-uploader-component>
             </md-tab>
             <md-tab label="Video">
                 <embed-video-component></embed-video-component>
@@ -31,11 +32,13 @@
                     fxFlex="0 0 auto"
                     color="accent"
                     type="submit"
-                    [disabled]="!artistForm.form.valid">SAVE</button>
+                    [disabled]="!artistForm.form.valid">SAVE
+            </button>
             <button md-raised-button
                     fxFlex="0 0 auto"
                     type="button"
-                    (click)="onCancel()">CANCEL</button>
+                    (click)="onCancel()">CANCEL
+            </button>
         </div>
         <div fxFlex></div>
     </div>

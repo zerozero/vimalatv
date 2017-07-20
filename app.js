@@ -18,7 +18,9 @@ var app = express();
 const URL = (process.env.NODE_ENV === 'production') ? process.env.MONGODB_URI
     : 'localhost:27017/vimala-tv';
 
-console.log("connecting to  "+URL);
+// console.log("connecting to  "+URL);
+// console.log("CLOUDINARY_URL: "+process.env.CLOUDINARY_URL);
+
 mongoose.connect(URL);
 mongoose.connection.on('error', console.error.bind(console, 'An error occurred with the DB connection: '));
 // mongoose.connect('localhost:27017/vimala-tv');//the name of the database: vimala-tv

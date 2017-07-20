@@ -21,3 +21,5 @@ $ heroku logs --tail
 $ heroku local web #run the local version of heroku (looks for Procfile. Default port is 5000)
 
 $ heroku addons:create papertrail
+
+$ export CLOUDINARY_URL=cloudinary://626785482432199:9xrQ_-iT0TUmYbvEnMEQWlbW8tc@hkgka4c5k

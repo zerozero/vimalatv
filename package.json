@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "build": "del public/js/app && webpack --config webpack.config.dev.js --progress --profile --watch",
-    "build:prod": "del public/js/app && webpack --config webpack.config.prod1.js --progress --profile --verbose",
+    "build:prod": "del public/js/app && webpack --config webpack.config.prod.js --progress --profile --display-entrypoints",
     "postinstall": "npm run build:prod"
   },
   "dependencies": {

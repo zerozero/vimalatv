@@ -1,13 +1,15 @@
 import {
-  Component,
-  OnInit,
-  EventEmitter,
-  ElementRef
+    Component,
+    OnInit,
+    EventEmitter,
+    ElementRef, Output
 }                                   from '@angular/core';
 import {
-  FileUploader,
-  FileUploaderOptions
+    FileItem,
+    FileUploader,
+    FileUploaderOptions
 }                                   from 'ng2-file-upload';
+import {ImageModel} from "../../Site/Collab/image.component";
 
 declare var $:any;
 
@@ -57,23 +59,23 @@ const URL = '/collab/upload/';
 
       .my-drop-zone { border: dotted 3px lightgray; }
       .nv-file-over { border: dotted 3px #ff4081; }
-  `],
-  outputs:      ['onComplete']
+  `]
 })
 export class ImageUploaderComponent implements OnInit{
 
+  @Output() OnComplete: EventEmitter<ImageModel> = new EventEmitter<ImageModel>();
+
+  data: ImageModel;
+
   public uploader:FileUploader = new FileUploader({url: URL});
   public hasBaseDropZoneOver:boolean = false;
-  public hasAnotherDropZoneOver:boolean = false;
 
-  public isLoading :boolean = false;
-  private progbar: any;
   private uploadTotal: number;
   private uploadedCount: number;
 
   percent: number = 1;
 
-  private onComplete: EventEmitter<any> = new EventEmitter();
+
   private uploaderOptions:FileUploaderOptions = {
     autoUpload: true,
     removeAfterUpload: true,
@@ -98,6 +100,8 @@ export class ImageUploaderComponent implements OnInit{
 
   ngOnInit(){
 
+      this.data = new ImageModel(null,'');
+
     this.uploader.setOptions(this.uploaderOptions);
     this.uploader.onBuildItemForm = (item, form) => {
       form.append('category', 'collab');
@@ -107,24 +111,34 @@ export class ImageUploaderComponent implements OnInit{
     this.uploader.onAfterAddingFile = ( fileItem: any ) => {
       // this.progbar.progress( 'reset' );
       this.percent = 0;
-    }
+    };
 
     this.uploader.onProgressAll = (progress: any) => {
       // this.progbar.progress( 'set percent', progress );
       this.uploadedCount++;
       this.percent = this.uploadedCount/this.uploadTotal*progress;
-    }
+    };
 
-    this.uploader.onCompleteItem = () => {
+    this.uploader.onCompleteItem = (result) => {
+        console.log("uploaded "+result);
       // this.progbar.progress( 'increment' );
       // this.percent = 0;
-    }
+    };
+
+    this.uploader.onSuccessItem = ( item: FileItem, response: string, status: number) => {
+        // console.log(item);
+        // console.log(response);
+        // console.log(status);
+        // console.log(JSON.parse(response));
+        this.data.url = JSON.parse(response).data.secure_url;
+        this.OnComplete.emit(this.data);
+      };
 
     this.uploader.onCompleteAll = () => {
       console.log('onCompleteAll');
       this.percent = 0;
-      this.onComplete.emit();
-    }
+      // this.OnComplete.emit();
+    };
 
   }
 

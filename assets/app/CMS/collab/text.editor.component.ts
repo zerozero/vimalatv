@@ -61,7 +61,7 @@ import {TextModel} from "../../Site/Collab/text.component";
 
 export class TextEditorComponent implements OnInit{
 
-    @Output() OnTextAdded = new EventEmitter<TextModel>();
+    @Output() OnTextAdded: EventEmitter<TextModel> = new EventEmitter<TextModel>();
 
     data: TextModel;
 
