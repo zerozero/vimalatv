@@ -26,7 +26,7 @@ module.exports = webpackMerge( commonConfig, {
             entryModule: helpers.root('assets/app/app.module#AppModule')
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'styles', 'polyfills']
+            name: ['app', 'styles']
         }),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
