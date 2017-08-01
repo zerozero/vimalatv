@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "exclude": [
+      "node_modules/*",
+      "aot/",
+      "assets/app/main.aot.ts"
+    ],
+    "lib": [
+      "es6",
+      "dom"
+    ]
+  }
+}

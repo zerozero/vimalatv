@@ -5,7 +5,8 @@ module.exports = {
     entry: {
         'app': './assets/app/main.ts',
         'styles': './assets/app/style.scss',
-        // 'polyfills': './assets/app/polyfills.ts'
+        'polyfills': './assets/app/polyfills.ts',
+        'vendor': './assets/app/vendor.ts'
     },
 
     resolve: {

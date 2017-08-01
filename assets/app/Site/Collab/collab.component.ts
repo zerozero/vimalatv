@@ -1,6 +1,6 @@
 import {
     Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, ViewChild,
-    ViewContainerRef
+    ViewContainerRef, ViewRef
 } from "@angular/core";
 import {ImageComponent, ImageModel} from "./image.component";
 import {VideoComponent, VideoModel} from "./video.component";
@@ -8,16 +8,15 @@ import {TextComponent, TextModel} from "./text.component";
 import {AudioComponent, AudioModel} from "./audio.component";
 import {routerTransition} from "../../router.animations";
 import {ActivatedRoute} from "@angular/router";
+import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {IComponentTemplate} from "./component.template";
 
-export interface IComponentTemplate {
-    initialise( data: any );
-}
 
 @Component({
     moduleId: module.id.toString(),
     selector: 'app-collab',
     templateUrl: './collab.component.html',
-    styleUrls: ['./collab.component.css'],
+    styleUrls: ['./collab.component.css']
     // animations: [routerTransition()],
     // host: {'[@routerTransition]': ''}
 })
@@ -30,24 +29,19 @@ export class CollabComponent implements OnInit, OnDestroy{
 
     private sub: any;
 
-    templateDef: any[] = [
-        new TextModel("1","Direct trade trust fund microdosing sustainable. Kickstarter palo santo 90's meditation. Lyft PBR&B man braid slow-carb fanny pack taiyaki meditation retro vegan photo booth vexillologist drinking vinegar truffaut. Poutine venmo tumeric, VHS schlitz woke seitan. Pork belly helvetica narwhal, hexagon disrupt pok pok ethical glossier kickstarter slow-carb. +1 vape lo-fi palo santo pinterest cloud bread. Church-key polaroid 90's man bun. Flannel humblebrag lyft thundercats freegan tofu. Four loko flexitarian pug hot chicken marfa iPhone, pitchfork shaman banjo poke vexillologist craft beer copper mug freegan stumptown. Wayfarers poutine kickstarter activated charcoal, hexagon copper mug glossier biodiesel dreamcatcher kitsch.", "New Album Out Now"),
-        new ImageModel("2", "https://res.cloudinary.com/ho7hirfls/image/upload/v1498725724/JohnEthridgeVimala_hs4cq9.jpg",undefined,"Vimala and John Etheridge"),
-        "audio",
-        new ImageModel("1","https://res.cloudinary.com/ho7hirfls/image/upload/v1498725430/Vimala_280x280_apszfk.png","Out of the Sky"),
-        new VideoModel("1", "https://www.youtube.com/embed/YzFLEC7RSTw"),
-        new AudioModel("1",'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/63497134&amp;color=ff4081&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false')
+    public isPreviewMode: boolean = false;
 
-    ];
 
     txtFactory: ComponentFactory<TextComponent>;
     imgFactory: ComponentFactory<ImageComponent>;
     vidFactory: ComponentFactory<VideoComponent>;
     audFactory: ComponentFactory<AudioComponent>;
 
+
     constructor(
         private _resolver: ComponentFactoryResolver,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private collabEditorService: CollabEditorService) {
 
     }
 
@@ -55,32 +49,34 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.sub = this.route.params.subscribe(params => {
             console.log(params.artist_id);
         });
+        this.collabEditorService.initialise(this._container);
     }
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
     }
 
-    createComponent( template: any ){
+    private getFactoryForTemplate( template: any ): ComponentFactory<any>{
         if (template instanceof ImageModel){
-            let cmp: ComponentRef<ImageComponent> = this._container.createComponent(this.imgFactory);
-            cmp.instance.initialise(template);
+            return this.imgFactory;
+        }else if (template instanceof TextModel){
+            return this.txtFactory;
+        }else if (template instanceof VideoModel){
+            return this.vidFactory
+        }else if (template instanceof AudioModel){
+            return this.audFactory;
         }
+        return null;
+    }
 
-        if (template instanceof TextModel){
-            let cmp: ComponentRef<TextComponent> = this._container.createComponent(this.txtFactory);
-            cmp.instance.initialise(template);
-        }
+    public createComponent( template: any ){
 
-        if (template instanceof VideoModel){
-            let cmp: ComponentRef<VideoComponent> = this._container.createComponent(this.vidFactory);
-            cmp.instance.initialise(template);
-        }
+        var cmp: ComponentRef<IComponentTemplate>;
+        var viewRef: ViewRef;
 
-        if (template instanceof AudioModel){
-            let cmp: ComponentRef<AudioComponent> = this._container.createComponent(this.audFactory);
-            cmp.instance.initialise(template);
-        }
+        cmp = this._container.createComponent(this.getFactoryForTemplate(template));
+
+        cmp.instance.initialise(template, cmp.hostView);
     }
 
     ngAfterViewInit() {
@@ -90,29 +86,6 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.vidFactory = this._resolver.resolveComponentFactory(VideoComponent);
         this.audFactory = this._resolver.resolveComponentFactory(AudioComponent);
 
-        // this.templateDef.forEach((template) => {
-        //
-        //     if (template instanceof ImageModel){
-        //        let cmp: ComponentRef<ImageComponent> = this._container.createComponent(imgFactory);
-        //         cmp.instance.initialise(template);
-        //    }
-        //
-        //    if (template instanceof TextModel){
-        //        let cmp: ComponentRef<TextComponent> = this._container.createComponent(txtFactory);
-        //        cmp.instance.initialise(template);
-        //    }
-        //
-        //     if (template instanceof VideoModel){
-        //         let cmp: ComponentRef<VideoComponent> = this._container.createComponent(vidFactory);
-        //         cmp.instance.initialise(template);
-        //     }
-        //
-        //     if (template instanceof AudioModel){
-        //         let cmp: ComponentRef<AudioComponent> = this._container.createComponent(audFactory);
-        //         cmp.instance.initialise(template);
-        //     }
-        //
-        // });
 
 
     }

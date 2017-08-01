@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import {SiteModule} from "./Site/site.module";
 import {APP_ROUTING} from "./app.routing";
 import {SiteComponent} from "./Site/site.component";
-import {MdButtonModule, MdMenuModule, MdSidenavModule, MdToolbarModule} from "@angular/material";
+import {MdButtonModule, MdIconModule, MdMenuModule, MdSidenavModule, MdToolbarModule} from "@angular/material";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {CmsModule} from "./CMS/cms.module";
 import {GigService} from "./CMS/gigs/gig.service";
@@ -26,6 +26,7 @@ import {CollabService} from "./CMS/collab/collab.service";
         MdToolbarModule,
         MdButtonModule,
         MdSidenavModule,
+        MdIconModule,
         MdMenuModule,
         FlexLayoutModule,
         APP_ROUTING

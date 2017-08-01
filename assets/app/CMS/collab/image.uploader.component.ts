@@ -130,8 +130,8 @@ export class ImageUploaderComponent implements OnInit{
         // console.log(response);
         // console.log(status);
         // console.log(JSON.parse(response));
-        this.data.url = JSON.parse(response).data.secure_url;
-        this.OnComplete.emit(this.data);
+        // this.data.url = JSON.parse(response).data.secure_url;
+        this.OnComplete.emit(new ImageModel(null,JSON.parse(response).data.secure_url));
       };
 
     this.uploader.onCompleteAll = () => {

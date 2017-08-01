@@ -1,4 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {VideoModel} from "../../Site/Collab/video.component";
+
+
 @Component({
     selector: 'embed-video-component',
     template: `
@@ -9,7 +12,7 @@ import {Component, OnInit} from "@angular/core";
                     <md-input-container class="full-width">
                         <input mdInput type="text"
                                placeholder="youtube embed string"
-                               [(ngModel)]="data.youtubeURL"
+                               [(ngModel)]="embedURL"
                                name="url">
                     </md-input-container>
                 </p>
@@ -39,13 +42,18 @@ import {Component, OnInit} from "@angular/core";
 })
 export class EmbedVideoComponent implements OnInit{
 
-    data = {
-        youtubeURL: ''
-    }
+
+    @Output() OnVideoAdded: EventEmitter<VideoModel> = new EventEmitter<VideoModel>();
+
+    data: VideoModel;
+    embedURL: string;
+
+
 
     constructor(){}
 
     ngOnInit(): void {
+        this.data = new VideoModel(null,'',0,0);
     }
 
     onCancel(){
@@ -54,6 +62,16 @@ export class EmbedVideoComponent implements OnInit{
 
     onSubmit(){
 
+        var tmp = document.createElement('div');
+        tmp.innerHTML = this.embedURL;
+        var elem = tmp.getElementsByTagName('iframe')[0];
+
+        this.data.url = elem['src'];
+        this.data.width = parseInt(elem['width']);
+        this.data.height = parseInt(elem['height']) ;
+        this.OnVideoAdded.emit(this.data);
+        this.data = new VideoModel(null,'',0,0);
+        this.embedURL = '';
     }
 
 }

@@ -1,4 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {AudioModel} from "../../Site/Collab/audio.component";
 @Component({
     selector: 'embed-audio-component',
     template: `
@@ -9,7 +10,7 @@ import {Component, OnInit} from "@angular/core";
                     <md-input-container class="full-width">
                         <input mdInput type="text"
                                placeholder="soundcloud embed string"
-                               [(ngModel)]="data.soundcloudURL"
+                               [(ngModel)]="embedURL"
                                name="url">
                     </md-input-container>
                 </p>
@@ -39,13 +40,15 @@ import {Component, OnInit} from "@angular/core";
 })
 export class EmbedAudioomponent implements OnInit{
 
-    data = {
-        soundcloudURL: ''
-    }
+    @Output() OnAudioAdded: EventEmitter<AudioModel> = new EventEmitter<AudioModel>();
+
+    data : AudioModel;
+    embedURL: string;
 
     constructor(){}
 
     ngOnInit(): void {
+        this.data = new AudioModel(null,'');
     }
 
     onCancel(){
@@ -53,7 +56,16 @@ export class EmbedAudioomponent implements OnInit{
     }
 
     onSubmit(){
+        console.log(this.embedURL);
 
+        var tmp = document.createElement('div');
+        tmp.innerHTML = this.embedURL;
+        var elem = tmp.getElementsByTagName('iframe')[0];
+
+        this.data.url = elem['src'];
+        this.OnAudioAdded.emit(this.data);
+
+        this.data = new AudioModel(null,'');
     }
 
 }

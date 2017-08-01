@@ -18,10 +18,10 @@
                 <image-uploader-component (OnComplete)="preview.createComponent($event)"></image-uploader-component>
             </md-tab>
             <md-tab label="Video">
-                <embed-video-component></embed-video-component>
+                <embed-video-component (OnVideoAdded)="preview.createComponent($event)"></embed-video-component>
             </md-tab>
             <md-tab label="Audio">
-                <embed-audio-component></embed-audio-component>
+                <embed-audio-component (OnAudioAdded)="preview.createComponent($event)"></embed-audio-component>
             </md-tab>
         </md-tab-group>
 

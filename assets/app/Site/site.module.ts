@@ -16,6 +16,7 @@ import {TextComponent} from "./Collab/text.component";
 import {CollabComponent} from "./Collab/collab.component";
 import {CommonModule} from "../common.module";
 import {BioComponent} from "./Bio/bio.component";
+import {CollabWidgetsComponent} from "./Collab/collab.widgets.component";
 
 
 //refactor
@@ -40,6 +41,7 @@ import {BioComponent} from "./Bio/bio.component";
         ReviewsComponent,
         ImageComponent,
         TextComponent,
+        CollabWidgetsComponent,
         VideoComponent,
         AudioComponent
     ],

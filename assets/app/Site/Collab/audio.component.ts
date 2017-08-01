@@ -1,13 +1,25 @@
-import {Component} from "@angular/core";
-import {IComponentTemplate} from "./collab.component";
+import {Component, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {ComponentTemplate} from "./component.template";
+import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 @Component({
     moduleId: module.id.toString(),
     selector: 'app-audio',
     template: `
-        <div fxFlex class="audio-component">
-            <iframe width="100%" height="166" scrolling="no" frameborder="no" [src]="safeResourceURL"></iframe>
+        <div fxLayout="row" 
+             (mouseenter)="widgets.OnMouseEnter($event)" 
+             (mouseleave)="widgets.OnMouseLeave($event)">
+            <div fxFlex class="audio-component" #content>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" [src]="safeResourceURL"></iframe>
+            </div>
         </div>
+        <collab-widgets #widgets
+                        (OnMoveUp)="OnMoveUp()"
+                        (OnMoveDown)="OnMoveDown()"
+                        (OnDelete)="OnDelete()"
+                        (OnEdit)="OnEditMe()"
+                        class="floating-widgets"
+                        [style.bottom]="getContentHeight()"></collab-widgets>
     `,
     styles: [`
         .audio-component{
@@ -19,21 +31,26 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
             height: auto;
             color: white;
         }
+
+        .floating-widgets {
+            height: 0;
+            position: relative;
+            right: 16px;
+            overflow: visible;
+        }
+
     `]
 })
-export class AudioComponent implements IComponentTemplate{
+export class AudioComponent extends ComponentTemplate{
 
-    data : AudioModel;
-    // soundcloudURL: string = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/63497134&amp;color=ff4081&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false';
     safeResourceURL: SafeResourceUrl;
 
-        // <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/63497134&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
-    constructor(private sanitizer: DomSanitizer){
-
+    constructor(collabEditorService: CollabEditorService, private sanitizer: DomSanitizer){
+        super(collabEditorService);
     }
 
-    initialise( data: AudioModel ){
-        this.data = data;
+    initialise( data: AudioModel, viewRef: ViewRef ){
+        super.initialise(data,viewRef);
         this.safeResourceURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url);
     }
 }

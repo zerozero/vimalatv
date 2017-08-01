@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {TextModel} from "../../Site/Collab/text.component";
+import {CollabEditorService} from "./collab.editor.service";
 @Component({
     selector: 'text-editor-component',
     template: `
@@ -65,7 +66,7 @@ export class TextEditorComponent implements OnInit{
 
     data: TextModel;
 
-    constructor(){}
+    constructor(private collabEditorService: CollabEditorService){}
 
     ngOnInit(): void {
         this.data = new TextModel(null,'','');

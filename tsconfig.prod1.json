@@ -17,6 +17,6 @@
     "rootDir": "."
   },
   "angularCompilerOptions": {
-    "genDir": "./app/ngfactory"
+    "genDir": "./assets/app/ngfactory"
   }
 }

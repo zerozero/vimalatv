@@ -1,9 +1,11 @@
-import {Component, ElementRef, Inject, OnInit} from "@angular/core";
+import {Component, ElementRef, Inject, OnInit, ViewChild} from "@angular/core";
 import {CollabService} from "./collab.service";
 import {Collab} from "./collab.model";
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 import {ArtistService} from "../artists/artist.service";
 import {Artist} from "../artists/artist.model";
+import {CollabEditorService} from "./collab.editor.service";
+import {CollabComponent} from "../../Site/Collab/collab.component";
 
 @Component({
     selector: 'cms-collab',
@@ -58,7 +60,9 @@ export class CmsCollabComponent implements OnInit{
      */
     createCollab(){
         let collab = new Collab(null,  "",[],false);
-        let dialogRef = this.dialog.open(EditCollabDialog, {data:{collab:collab,artists:this.artists}, disableClose: true});
+        let wd = this.el.nativeElement.clientWidth * 0.9;
+        let ht = this.el.nativeElement.clientHeight* 0.9;
+        let dialogRef = this.dialog.open(EditCollabDialog, {data:{collab:collab,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.save(result);
@@ -172,21 +176,29 @@ export class CmsCollabComponent implements OnInit{
                 max-width: 240px;
             }
         `
-    ]
+    ],
+    providers: [CollabEditorService]
 })
 export class EditCollabDialog {
 
     private clonedCollab: Collab;
     public selectedArtist: Artist;
 
+    @ViewChild('preview') collabComponent: CollabComponent;
+
     constructor(public dialogRef: MdDialogRef<EditCollabDialog>,
                 @Inject(MD_DIALOG_DATA) public data: any) {
+
         this.clonedCollab = data.collab.clone();
         this.selectedArtist = data.artists.find((artist) => {
             return artist.artist_id == data.collab.artist_id;
         });
+
     }
 
+    ngAfterContentInit(){
+        this.collabComponent.isPreviewMode = true;
+    }
 
     onCancel(){
         this.data.collab.reset(this.clonedCollab);
