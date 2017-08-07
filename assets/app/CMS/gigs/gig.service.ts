@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class GigService{
 
-    static ENDPOINT: string = '/gig/:id';
+    static ENDPOINT: string = '/__gig/:id';
 
     gigs: Gig[] = [];
 

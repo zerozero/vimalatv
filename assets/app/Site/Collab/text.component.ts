@@ -6,21 +6,20 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
     moduleId: module.id.toString(),
     selector: 'app-text',
     template: `
-        <div fxLayout="row" 
-             (mouseenter)="widgets.OnMouseEnter($event)" 
-             (mouseleave)="widgets.OnMouseLeave($event)">
-            <div fxFlex #content>
-                <h1 *ngIf="data.title != undefined">{{data.title}}</h1>
-                <p>{{data.content}}</p>
-            </div>
-        </div>
         <collab-widgets #widgets
                         (OnMoveUp)="OnMoveUp()"
                         (OnMoveDown)="OnMoveDown()"
                         (OnDelete)="OnDelete()"
                         (OnEdit)="OnEditMe()"
-                        class="floating-widgets"
-                        [style.bottom]="getContentHeight()"></collab-widgets>            
+                        class="floating-widgets" *ngIf="isEditMode"></collab-widgets>            
+        <div fxLayout="row" 
+             (mouseenter)="widgets?.OnMouseEnter($event)" 
+             (mouseleave)="widgets?.OnMouseLeave($event)">
+            <div fxFlex #content>
+                <h1 *ngIf="data.title != undefined">{{data.title}}</h1>
+                <p>{{data.content}}</p>
+            </div>
+        </div>
     `,
     styles: [
         `
@@ -36,6 +35,7 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
                 height: 0;
                 position: relative;
                 right: 16px;
+                top: 16px;
                 overflow: visible;
             }
 
@@ -44,6 +44,8 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
 })
 export class TextComponent extends ComponentTemplate{
 
+
+
     constructor(collabEditorService: CollabEditorService){
         super(collabEditorService);
     }
@@ -51,10 +53,4 @@ export class TextComponent extends ComponentTemplate{
 
 
 
-}
-
-export class TextModel {
-    constructor(public txt_id: string,
-                public content: string,
-                public title?: string) {}
 }

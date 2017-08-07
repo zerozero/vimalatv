@@ -2,11 +2,13 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
+import {CollabEditorService} from "../CMS/collab/collab.editor.service";
 
 @Component({
     selector: 'app-site',
     templateUrl: './site.component.html',
-    styleUrls: ['./site.component.css']
+    styleUrls: ['./site.component.css'],
+    providers: [CollabEditorService]        //needed for collab.component
 })
 
 export class SiteComponent implements OnInit{
@@ -37,6 +39,10 @@ export class SiteComponent implements OnInit{
 
     showCollaboration(artist: Artist){
         this.router.navigateByUrl('/collab/'+artist.artist_id);
+    }
+
+    showMedia(type: string){
+
     }
 
     navigateToRoute(route: string){

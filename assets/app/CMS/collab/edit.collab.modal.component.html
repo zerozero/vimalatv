@@ -4,7 +4,7 @@
         <h4 fxFlex>{{ data.collab.id ? 'Edit' : 'Create' }} Collaboration</h4>
 
         <md-select class="artist-select" fxFlex="0 0 auto" placeholder="Artist" [(ngModel)]="selectedArtist" name="sel"
-                   ngDefaultControl>
+                   ngDefaultControl required>
             <md-option *ngFor="let artist of data.artists" [value]="artist">
                 {{artist.name}}
             </md-option>
@@ -25,7 +25,7 @@
             </md-tab>
         </md-tab-group>
 
-        <app-collab #preview></app-collab>
+        <app-collab #preview [collaboration]="clonedCollab"></app-collab>
 
         <div fxFlex fxlayout="row" fxLayoutAlign="end center">
             <button md-raised-button

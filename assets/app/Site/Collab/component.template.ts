@@ -1,8 +1,9 @@
-import {ElementRef, ViewChild, ViewRef} from "@angular/core";
+import {ElementRef, OnChanges, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {IMediaModel, MediaType} from "./MediaModel";
 
 export interface IComponentTemplate {
-    initialise( data: any, viewRef: ViewRef );
+    initialise( data: IMediaModel, viewRef: ViewRef );
     OnMoveUp();
     OnMoveDown();
     OnDelete();
@@ -11,20 +12,20 @@ export interface IComponentTemplate {
 
 export class ComponentTemplate implements IComponentTemplate{
 
-    data: any;
+    data: IMediaModel;
     viewRef: ViewRef;
+    isEditMode: boolean = false;
+    contentHeight: string = "0px";
 
     @ViewChild('content', {read: ElementRef}) _content: ElementRef;
 
-    getContentHeight():string{
-        return (this._content.nativeElement.offsetHeight-16)+"px";
-    }
 
     constructor(private collabEditorService: CollabEditorService){
 
     }
 
-    initialise( data: any, viewRef: ViewRef ){
+
+    initialise( data: IMediaModel, viewRef: ViewRef ){
         this.data = data;
         this.viewRef = viewRef;
     }

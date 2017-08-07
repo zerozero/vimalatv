@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {AudioModel} from "../../Site/Collab/audio.component";
+import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 @Component({
     selector: 'embed-audio-component',
     template: `
@@ -40,15 +41,19 @@ import {AudioModel} from "../../Site/Collab/audio.component";
 })
 export class EmbedAudioomponent implements OnInit{
 
-    @Output() OnAudioAdded: EventEmitter<AudioModel> = new EventEmitter<AudioModel>();
+    @Output() OnAudioAdded: EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
 
-    data : AudioModel;
+    data : IMediaModel;
     embedURL: string;
 
     constructor(){}
 
     ngOnInit(): void {
-        this.data = new AudioModel(null,'');
+        // this.data = new AudioModel(null,'');
+        this.data = {
+            media_id: null,
+            type : MediaType.AUDIO
+        };
     }
 
     onCancel(){
@@ -65,7 +70,11 @@ export class EmbedAudioomponent implements OnInit{
         this.data.url = elem['src'];
         this.OnAudioAdded.emit(this.data);
 
-        this.data = new AudioModel(null,'');
+        // this.data = new AudioModel(null,'');
+        this.data = {
+            media_id: null,
+            type : MediaType.AUDIO
+        };
     }
 
 }

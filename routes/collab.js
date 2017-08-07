@@ -27,6 +27,25 @@ router.get('/', function(req,res,next){
         });
 });
 
+router.get('/:id', function(req,res,next){
+    var id = req.params.id;
+    console.log("the id = "+id);
+    Collab.find({artist_id: id})
+        .exec(function(err,collabs){
+            if (err) {
+                return res.status(500).json({
+                    title:'An Error Occurred',
+                    error: err
+                });
+            }
+            console.log(collabs);
+            res.status(200).json({
+                message: 'Success',
+                data: collabs
+            });
+        });
+});
+
 router.post('/', function(req,res,next){
     var collab = new Collab({
         artist_id: req.body.artist_id,
@@ -100,6 +119,7 @@ router.patch('/:id', function (req, res, next){
         }
         collab.name = req.body.name;
         collab.enabled = req.body.enabled;
+        collab.templates = req.body.templates;
         collab.save(function(err, result){
             if (err){
                 return res.status(500).json({

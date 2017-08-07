@@ -5,7 +5,6 @@ var util = require('util');
 
 router.get('/', function(req,res,next){
 
-    console.log(util.inspect(req.query));
     Gig.find( req.query.filterDisabled ? {enabled:true} : {} )
         .exec(function(err,gigs){
             if (err) {

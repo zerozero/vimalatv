@@ -1,6 +1,12 @@
 <div fxLayout="row" fxLayoutAlign="center start" class="containerSite" [class.collab-content]="!isPreviewMode" [class.collab-content-dialog]="isPreviewMode">
 
-        <div fxLayout="row true" fxLayoutAlign="center start" fxFlex.gt-sm="50vw" fxFlex="90vw" class="" [class.content-container]="!isPreviewMode" [class.content-container-dialog]="isPreviewMode">
+        <div fxLayout="row true"
+             fxLayoutAlign="center start"
+             fxFlex.gt-sm="50vw"
+             fxFlex="90vw"
+             class=""
+             [class.content-container]="!isPreviewMode"
+             [class.content-container-dialog]="isPreviewMode">
             <div fxFlex="100%" class="top-margin"></div>
             <ng-container #vc></ng-container>
         </div>

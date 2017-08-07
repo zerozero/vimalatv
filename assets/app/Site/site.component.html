@@ -9,6 +9,14 @@
         <button md-menu-item class="body-font" *ngFor="let artist of artists" (click)="showCollaboration(artist)">{{artist.name | uppercase}}</button>
     </md-menu>
 
+    <md-menu #mediaMenu="mdMenu"
+             class="flat-menu-panel"
+             [class]="classes"
+             [overlapTrigger]="false">
+        <button md-menu-item class="body-font" (click)="showMedia('audio')">AUDIO</button>
+        <button md-menu-item class="body-font" (click)="showMedia('video')">VIDEO</button>
+    </md-menu>
+
     <button fxFlex="0 1 auto"
             md-icon-button
             fxHide="false"
@@ -43,7 +51,7 @@
         <a fxFlex="auto"
            md-button
            routerLinkActive="active"
-           [routerLink]="['/media']"
+           [mdMenuTriggerFor]="mediaMenu"
            class="body-font">MEDIA</a>
         <span class="body-font separator">/</span>
         <a fxFlex="auto"

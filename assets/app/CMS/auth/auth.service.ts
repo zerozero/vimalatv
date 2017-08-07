@@ -21,8 +21,6 @@ export class Auth {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
-
-      // this.router.navigateByUrl('/cms/home');
     });
   }
 

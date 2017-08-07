@@ -9,7 +9,7 @@ import {
     FileUploader,
     FileUploaderOptions
 }                                   from 'ng2-file-upload';
-import {ImageModel} from "../../Site/Collab/image.component";
+import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 
 declare var $:any;
 
@@ -63,9 +63,8 @@ const URL = '/collab/upload/';
 })
 export class ImageUploaderComponent implements OnInit{
 
-  @Output() OnComplete: EventEmitter<ImageModel> = new EventEmitter<ImageModel>();
+  @Output() OnComplete: EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
 
-  data: ImageModel;
 
   public uploader:FileUploader = new FileUploader({url: URL});
   public hasBaseDropZoneOver:boolean = false;
@@ -100,7 +99,6 @@ export class ImageUploaderComponent implements OnInit{
 
   ngOnInit(){
 
-      this.data = new ImageModel(null,'');
 
     this.uploader.setOptions(this.uploaderOptions);
     this.uploader.onBuildItemForm = (item, form) => {
@@ -126,12 +124,13 @@ export class ImageUploaderComponent implements OnInit{
     };
 
     this.uploader.onSuccessItem = ( item: FileItem, response: string, status: number) => {
-        // console.log(item);
-        // console.log(response);
-        // console.log(status);
-        // console.log(JSON.parse(response));
-        // this.data.url = JSON.parse(response).data.secure_url;
-        this.OnComplete.emit(new ImageModel(null,JSON.parse(response).data.secure_url));
+        let data: IMediaModel = {
+            media_id: null,
+            type : MediaType.IMAGE,
+            url: JSON.parse(response).data.secure_url
+        };
+        this.OnComplete.emit(data);
+        // this.OnComplete.emit(new MediaModel(null, MediaModel.IMAGE, JSON.parse(response).data.secure_url));
       };
 
     this.uploader.onCompleteAll = () => {

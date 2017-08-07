@@ -15,6 +15,7 @@ export class CmsCollabComponent implements OnInit{
 
     collabs: Collab[] = [];
     artists: Artist[] = [];
+    unusedArtists: Artist[] = [];
 
     selectedValue: string;
 
@@ -30,6 +31,7 @@ export class CmsCollabComponent implements OnInit{
     ngOnInit(): void {
             this._getAllCollabs();
             this._getAllArtists();
+            this._getUnusedArtists();
     }
 
     private getArtistName( id: string ):string{
@@ -53,6 +55,14 @@ export class CmsCollabComponent implements OnInit{
             .subscribe((artists) => {
                 this.artists = artists;
             });
+    }
+
+    private _getUnusedArtists():void{
+        this.unusedArtists = [];
+        this.artists.forEach((artist) => {
+            let id = artist.artist_id;
+            //todo: search for existing collaborations with this artist id
+        });
     }
 
     /*
@@ -127,6 +137,7 @@ export class CmsCollabComponent implements OnInit{
             .update(collab)
             .subscribe(
                 (data) => {
+                    console.log(data);
                     // this.filterCollabs();
                 },
                 (err) => {
@@ -187,7 +198,9 @@ export class EditCollabDialog {
     @ViewChild('preview') collabComponent: CollabComponent;
 
     constructor(public dialogRef: MdDialogRef<EditCollabDialog>,
-                @Inject(MD_DIALOG_DATA) public data: any) {
+                @Inject(MD_DIALOG_DATA)
+                public data: any,
+                private collabEditorService: CollabEditorService) {
 
         this.clonedCollab = data.collab.clone();
         this.selectedArtist = data.artists.find((artist) => {
@@ -206,7 +219,9 @@ export class EditCollabDialog {
     }
 
     onSubmit(){
+        let mydata = this.collabEditorService.getCollabData();
         this.data.collab.artist_id = this.selectedArtist.artist_id;
+        this.data.collab.templates = mydata;
         this.dialogRef.close(this.data.collab);
     }
 }

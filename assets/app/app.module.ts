@@ -12,10 +12,12 @@ import {GigService} from "./CMS/gigs/gig.service";
 import {HttpModule} from "@angular/http";
 import {ArtistService} from "./CMS/artists/artist.service";
 import {CollabService} from "./CMS/collab/collab.service";
+import {PageNotFoundComponent} from "./pagenotfound.component";
 
 @NgModule({
     declarations: [
-        SiteComponent
+        SiteComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

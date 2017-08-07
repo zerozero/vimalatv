@@ -2,13 +2,20 @@ import {Component, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 import {ComponentTemplate} from "./component.template";
+import {IMediaModel} from "./MediaModel";
 
 @Component({
     moduleId: module.id.toString(),
     selector: 'app-video',
     template: `
-        <div (mouseenter)="widgets.OnMouseEnter($event)" 
-             (mouseleave)="widgets.OnMouseLeave($event)">
+        <collab-widgets #widgets
+                        (OnMoveUp)="OnMoveUp()"
+                        (OnMoveDown)="OnMoveDown()"
+                        (OnDelete)="OnDelete()"
+                        (OnEdit)="OnEditMe()"
+                        class="floating-widgets" *ngIf="isEditMode"></collab-widgets>
+        <div (mouseenter)="widgets?.OnMouseEnter($event)" 
+             (mouseleave)="widgets?.OnMouseLeave($event)">
             <div fxFlex class="video-component" #content>
                 <iframe [width]="videoWidth" 
                         [height]="videoHeight" 
@@ -17,13 +24,6 @@ import {ComponentTemplate} from "./component.template";
                         allowfullscreen></iframe>
             </div>
         </div>
-        <collab-widgets #widgets
-                        (OnMoveUp)="OnMoveUp()"
-                        (OnMoveDown)="OnMoveDown()"
-                        (OnDelete)="OnDelete()"
-                        (OnEdit)="OnEditMe()"
-                        class="floating-widgets"
-                        [style.bottom]="getContentHeight()"></collab-widgets>
     `,
     styles: [`
         .video-component{
@@ -40,6 +40,7 @@ import {ComponentTemplate} from "./component.template";
             height: 0;
             position: relative;
             right: 16px;
+            top: 16px;
             overflow: visible;
         }
 
@@ -55,7 +56,7 @@ export class VideoComponent extends ComponentTemplate{
     videoWidth: number;
     videoHeight: number;
 
-    initialise( data: VideoModel, viewRef: ViewRef ){
+    initialise( data: IMediaModel, viewRef: ViewRef ){
         super.initialise(data,viewRef);
         this.safeResourceURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.url);
         this.videoWidth = data.width;
@@ -63,11 +64,3 @@ export class VideoComponent extends ComponentTemplate{
     }
 }
 
-export class VideoModel {
-    constructor(public vid_id: string,
-                public url: string,
-                public width: number,
-                public height: number,
-                public title?: string,
-                public caption?:string) {}
-}

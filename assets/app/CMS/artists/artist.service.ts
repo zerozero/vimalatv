@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ArtistService{
 
-    static ENDPOINT: string = '/artist/:id';
+    static ENDPOINT: string = '/__artist/:id';
 
     artists: Artist[] = [];
 

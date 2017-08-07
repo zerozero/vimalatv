@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {VideoModel} from "../../Site/Collab/video.component";
+import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 
 
 @Component({
@@ -43,9 +44,9 @@ import {VideoModel} from "../../Site/Collab/video.component";
 export class EmbedVideoComponent implements OnInit{
 
 
-    @Output() OnVideoAdded: EventEmitter<VideoModel> = new EventEmitter<VideoModel>();
+    @Output() OnVideoAdded: EventEmitter<MediaType> = new EventEmitter<MediaType>();
 
-    data: VideoModel;
+    data: IMediaModel;
     embedURL: string;
 
 
@@ -53,7 +54,13 @@ export class EmbedVideoComponent implements OnInit{
     constructor(){}
 
     ngOnInit(): void {
-        this.data = new VideoModel(null,'',0,0);
+        // this.data = new MediaModel(null, MediaModel.VIDEO,'', null, null, null, 0,0);
+        this.data = {
+            media_id: null,
+            type : MediaType.VIDEO,
+            width: 0,
+            height: 0
+        }
     }
 
     onCancel(){
@@ -62,15 +69,20 @@ export class EmbedVideoComponent implements OnInit{
 
     onSubmit(){
 
-        var tmp = document.createElement('div');
+        let tmp = document.createElement('div');
         tmp.innerHTML = this.embedURL;
-        var elem = tmp.getElementsByTagName('iframe')[0];
+        let elem = tmp.getElementsByTagName('iframe')[0];
 
         this.data.url = elem['src'];
         this.data.width = parseInt(elem['width']);
         this.data.height = parseInt(elem['height']) ;
         this.OnVideoAdded.emit(this.data);
-        this.data = new VideoModel(null,'',0,0);
+        this.data = {
+            media_id: null,
+            type : MediaType.VIDEO,
+            width: 0,
+            height: 0
+        };
         this.embedURL = '';
     }
 

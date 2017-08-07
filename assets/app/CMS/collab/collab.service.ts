@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class CollabService{
 
-    static ENDPOINT: string = '/collab/:id';
+    static ENDPOINT: string = '/__collab/:id';
 
     collabs: Collab[] = [];
 
@@ -19,6 +19,26 @@ export class CollabService{
 
         let url: string = (CollabService.ENDPOINT
             .replace('/:id', '?filterDisabled=false'));
+
+        return this._http
+            .get(url)
+            .map((r:Response) => {
+                const collabs = r.json().data;
+                let transformedCollabs: Collab[] = [];
+                for (let collab of collabs){
+                    transformedCollabs.push( new Collab(collab._id, collab.artist_id, collab.templates, collab.enabled));
+                }
+                this.collabs = transformedCollabs;
+                return transformedCollabs;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
+
+    }
+
+    getOne( id:string ):Observable<any> {
+
+        let url: string = (CollabService.ENDPOINT
+            .replace(':id', id));
 
         return this._http
             .get(url)

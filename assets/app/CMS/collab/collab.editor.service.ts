@@ -25,4 +25,20 @@ export class CollabEditorService{
         let d = this._container.indexOf(viewRef);
         this._container.remove(d)
     }
+
+    public getCollabData():any{
+
+        // for (var i=0; i<this._container.length; i++){
+        //     let vr :ViewRef = this._container.get(i);
+        // }
+        // console.log(this._container["_embeddedViews"]);
+
+        let dat = [];
+
+        //access the private _embeddedViews - because we can..
+        this._container["_embeddedViews"].forEach((obj) => {
+            dat.push(obj.nodes[1].instance.data);
+        });
+        return dat;
+    }
 }

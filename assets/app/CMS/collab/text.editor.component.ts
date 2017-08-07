@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {TextModel} from "../../Site/Collab/text.component";
 import {CollabEditorService} from "./collab.editor.service";
+import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 @Component({
     selector: 'text-editor-component',
     template: `
@@ -62,14 +62,18 @@ import {CollabEditorService} from "./collab.editor.service";
 
 export class TextEditorComponent implements OnInit{
 
-    @Output() OnTextAdded: EventEmitter<TextModel> = new EventEmitter<TextModel>();
+    @Output() OnTextAdded: EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
 
-    data: TextModel;
+    data: IMediaModel;
 
     constructor(private collabEditorService: CollabEditorService){}
 
     ngOnInit(): void {
-        this.data = new TextModel(null,'','');
+        // this.data = new MediaModel(null,MediaModel.TEXT);
+        this.data = {
+            media_id: null,
+            type : MediaType.TEXT
+        };
     }
 
     onReset(){
@@ -78,6 +82,10 @@ export class TextEditorComponent implements OnInit{
 
     onSubmit(){
         this.OnTextAdded.emit(this.data);
-        this.data = new TextModel(null,'','');
+        // this.data = new MediaModel(null,MediaModel.TEXT);
+        this.data = {
+            media_id: null,
+            type : MediaType.TEXT
+        };
     }
 }

@@ -45,9 +45,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/collab', collabRoutes);
-app.use('/artist', artistRoutes);
-app.use('/gig', gigRoutes);
+app.use('/__collab', collabRoutes);
+app.use('/__artist', artistRoutes);
+app.use('/__gig', gigRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
