@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {AudioModel} from "../../Site/Collab/audio.component";
 import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 @Component({
     selector: 'embed-audio-component',

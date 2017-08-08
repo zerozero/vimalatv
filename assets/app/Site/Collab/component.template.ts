@@ -18,7 +18,7 @@ export class ComponentTemplate implements IComponentTemplate{
     contentHeight: string = "0px";
 
     @ViewChild('content', {read: ElementRef}) _content: ElementRef;
-
+    @ViewChild('widgets') widgets: any;
 
     constructor(private collabEditorService: CollabEditorService){
 

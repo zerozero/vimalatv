@@ -53,6 +53,7 @@ import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 export class ImageComponent extends ComponentTemplate{
 
 
+
     constructor(collabEditorService: CollabEditorService){
         super(collabEditorService);
     }

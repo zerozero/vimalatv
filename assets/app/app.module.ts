@@ -4,8 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import {SiteModule} from "./Site/site.module";
 import {APP_ROUTING} from "./app.routing";
-import {SiteComponent} from "./Site/site.component";
-import {MdButtonModule, MdIconModule, MdMenuModule, MdSidenavModule, MdToolbarModule} from "@angular/material";
+import {
+    MdButtonModule, MdIconModule, MdListModule, MdMenuModule, MdSidenavModule,
+    MdToolbarModule
+} from "@angular/material";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {CmsModule} from "./CMS/cms.module";
 import {GigService} from "./CMS/gigs/gig.service";
@@ -13,30 +15,27 @@ import {HttpModule} from "@angular/http";
 import {ArtistService} from "./CMS/artists/artist.service";
 import {CollabService} from "./CMS/collab/collab.service";
 import {PageNotFoundComponent} from "./pagenotfound.component";
+import {MediaService} from "./CMS/media/media.service";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
     declarations: [
-        SiteComponent,
         PageNotFoundComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        CommonModule,
         HttpModule,
         CmsModule,
         SiteModule,
-        MdToolbarModule,
-        MdButtonModule,
-        MdSidenavModule,
-        MdIconModule,
-        MdMenuModule,
-        FlexLayoutModule,
         APP_ROUTING
     ],
     providers: [
         GigService,
         ArtistService,
-        CollabService
+        CollabService,
+        MediaService
     ],
     bootstrap: [AppComponent]
 })

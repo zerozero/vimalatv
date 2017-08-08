@@ -1,1 +1,27 @@
-Media
+<div class="media-content">
+    <div class="containerSite" fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="mediaType == typeAudio"
+             fxFlex
+             fxLayout="column"
+             fxLayoutAlign="center center">
+            <h1 class="body-font" fxFlex="0 0 auto">AUDIO</h1>
+            <div class="media-container"
+                 fxFlex="0 0 auto"
+                 fxLayout="row true"
+                 fxLayoutAlign="space-around center">
+                <h2 class="body-font" fxFlex>
+                    <a [href]="spotifyUrl" target="_blank">spotify</a>
+                </h2>
+                <h2 class="body-font" fxFlex>
+                    <a [href]="spotifyUrl" target="_blank">soundcloud</a>
+                </h2>
+                <h2 class="body-font" fxFlex>
+                    <a [href]="spotifyUrl" target="_blank">itunes</a>
+                </h2>
+            </div>
+        </div>
+        <div *ngIf="mediaType == typeVideo">
+            VIDEO
+        </div>
+    </div>
+</div>

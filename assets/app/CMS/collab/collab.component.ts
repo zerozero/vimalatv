@@ -192,7 +192,7 @@ export class CmsCollabComponent implements OnInit{
 })
 export class EditCollabDialog {
 
-    private clonedCollab: Collab;
+    public clonedCollab: Collab;
     public selectedArtist: Artist;
 
     @ViewChild('preview') collabComponent: CollabComponent;

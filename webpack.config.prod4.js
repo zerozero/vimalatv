@@ -44,7 +44,16 @@ module.exports = {
     ],
     module: {
         rules: [
-            {test: /\.scss$/, loaders: ['raw-loader', 'sass-loader']},
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }]
+            },
             {
                 test: /\.css$/,
                 use: [
@@ -54,12 +63,26 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: [{ loader: 'html-loader' }]
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true,
+                        removeComments: true,
+                        collapseWhitespace: true,
+
+                        // angular 2 templates break if these are omitted
+                        removeAttributeQuotes: false,
+                        keepClosingSlash: true,
+                        caseSensitive: true,
+                        conservativeCollapse: true,
+                    }
+                }],
+
             },
             {test: /\.ts$/, loader: '@ngtools/webpack'},
             {
                 test: /\.(png|jpeg|jpg|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file-loader'
+                use: 'file-loader'
             }
         ]
     },

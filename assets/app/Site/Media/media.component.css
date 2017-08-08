@@ -1,0 +1,39 @@
+.media-content{
+    height: 100%;
+    background: url("../../../images/Vimala-Rowe-website-gigs-pic.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.media-container {
+    width: 100vw;
+    max-width: 960px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    color: #ff4081;
+}
+
+h2 {
+    color: white;
+}
+
+a:focus{
+    outline:0 !important;
+    text-decoration: none;
+    color:white;
+}
+
+a:hover{
+    text-decoration: none;
+    color:#e7c130;
+}
+
+a{
+    color: white;
+}

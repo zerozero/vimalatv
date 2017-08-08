@@ -7,6 +7,7 @@ export interface IMediaModel {
     caption?:string;
     width?: number;
     height?: number;
+    enabled?: boolean;
 }
 
 export class MediaType {

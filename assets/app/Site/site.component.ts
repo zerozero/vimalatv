@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
 import {CollabEditorService} from "../CMS/collab/collab.editor.service";
+import {MediaService} from "../CMS/media/media.service";
+import {MediaType} from "./Collab/MediaModel";
 
 @Component({
     selector: 'app-site',
@@ -18,6 +20,9 @@ export class SiteComponent implements OnInit{
     classes : string = 'flat-menu-panel';
 
     artists: Artist[] = [];
+
+    public typeVideo: string = MediaType.VIDEO;
+    public typeAudio: string = MediaType.AUDIO;
 
     constructor(private router:Router,
                 private artistService:ArtistService){
@@ -42,7 +47,7 @@ export class SiteComponent implements OnInit{
     }
 
     showMedia(type: string){
-
+        this.router.navigateByUrl('/media/'+type);
     }
 
     navigateToRoute(route: string){

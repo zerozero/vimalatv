@@ -6,17 +6,17 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {
     DateAdapter,
     MD_DATE_FORMATS,
-    MdButtonModule, MdCardModule, MdCheckboxModule,
+    MdCheckboxModule,
     MdDatepickerModule,
     MdDialogModule,
-    MdIconModule,
     MdInputModule,
     MdListModule,
-    MdMenuModule,
-    MdNativeDateModule, MdOptionModule, MdProgressBarModule, MdSelectModule,
-    MdSidenavModule, MdSlideToggleModule,
+    MdNativeDateModule,
+    MdOptionModule,
+    MdProgressBarModule,
+    MdSelectModule,
+    MdSlideToggleModule,
     MdTabsModule,
-    MdToolbarModule, NativeDateAdapter
 } from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import {Http, RequestOptions} from "@angular/http";
@@ -38,7 +38,9 @@ import {FileUploadModule} from "ng2-file-upload";
 import {TextEditorComponent} from "./collab/text.editor.component";
 import {EmbedVideoComponent} from "./collab/embed.video.component";
 import {EmbedAudioomponent} from "./collab/embed.audio.component";
-import {CommonModule} from "../common.module";
+import {MyCommonModule} from "../common.module";
+import {MediaFilterPipe} from "./media/media.filter";
+import {CommonModule} from "@angular/common";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -57,18 +59,13 @@ const MY_DATE_FORMATS = {
 
 @NgModule({
     imports: [
+        MyCommonModule,
         CommonModule,
         BrowserModule,
         FormsModule,
         FileUploadModule,
-        MdToolbarModule,
-        MdButtonModule,
-        MdSidenavModule,
-        MdMenuModule,
         MdTabsModule,
         MdListModule,
-        MdIconModule,
-        FlexLayoutModule,
         MdDialogModule,
         MdInputModule,
         MdDatepickerModule,
@@ -101,7 +98,8 @@ const MY_DATE_FORMATS = {
         EditArtistDialog,
         DeleteArtistDialog,
         EditCollabDialog,
-        DeleteCollabDialog
+        DeleteCollabDialog,
+        MediaFilterPipe
     ],
     providers: [
         Auth,

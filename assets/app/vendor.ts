@@ -6,6 +6,7 @@ import '@angular/http';
 import '@angular/router';
 import '@angular/forms';
 import '@angular/material';
+import '@angular/cdk';
 
 // RxJS
 import 'rxjs';

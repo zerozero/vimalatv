@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {VideoModel} from "../../Site/Collab/video.component";
 import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 
 

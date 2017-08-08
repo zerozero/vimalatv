@@ -16,7 +16,7 @@ const SITE_ROUTES: Routes = [
         { path: 'home', component: HomeComponent},
         { path: 'bio', component: BioComponent },
         { path: 'gigs', component: GigsComponent },
-        { path: 'media', component: MediaComponent },
+        { path: 'media/:type', component: MediaComponent },
         { path: 'collab/:artist_id', component: CollabComponent },
         { path: 'reviews', component: ReviewsComponent },
         { path: 'contact', component: ContactComponent }
