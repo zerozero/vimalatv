@@ -1,8 +1,9 @@
 import {Inject, Injectable} from "@angular/core";
 import {Http,Headers,Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {IMediaModel} from "../../Site/Collab/MediaModel";
+
 import 'rxjs/add/operator/catch';
+import {IMediaModel} from "./imedia.model";
 
 @Injectable()
 export class MediaService{
@@ -27,7 +28,7 @@ export class MediaService{
                 for (let source of sources){
 
                     let data: IMediaModel = {
-                        media_id: null,
+                        media_id: source._id,
                         type : source.type,
                         url: source.url,
                         title: source.title,
@@ -41,6 +42,32 @@ export class MediaService{
             })
             .catch((error: Response) => Observable.throw(error.json()));
 
+    }
+
+    getMediaOfType(type:string):Observable<any> {
+        let url: string = (MediaService.ENDPOINT
+            .replace(':id', type+'?filterDisabled=true'));
+
+        return this._http
+            .get(url)
+            .map((r:Response) => {
+                const sources = r.json().data;
+                let transformedSources: IMediaModel[] = [];
+                for (let source of sources){
+                    let data: IMediaModel = {
+                        media_id: source._id,
+                        type : source.type,
+                        url: source.url,
+                        title: source.title,
+                        enabled: source.enabled
+                    };
+
+                    transformedSources.push( data );
+                }
+                this.mediaSources = transformedSources;
+                return transformedSources;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
     }
 
     getAllEnabled():Observable<any> {
@@ -100,14 +127,16 @@ export class MediaService{
             .map((response: Response) => {
                 const result = response.json().data;
                 let media: IMediaModel = {
-                    media_id: null,
-                    type : source.type,
-                    url: source.url,
-                    title: source.title,
-                    enabled: source.enabled
+                    media_id: result._id,
+                    type : result.type,
+                    url: result.url,
+                    title: result.title,
+                    enabled: result.enabled
                 };
+                console.log(this.mediaSources);
                 this.mediaSources.push(media);
-                return media;
+                console.log(this.mediaSources);
+                return this.mediaSources;
             })
             .catch((error:Response) => Observable.throw(error.json()));
 

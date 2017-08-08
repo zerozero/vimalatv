@@ -7,12 +7,14 @@ import {
 } from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
     declarations: [
         CollabComponent
     ],
     imports: [
+        BrowserModule,
         MdToolbarModule,
         MdButtonModule,
         MdSidenavModule,
@@ -22,6 +24,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         FlexLayoutModule
     ],
     exports: [
+        BrowserModule,
         CollabComponent,
         MdToolbarModule,
         MdButtonModule,

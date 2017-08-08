@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {CollabEditorService} from "./collab.editor.service";
-import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
+import { MediaModel} from "../media/media.model";
+import {IMediaModel} from "../media/imedia.model";
+
 @Component({
     selector: 'text-editor-component',
     template: `
@@ -72,7 +74,7 @@ export class TextEditorComponent implements OnInit{
         // this.data = new MediaModel(null,MediaModel.TEXT);
         this.data = {
             media_id: null,
-            type : MediaType.TEXT
+            type : MediaModel.TEXT
         };
     }
 
@@ -85,7 +87,7 @@ export class TextEditorComponent implements OnInit{
         // this.data = new MediaModel(null,MediaModel.TEXT);
         this.data = {
             media_id: null,
-            type : MediaType.TEXT
+            type : MediaModel.TEXT
         };
     }
 }

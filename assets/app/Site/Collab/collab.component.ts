@@ -10,9 +10,12 @@ import {routerTransition} from "../../router.animations";
 import {ActivatedRoute} from "@angular/router";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 import {IComponentTemplate} from "./component.template";
-import {IMediaModel, MediaType} from "./MediaModel";
+
 import {Collab} from "../../CMS/collab/collab.model";
 import {CollabService} from "../../CMS/collab/collab.service";
+import {IMediaModel} from "../../CMS/media/imedia.model";
+import {MediaModel} from "../../CMS/media/media.model";
+
 
 
 @Component({
@@ -107,13 +110,13 @@ export class CollabComponent implements OnInit, OnDestroy{
     }
 
     private getFactoryForTemplate( template: IMediaModel ): ComponentFactory<any>{
-        if (template.type == MediaType.IMAGE){
+        if (template.type == MediaModel.IMAGE){
             return this.imgFactory;
-        }else if (template.type == MediaType.TEXT){
+        }else if (template.type == MediaModel.TEXT){
             return this.txtFactory;
-        }else if (template.type == MediaType.VIDEO){
+        }else if (template.type == MediaModel.VIDEO){
             return this.vidFactory
-        }else if (template.type == MediaType.AUDIO){
+        }else if (template.type == MediaModel.AUDIO){
             return this.audFactory;
         }
         return null;

@@ -23,8 +23,6 @@ import {CommonModule} from "@angular/common";
 @NgModule({
     imports: [
         MyCommonModule,
-        CommonModule,
-        BrowserModule,
         SITE_ROUTING
     ],
     declarations: [

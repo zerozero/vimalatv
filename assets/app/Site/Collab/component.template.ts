@@ -1,6 +1,7 @@
 import {ElementRef, OnChanges, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
-import {IMediaModel, MediaType} from "./MediaModel";
+import {IMediaModel} from "../../CMS/media/imedia.model";
+
 
 export interface IComponentTemplate {
     initialise( data: IMediaModel, viewRef: ViewRef );

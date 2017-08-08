@@ -1,7 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MediaService} from "../../CMS/media/media.service";
-import {MediaType} from "../Collab/MediaModel";
+import {MediaModel} from "../../CMS/media/media.model";
+import {IMediaModel} from "../../CMS/media/imedia.model";
+
 
 @Component({
     selector: 'app-media',
@@ -10,11 +12,13 @@ import {MediaType} from "../Collab/MediaModel";
 })
 export class MediaComponent implements OnInit{
 
-    public typeVideo: string = MediaType.VIDEO;
-    public typeAudio: string = MediaType.AUDIO;
+    public typeVideo: string = MediaModel.VIDEO;
+    public typeAudio: string = MediaModel.AUDIO;
 
     public mediaType: string;
     private media: any;
+
+    public mediaSources: IMediaModel[] = [];
 
     private sub: any;
 
@@ -22,7 +26,7 @@ export class MediaComponent implements OnInit{
 
     constructor(private router:Router,
                 private route: ActivatedRoute,
-                private artistService:MediaService){
+                private mediaService:MediaService){
 
     }
 
@@ -37,7 +41,11 @@ export class MediaComponent implements OnInit{
     }
 
     _getMediaOfType( type: string ){
-
+        this.mediaService
+            .getMediaOfType(type)
+            .subscribe((sources) => {
+                this.mediaSources = sources;
+            });
     }
 
 

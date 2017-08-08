@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
+import {MediaModel} from "../media/media.model";
+import {IMediaModel} from "../media/imedia.model";
+
 @Component({
     selector: 'embed-audio-component',
     template: `
@@ -51,7 +53,7 @@ export class EmbedAudioomponent implements OnInit{
         // this.data = new AudioModel(null,'');
         this.data = {
             media_id: null,
-            type : MediaType.AUDIO
+            type : MediaModel.AUDIO
         };
     }
 
@@ -72,7 +74,7 @@ export class EmbedAudioomponent implements OnInit{
         // this.data = new AudioModel(null,'');
         this.data = {
             media_id: null,
-            type : MediaType.AUDIO
+            type : MediaModel.AUDIO
         };
     }
 

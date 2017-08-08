@@ -23,9 +23,7 @@ import {CommonModule} from "@angular/common";
         PageNotFoundComponent
     ],
     imports: [
-        BrowserModule,
         BrowserAnimationsModule,
-        CommonModule,
         HttpModule,
         CmsModule,
         SiteModule,

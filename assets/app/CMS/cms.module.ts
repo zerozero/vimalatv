@@ -26,7 +26,7 @@ import {Auth} from "./auth/auth.service";
 import {TabsComponent} from "./tabs/tabs.component";
 import {HomeComponent} from "./home/home.component";
 import {CmsBioComponent} from "./bio/bio.component";
-import {MediaComponent} from "./media/media.component";
+import {DeleteMediaDialog, EditMediaDialog, MediaComponent} from "./media/media.component";
 import {CmsCollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
@@ -60,8 +60,6 @@ const MY_DATE_FORMATS = {
 @NgModule({
     imports: [
         MyCommonModule,
-        CommonModule,
-        BrowserModule,
         FormsModule,
         FileUploadModule,
         MdTabsModule,
@@ -99,6 +97,8 @@ const MY_DATE_FORMATS = {
         DeleteArtistDialog,
         EditCollabDialog,
         DeleteCollabDialog,
+        EditMediaDialog,
+        DeleteMediaDialog,
         MediaFilterPipe
     ],
     providers: [
@@ -116,7 +116,9 @@ const MY_DATE_FORMATS = {
         EditArtistDialog,
         DeleteArtistDialog,
         EditCollabDialog,
-        DeleteCollabDialog
+        DeleteCollabDialog,
+        EditMediaDialog,
+        DeleteMediaDialog,
     ]
 })
 

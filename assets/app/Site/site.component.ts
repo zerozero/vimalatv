@@ -4,7 +4,8 @@ import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
 import {CollabEditorService} from "../CMS/collab/collab.editor.service";
 import {MediaService} from "../CMS/media/media.service";
-import {MediaType} from "./Collab/MediaModel";
+import {MediaModel} from "../CMS/media/media.model";
+
 
 @Component({
     selector: 'app-site',
@@ -21,8 +22,8 @@ export class SiteComponent implements OnInit{
 
     artists: Artist[] = [];
 
-    public typeVideo: string = MediaType.VIDEO;
-    public typeAudio: string = MediaType.AUDIO;
+    public typeVideo: string = MediaModel.VIDEO;
+    public typeAudio: string = MediaModel.AUDIO;
 
     constructor(private router:Router,
                 private artistService:ArtistService){

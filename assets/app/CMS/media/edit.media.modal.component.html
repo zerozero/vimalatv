@@ -1,0 +1,41 @@
+<form class="gig-container" #gigForm="ngForm" (ngSubmit)="onSubmit()">
+    <h4>{{ data.media_id ? 'Edit' : 'Create' }} Media</h4>
+    <br/>
+    <md-select placeholder="Media Type" [(ngModel)]="data.type" name="mediaType">
+        <md-option [value]="typeAudio">{{typeAudio | uppercase }}</md-option>
+        <md-option [value]="typeVideo">{{typeVideo | uppercase}}</md-option>
+    </md-select>
+
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="Title"
+                   required
+                   [(ngModel)]="data.title"
+                   name="title">
+        </md-input-container>
+    </p>
+    <p>
+        <md-input-container class="full-width">
+            <input mdInput
+                   placeholder="url"
+                   [(ngModel)]="data.url"
+                   name="url">
+        </md-input-container>
+    </p>
+
+    <div fxlayout="row" fxLayoutAlign="end center">
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                color="primary"
+                type="submit"
+                [disabled]="!gigForm.form.valid">SAVE</button>
+        <button md-raised-button
+                fxFlex="0 0 auto"
+                type="button"
+                (click)="onCancel()">CANCEL</button>
+    </div>
+
+</form>
+
+

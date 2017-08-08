@@ -9,15 +9,10 @@
                  fxFlex="0 0 auto"
                  fxLayout="row true"
                  fxLayoutAlign="space-around center">
-                <h2 class="body-font" fxFlex>
-                    <a [href]="spotifyUrl" target="_blank">spotify</a>
+                <h2 class="body-font" fxFlex *ngFor="let source of mediaSources">
+                    <a [href]="source.url" target="_blank">{{source.title}}</a>
                 </h2>
-                <h2 class="body-font" fxFlex>
-                    <a [href]="spotifyUrl" target="_blank">soundcloud</a>
-                </h2>
-                <h2 class="body-font" fxFlex>
-                    <a [href]="spotifyUrl" target="_blank">itunes</a>
-                </h2>
+
             </div>
         </div>
         <div *ngIf="mediaType == typeVideo">

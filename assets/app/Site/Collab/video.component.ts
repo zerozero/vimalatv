@@ -2,7 +2,8 @@ import {Component, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 import {ComponentTemplate} from "./component.template";
-import {IMediaModel} from "./MediaModel";
+import {IMediaModel} from "../../CMS/media/imedia.model";
+
 
 @Component({
     moduleId: module.id.toString(),

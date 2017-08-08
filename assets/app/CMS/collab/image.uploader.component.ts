@@ -9,7 +9,9 @@ import {
     FileUploader,
     FileUploaderOptions
 }                                   from 'ng2-file-upload';
-import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
+import { MediaModel} from "../media/media.model";
+import {IMediaModel} from "../media/imedia.model";
+
 
 declare var $:any;
 
@@ -126,7 +128,7 @@ export class ImageUploaderComponent implements OnInit{
     this.uploader.onSuccessItem = ( item: FileItem, response: string, status: number) => {
         let data: IMediaModel = {
             media_id: null,
-            type : MediaType.IMAGE,
+            type : MediaModel.IMAGE,
             url: JSON.parse(response).data.secure_url
         };
         this.OnComplete.emit(data);

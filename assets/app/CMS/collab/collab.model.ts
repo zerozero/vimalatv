@@ -1,4 +1,4 @@
-import {IMediaModel} from "../../Site/Collab/MediaModel";
+import {IMediaModel} from "../media/imedia.model";
 
 export class Collab{
     constructor(public collab_id:string, public artist_id: string, public templates: IMediaModel[], public enabled: boolean) {}

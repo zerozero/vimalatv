@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
+import { MediaModel} from "../media/media.model";
+import {IMediaModel} from "../media/imedia.model";
+
 
 
 @Component({
@@ -43,7 +45,7 @@ import {IMediaModel, MediaType} from "../../Site/Collab/MediaModel";
 export class EmbedVideoComponent implements OnInit{
 
 
-    @Output() OnVideoAdded: EventEmitter<MediaType> = new EventEmitter<MediaType>();
+    @Output() OnVideoAdded: EventEmitter<MediaModel> = new EventEmitter<MediaModel>();
 
     data: IMediaModel;
     embedURL: string;
@@ -56,7 +58,7 @@ export class EmbedVideoComponent implements OnInit{
         // this.data = new MediaModel(null, MediaModel.VIDEO,'', null, null, null, 0,0);
         this.data = {
             media_id: null,
-            type : MediaType.VIDEO,
+            type : MediaModel.VIDEO,
             width: 0,
             height: 0
         }
@@ -78,7 +80,7 @@ export class EmbedVideoComponent implements OnInit{
         this.OnVideoAdded.emit(this.data);
         this.data = {
             media_id: null,
-            type : MediaType.VIDEO,
+            type : MediaModel.VIDEO,
             width: 0,
             height: 0
         };
