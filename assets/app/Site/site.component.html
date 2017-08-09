@@ -1,3 +1,23 @@
+<md-sidenav-container>
+
+    <md-sidenav #sidenav mode="push" class="sidenav-menu">
+        <!-- sidenav content -->
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap.lt-md="0px" fxLayoutGap="12px" class="menu-layout-container">
+
+            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('home'); sidenav.close()">HOME</button>
+            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('bio'); sidenav.close()">BIO</button>
+            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('gigs'); sidenav.close()">GIGS</button>
+            <button fxFlex="0 1 auto" md-button [mdMenuTriggerFor]="mediaMenu">MEDIA</button>
+            <button fxFlex="0 1 auto" md-button [mdMenuTriggerFor]="collabMenu">COLLABORATIONS</button>
+            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('reviews'); sidenav.close()">REVIEWS</button>
+            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('contact'); sidenav.close()">CONTACT</button>
+        </div>
+    </md-sidenav>
+
+    <router-outlet></router-outlet>
+
+</md-sidenav-container>
+
 <md-toolbar color="accent" >
     <span class="example-spacer"></span>
 
@@ -73,22 +93,3 @@
     </div>
 </md-toolbar>
 
-<md-sidenav-container>
-
-    <md-sidenav #sidenav mode="push" class="sidenav-menu">
-        <!-- sidenav content -->
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap.lt-md="0px" fxLayoutGap="12px" class="menu-layout-container">
-
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('home'); sidenav.close()">HOME</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('bio'); sidenav.close()">BIO</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('gigs'); sidenav.close()">GIGS</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('media'); sidenav.close()">MEDIA</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('collab'); sidenav.close()">COLLABORATIONS</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('reviews'); sidenav.close()">REVIEWS</button>
-            <button fxFlex="0 1 auto" md-button (click)="navigateToRoute('contact'); sidenav.close()">CONTACT</button>
-        </div>
-    </md-sidenav>
-
-    <router-outlet></router-outlet>
-
-</md-sidenav-container>

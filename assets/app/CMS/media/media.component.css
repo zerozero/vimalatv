@@ -1,0 +1,20 @@
+button{
+    margin-left: 50px;
+}
+
+md-slide-toggle{
+    margin-left: 12px;
+}
+.add-button{
+    margin: 12px;
+}
+.inline-fab{
+    margin-left: 12px;
+}
+
+.warning{
+    background-color: crimson;
+    border-radius: 8px;
+    color: white;
+    padding: 18px;
+}

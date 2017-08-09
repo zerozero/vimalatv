@@ -3,7 +3,7 @@
     <div fxFlex="0 0 auto" fxFlexAlign="end">
         <button (click)="createItem()" class="add-button" md-mini-fab><md-icon>add</md-icon></button>
     </div>
-
+    <p fxFlex="0 1 auto" class="warning">Take care with the order in which you create items as it is currently not possible to change the order.</p>
     <div fxLayout="row" fxLayoutAlign="center start" fxFlex="1 0 auto">
         <md-list class="audio-source-list" fxFlex="1 1 auto">
             <h3 md-subheader>Audio</h3>
@@ -11,6 +11,16 @@
 
                 <h4 md-line>{{source.title}}</h4>
                 <h4 md-line>{{source.url}}</h4>
+                <!--<button class="widget"-->
+                        <!--type="button"-->
+                        <!--(click)="moveUp(source)"-->
+                        <!--class="inline-fab"-->
+                        <!--md-mini-fab><md-icon>arrow_upward</md-icon></button>-->
+                <!--<button class="widget"-->
+                        <!--type="button"-->
+                        <!--(click)="moveDown(source)"-->
+                        <!--class="inline-fab"-->
+                        <!--md-mini-fab><md-icon>arrow_downward</md-icon></button>-->
                 <button (click)="editItem(source)"
                         class="inline-fab"
                         md-mini-fab><md-icon>edit</md-icon>
@@ -30,6 +40,16 @@
 
                 <h4 md-line>{{source.title}}</h4>
                 <h4 md-line>{{source.url}}</h4>
+                <!--<button class="widget"-->
+                        <!--type="button"-->
+                        <!--(click)="moveUp(source)"-->
+                        <!--class="inline-fab"-->
+                        <!--md-mini-fab><md-icon>arrow_upward</md-icon></button>-->
+                <!--<button class="widget"-->
+                        <!--type="button"-->
+                        <!--(click)="moveDown(source)"-->
+                        <!--class="inline-fab"-->
+                        <!--md-mini-fab><md-icon>arrow_downward</md-icon></button>-->
                 <button (click)="editItem(source)"
                         class="inline-fab"
                         md-mini-fab><md-icon>edit</md-icon>

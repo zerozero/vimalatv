@@ -16,26 +16,19 @@ import {IMediaModel} from "../../CMS/media/imedia.model";
                         (OnEdit)="OnEditMe()"
                         class="floating-widgets" *ngIf="isEditMode"></collab-widgets>
         <div (mouseenter)="widgets?.OnMouseEnter($event)" 
-             (mouseleave)="widgets?.OnMouseLeave($event)">
-            <div fxFlex class="video-component" #content>
-                <iframe [width]="videoWidth" 
-                        [height]="videoHeight" 
-                        [src]="safeResourceURL" 
-                        frameborder="0" 
-                        allowfullscreen></iframe>
+             (mouseleave)="widgets?.OnMouseLeave($event)" fxLayout="row" fxFlexAlign="center center">
+            <div fxFlex="1 0 auto" #content>
+                <div class="container">
+                    <iframe [src]="safeResourceURL"
+                            frameborder="0"
+                            allowfullscreen class="video"></iframe>    
+                </div>
+                
             </div>
         </div>
     `,
     styles: [`
-        .video-component{
-            margin: 10px;
-            padding: 10px;
-            max-width: 640px;
-            max-height: 480px;
-            width: auto;
-            height: auto;
-            color: white;
-        }
+       
 
         .floating-widgets {
             height: 0;
@@ -43,6 +36,25 @@ import {IMediaModel} from "../../CMS/media/imedia.model";
             right: 16px;
             top: 16px;
             overflow: visible;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+        }
+        .video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        :host {
+            display: block;
+            width: 100%;
         }
 
     `]

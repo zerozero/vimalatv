@@ -6,7 +6,8 @@ import {IMediaModel} from "./imedia.model";
 
 @Component({
     selector: 'cms-media',
-    templateUrl: './media.component.html'
+    templateUrl: './media.component.html',
+    styleUrls: ['./media.component.css']
 })
 export class MediaComponent implements OnInit{
 
@@ -32,6 +33,14 @@ export class MediaComponent implements OnInit{
     changeEnabled(source:any, enabled: boolean){
         source.enabled = enabled;
         this.update(source);
+    }
+
+    moveDown( source:IMediaModel ){
+        console.log("move down "+source.title);
+    }
+
+    moveUp( source:IMediaModel ){
+        console.log("move up "+source.title+" "+this.mediaSources.indexOf(source));
     }
 
     createItem(){

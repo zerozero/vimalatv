@@ -1,12 +1,27 @@
 md-sidenav-container {
-    height: calc(100vh - 65px);
+    /*height: calc(100vh - 65px);*/
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top:0;
+    /*z-index: -1;*/
 }
+
+md-toolbar {
+    position: absolute;
+    left: 0;
+    top:0;
+    /*z-index: 1;*/
+}
+
 
 .sidenav-menu{
     background-color: #ff4081 !important;
 }
 
 .menu-layout-container{
+    padding-top: 80px;
     height: 100%;
 }
 

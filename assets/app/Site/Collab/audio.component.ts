@@ -41,6 +41,11 @@ import {IMediaModel} from "../../CMS/media/imedia.model";
             overflow: visible;
         }
 
+        :host {
+            display: block;
+            width: 100%;
+        }
+
     `]
 })
 export class AudioComponent extends ComponentTemplate{

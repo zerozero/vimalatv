@@ -39,6 +39,11 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
                 overflow: visible;
             }
 
+            :host {
+                display: block;
+                width: 100%;
+            }
+
         `
     ]
 })

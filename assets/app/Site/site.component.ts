@@ -1,10 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
 import {CollabEditorService} from "../CMS/collab/collab.editor.service";
 import {MediaService} from "../CMS/media/media.service";
 import {MediaModel} from "../CMS/media/media.model";
+import {MdSidenav} from "@angular/material";
 
 
 @Component({
@@ -17,7 +18,9 @@ import {MediaModel} from "../CMS/media/media.model";
 export class SiteComponent implements OnInit{
 
 
-//note this class must be defined in the global css file
+    @ViewChild('sidenav', {read: MdSidenav}) _sidenav: MdSidenav;
+
+    //note this class must be defined in the global css file
     classes : string = 'flat-menu-panel';
 
     artists: Artist[] = [];
@@ -44,10 +47,12 @@ export class SiteComponent implements OnInit{
     }
 
     showCollaboration(artist: Artist){
+        this._sidenav.close();
         this.router.navigateByUrl('/collab/'+artist.artist_id);
     }
 
     showMedia(type: string){
+        this._sidenav.close();
         this.router.navigateByUrl('/media/'+type);
     }
 

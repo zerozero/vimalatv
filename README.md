@@ -23,3 +23,12 @@ $ heroku local web #run the local version of heroku (looks for Procfile. Default
 $ heroku addons:create papertrail
 
 $ export CLOUDINARY_URL=cloudinary://626785482432199:9xrQ_-iT0TUmYbvEnMEQWlbW8tc@hkgka4c5k
+
+local development setup
+=======================
+
+I have configured pf firewall in murus.app to allow connections on ports 3000, 4200 and 4300
+
+192.168.1.64:3000
+
+bin/www - server.listen(3000, '0.0.0.0');

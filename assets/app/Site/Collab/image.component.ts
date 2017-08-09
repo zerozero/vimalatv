@@ -48,6 +48,11 @@ import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
             width: auto;
             height: auto;
         }
+
+        :host {
+            display: block;
+            width: 100%;
+        }
     `]
 })
 export class ImageComponent extends ComponentTemplate{
