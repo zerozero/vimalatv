@@ -16,7 +16,7 @@ h1, h2 {
 }
 
 h1 {
-    color: #ff4081;
+    color: #e7c130;
 }
 
 h2 {
@@ -37,3 +37,48 @@ a:hover{
 a{
     color: white;
 }
+
+.spacer{
+    width:100vw;
+}
+
+.video-player{
+    width:100vw;
+    max-width: 1024px;
+    background-color: green;
+    height: 100%;
+}
+
+.video-thumb-container{
+    max-width: 960px;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+
+.video-thumb{
+    padding: 8px;
+}
+
+.thumb-grid{
+    max-width: 1024px;
+    width: 100vw;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*:host {*/
+    /*display: block;*/
+    /*width: 100%;*/
+/*}*/

@@ -6,6 +6,8 @@ import {CollabEditorService} from "../CMS/collab/collab.editor.service";
 import {MediaService} from "../CMS/media/media.service";
 import {MediaModel} from "../CMS/media/media.model";
 import {MdSidenav} from "@angular/material";
+import {CollabService} from "../CMS/collab/collab.service";
+import {Collab} from "../CMS/collab/collab.model";
 
 
 @Component({
@@ -24,31 +26,50 @@ export class SiteComponent implements OnInit{
     classes : string = 'flat-menu-panel';
 
     artists: Artist[] = [];
+    collabs:Collab[] = [];
 
     public typeVideo: string = MediaModel.VIDEO;
     public typeAudio: string = MediaModel.AUDIO;
 
     constructor(private router:Router,
+                private collabService:CollabService,
                 private artistService:ArtistService){
 
     }
 
 
     ngOnInit(): void {
-        this._getAll();
+        this._getArtists();
     }
 
-    _getAll(){
+    _getArtists() {
         this.artistService
             .getAll()
             .subscribe((artists) => {
                 this.artists = artists;
-            })
+                this._getCollabs();
+            });
     }
 
-    showCollaboration(artist: Artist){
+    _getCollabs(){
+
+        this.collabService
+            .getAll(true)
+            .subscribe((collabs) => {
+                this.collabs = collabs;
+            });
+    }
+
+    getArtist(artist_id:string):string{
+        var result = this.artists.filter(function( artist ) {
+            return artist.artist_id == artist_id;
+        });
+        return result ? result[0].name : "not found";
+    }
+
+    showCollaboration(collab: Collab){
         this._sidenav.close();
-        this.router.navigateByUrl('/collab/'+artist.artist_id);
+        this.router.navigateByUrl('/collab/'+collab.artist_id);
     }
 
     showMedia(type: string){

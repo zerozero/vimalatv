@@ -1,7 +1,7 @@
 <form class="gig-container" #artistForm="ngForm" (ngSubmit)="onSubmit()">
     <div fxLayout="column" fxLayoutGap="40px">
 
-        <h4 fxFlex>{{ data.collab.id ? 'Edit' : 'Create' }} Collaboration</h4>
+        <h4 fxFlex>{{ data.collab.collab_id ? 'Edit' : 'Create' }} Collaboration</h4>
 
         <md-select class="artist-select" fxFlex="0 0 auto" placeholder="Artist" [(ngModel)]="selectedArtist" name="sel"
                    ngDefaultControl required>
@@ -10,22 +10,22 @@
             </md-option>
         </md-select>
 
-        <md-tab-group fxFlex="300px" [dynamicHeight]="true">
+        <md-tab-group #mediaTabs fxFlex="300px" [dynamicHeight]="true">
             <md-tab label="Text">
-                <text-editor-component (OnTextAdded)="preview.createComponent($event)"></text-editor-component>
+                <text-editor-component #textEditor (OnTextAdded)="preview.createComponent($event)"></text-editor-component>
             </md-tab>
             <md-tab label="Image">
-                <image-uploader-component (OnComplete)="preview.createComponent($event)"></image-uploader-component>
+                <image-uploader-component #imageEditor (OnComplete)="preview.createComponent($event)"></image-uploader-component>
             </md-tab>
             <md-tab label="Video">
-                <embed-video-component (OnVideoAdded)="preview.createComponent($event)"></embed-video-component>
+                <embed-video-component #videoEditor (OnVideoAdded)="preview.createComponent($event)"></embed-video-component>
             </md-tab>
             <md-tab label="Audio">
-                <embed-audio-component (OnAudioAdded)="preview.createComponent($event)"></embed-audio-component>
+                <embed-audio-component #audioEditor (OnAudioAdded)="preview.createComponent($event)"></embed-audio-component>
             </md-tab>
         </md-tab-group>
 
-        <app-collab #preview [collaboration]="clonedCollab"></app-collab>
+        <app-collab #preview [collaboration]="clonedCollab" [isPreviewMode]="true" (OnEditComponent)="DoEdit($event)"></app-collab>
 
         <div fxFlex fxlayout="row" fxLayoutAlign="end center">
             <button md-raised-button

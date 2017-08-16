@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {ReviewsComponent} from "./Reviews/reviews.component";
-import {MediaComponent} from "./Media/media.component";
+import {MediaComponent, ModalVideoPlayer} from "./Media/media.component";
 import {GigsComponent} from "./Gigs/gigs.component";
 import {ContactComponent} from "./Contact/contact.component";
 import {HomeComponent} from "./Home/home.component";
@@ -17,12 +17,15 @@ import {BioComponent} from "./Bio/bio.component";
 import {CollabWidgetsComponent} from "./Collab/collab.widgets.component";
 import {SiteComponent} from "./site.component";
 import {CommonModule} from "@angular/common";
+import {VideoThumbnail} from "./Media/video.thumbnail.component";
+import {MdGridListModule} from "@angular/material";
 
 
 //refactor
 @NgModule({
     imports: [
         MyCommonModule,
+        MdGridListModule,
         SITE_ROUTING
     ],
     declarations: [
@@ -38,14 +41,17 @@ import {CommonModule} from "@angular/common";
         TextComponent,
         CollabWidgetsComponent,
         VideoComponent,
-        AudioComponent
+        AudioComponent,
+        VideoThumbnail,
+        ModalVideoPlayer
     ],
     providers: [],
     entryComponents: [
         ImageComponent,
         AudioComponent,
         VideoComponent,
-        TextComponent
+        TextComponent,
+        ModalVideoPlayer
     ]
 })
 

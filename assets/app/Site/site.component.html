@@ -26,7 +26,7 @@
              class="flat-menu-panel"
              [class]="classes"
              [overlapTrigger]="false">
-        <button md-menu-item class="body-font" *ngFor="let artist of artists" (click)="showCollaboration(artist)">{{artist.name | uppercase}}</button>
+        <button md-menu-item class="body-font" *ngFor="let collab of collabs" (click)="showCollaboration(collab)">{{getArtist(collab.artist_id) | uppercase}}</button>
     </md-menu>
 
     <md-menu #mediaMenu="mdMenu"

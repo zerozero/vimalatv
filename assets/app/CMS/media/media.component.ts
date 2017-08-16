@@ -3,6 +3,7 @@ import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 import { MediaModel} from "./media.model";
 import {MediaService} from "./media.service";
 import {IMediaModel} from "./imedia.model";
+import {isNullOrUndefined} from "util";
 
 @Component({
     selector: 'cms-media',
@@ -165,7 +166,15 @@ export class EditMediaDialog {
     }
 
     onSubmit(){
+        if (this.data.type == MediaModel.VIDEO){
+            var tmp = document.createElement('div');
+            tmp.innerHTML = this.data.url;
+            var elem = tmp.getElementsByTagName('iframe')[0];
+
+            this.data.url = elem == undefined ? this.data.url : elem['src'];
+        }
         this.dialogRef.close(this.data);
+
     }
 }
 

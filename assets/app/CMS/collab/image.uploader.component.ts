@@ -11,11 +11,12 @@ import {
 }                                   from 'ng2-file-upload';
 import { MediaModel} from "../media/media.model";
 import {IMediaModel} from "../media/imedia.model";
+import {isNullOrUndefined} from "util";
 
 
 declare var $:any;
 
-const URL = '/collab/upload/';
+const URL = '/__collab/upload/';
 
 @Component({
   selector: 'image-uploader-component',
@@ -76,6 +77,8 @@ export class ImageUploaderComponent implements OnInit{
 
   percent: number = 1;
 
+  private editData: IMediaModel;
+
 
   private uploaderOptions:FileUploaderOptions = {
     autoUpload: true,
@@ -126,12 +129,19 @@ export class ImageUploaderComponent implements OnInit{
     };
 
     this.uploader.onSuccessItem = ( item: FileItem, response: string, status: number) => {
-        let data: IMediaModel = {
-            media_id: null,
-            type : MediaModel.IMAGE,
-            url: JSON.parse(response).data.secure_url
-        };
-        this.OnComplete.emit(data);
+
+        if (isNullOrUndefined(this.editData)){
+            let data: IMediaModel = {
+                media_id: null,
+                type : MediaModel.IMAGE,
+                url: JSON.parse(response).data.secure_url
+            };
+            this.OnComplete.emit(data);
+        }else{
+            this.editData.url = JSON.parse(response).data.secure_url;
+            this.editData = null;
+        }
+
         // this.OnComplete.emit(new MediaModel(null, MediaModel.IMAGE, JSON.parse(response).data.secure_url));
       };
 
@@ -142,6 +152,11 @@ export class ImageUploaderComponent implements OnInit{
     };
 
   }
+
+
+    editMedia(data:IMediaModel){
+      this.editData = data;
+    }
 
 
 

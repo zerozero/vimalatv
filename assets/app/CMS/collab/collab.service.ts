@@ -15,10 +15,10 @@ export class CollabService{
     }
 
 
-    getAll():Observable<any> {
+    getAll(filterDisabled:boolean = false):Observable<any> {
 
         let url: string = (CollabService.ENDPOINT
-            .replace('/:id', '?filterDisabled=false'));
+            .replace('/:id', '?filterDisabled='+(filterDisabled ? 'true' : 'false')));
 
         return this._http
             .get(url)

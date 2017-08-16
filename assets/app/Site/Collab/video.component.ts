@@ -1,8 +1,9 @@
-import {Component, ViewRef} from "@angular/core";
+import {Component, Input, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 import {ComponentTemplate} from "./component.template";
 import {IMediaModel} from "../../CMS/media/imedia.model";
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -36,6 +37,7 @@ import {IMediaModel} from "../../CMS/media/imedia.model";
             right: 16px;
             top: 16px;
             overflow: visible;
+            z-index: 10;
         }
 
         .container {
@@ -60,6 +62,13 @@ import {IMediaModel} from "../../CMS/media/imedia.model";
     `]
 })
 export class VideoComponent extends ComponentTemplate{
+
+    @Input()
+    set mediaModel(mediaModel: IMediaModel) {
+        if (isNullOrUndefined(mediaModel))
+            return;
+        this.safeResourceURL = this.sanitizer.bypassSecurityTrustResourceUrl(mediaModel.url+"?rel=0");
+    }
 
     constructor(collabEditorService: CollabEditorService, private sanitizer: DomSanitizer){
         super(collabEditorService);

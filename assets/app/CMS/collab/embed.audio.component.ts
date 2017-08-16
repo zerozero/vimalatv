@@ -58,11 +58,15 @@ export class EmbedAudioomponent implements OnInit{
     }
 
     onCancel(){
+        this.embedURL = "";
 
+        this.data = {
+            media_id: null,
+            type : MediaModel.AUDIO
+        };
     }
 
     onSubmit(){
-        console.log(this.embedURL);
 
         var tmp = document.createElement('div');
         tmp.innerHTML = this.embedURL;
@@ -71,7 +75,8 @@ export class EmbedAudioomponent implements OnInit{
         this.data.url = elem['src'];
         this.OnAudioAdded.emit(this.data);
 
-        // this.data = new AudioModel(null,'');
+        this.embedURL = "";
+
         this.data = {
             media_id: null,
             type : MediaModel.AUDIO

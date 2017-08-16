@@ -10,7 +10,7 @@
             <md-list-item *ngFor="let source of mediaSources | mediaFilter: 'audio' ">
 
                 <h4 md-line>{{source.title}}</h4>
-                <h4 md-line>{{source.url}}</h4>
+                <h4 md-line >{{source.url | truncateFilter:120}}</h4>
                 <!--<button class="widget"-->
                         <!--type="button"-->
                         <!--(click)="moveUp(source)"-->
@@ -39,7 +39,7 @@
             <md-list-item *ngFor="let source of mediaSources | mediaFilter: 'video' ">
 
                 <h4 md-line>{{source.title}}</h4>
-                <h4 md-line>{{source.url}}</h4>
+                <h4 md-line>{{source.url | truncateFilter:120}}</h4>
                 <!--<button class="widget"-->
                         <!--type="button"-->
                         <!--(click)="moveUp(source)"-->

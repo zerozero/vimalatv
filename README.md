@@ -32,3 +32,8 @@ I have configured pf firewall in murus.app to allow connections on ports 3000, 4
 192.168.1.64:3000
 
 bin/www - server.listen(3000, '0.0.0.0');
+
+youtube thumbnail image
+=======================
+
+https://img.youtube.com/vi/t5Hf3sjI108/mqdefault.jpg

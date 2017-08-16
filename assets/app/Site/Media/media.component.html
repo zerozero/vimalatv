@@ -1,5 +1,7 @@
 <div class="media-content">
     <div class="containerSite" fxLayout="column" fxLayoutAlign="center center">
+
+        <!-- AUDIO -->
         <div *ngIf="mediaType == typeAudio"
              fxFlex
              fxLayout="column"
@@ -15,8 +17,25 @@
 
             </div>
         </div>
-        <div *ngIf="mediaType == typeVideo">
-            VIDEO
+
+
+        <!-- VIDEO -->
+        <div *ngIf="mediaType == typeVideo"
+             fxFlex
+             fxLayout="column"
+             fxLayoutAlign="start center" class="video-thumb-container">
+            <div class="spacer" fxFlex="100px"></div>
+            <h1 class="body-font" fxFlex="0 0 auto">VIDEO</h1>
+            <div class="spacer" fxFlex="48px"></div>
+            <app-video #videoPlayer [mediaModel]="selectedVideo"></app-video>
+
+            <div class="spacer" fxFlex="48px"></div>
+            <div fxFlex fxLayout="row true" fxLayoutAlign="center start" fxLayoutGap="12px">
+                <video-thumb *ngFor="let source of mediaSources" (OnPlayVideo)="PlayVideo($event)" [mediaModel]="source"></video-thumb>
+            </div>
+            <div class="spacer" fxFlex="200px"></div>
+
         </div>
     </div>
+
 </div>

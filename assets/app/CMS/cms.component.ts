@@ -24,6 +24,7 @@ export class CmsComponent{
     }
 
     login(){
+        this.router.navigateByUrl('/cms');
         this.auth.login();
     }
 }

@@ -1,9 +1,11 @@
-import {ElementRef, OnChanges, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
+import {ElementRef, EventEmitter, OnChanges, Output, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
 import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 
 
 export interface IComponentTemplate {
+    isEditMode;
+    OnEditItem;
     initialise( data: IMediaModel, viewRef: ViewRef );
     OnMoveUp();
     OnMoveDown();
@@ -13,10 +15,11 @@ export interface IComponentTemplate {
 
 export class ComponentTemplate implements IComponentTemplate{
 
+    @Output() OnEditItem: EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
+
     data: IMediaModel;
     viewRef: ViewRef;
     isEditMode: boolean = false;
-    contentHeight: string = "0px";
 
     @ViewChild('content', {read: ElementRef}) _content: ElementRef;
     @ViewChild('widgets') widgets: any;
@@ -40,8 +43,7 @@ export class ComponentTemplate implements IComponentTemplate{
     }
 
     OnEditMe(){
-        //todo: implement editing
-        console.log("edit me!!!");
+        this.OnEditItem.emit(this.data);
     }
 
     OnDelete(){

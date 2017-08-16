@@ -27,8 +27,7 @@ import {IMediaModel} from "../media/imedia.model";
                                   placeholder="Body Text"
                                   mdTextareaAutosize
                                   [mdAutosizeMinRows]="3"
-                                  [mdAutosizeMaxRows]="5"
-                                  required
+                                  [mdAutosizeMaxRows]="3"
                                   [(ngModel)]="data.content"
                                   name="body">
                         </textarea>
@@ -68,14 +67,21 @@ export class TextEditorComponent implements OnInit{
 
     data: IMediaModel;
 
+    private isEditing: boolean = false;
+
     constructor(private collabEditorService: CollabEditorService){}
 
     ngOnInit(): void {
-        // this.data = new MediaModel(null,MediaModel.TEXT);
+
         this.data = {
             media_id: null,
             type : MediaModel.TEXT
         };
+    }
+
+    editMedia( data:IMediaModel){
+        this.isEditing = true;
+        this.data = data;
     }
 
     onReset(){
@@ -83,8 +89,11 @@ export class TextEditorComponent implements OnInit{
     }
 
     onSubmit(){
-        this.OnTextAdded.emit(this.data);
-        // this.data = new MediaModel(null,MediaModel.TEXT);
+        //only emit if it's a new piece of data
+        if (!this.isEditing)
+            this.OnTextAdded.emit(this.data);
+
+        this.isEditing = false;
         this.data = {
             media_id: null,
             type : MediaModel.TEXT

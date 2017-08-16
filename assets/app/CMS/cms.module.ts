@@ -41,6 +41,7 @@ import {EmbedAudioomponent} from "./collab/embed.audio.component";
 import {MyCommonModule} from "../common.module";
 import {MediaFilterPipe} from "./media/media.filter";
 import {CommonModule} from "@angular/common";
+import {TruncateFilterPipe} from "./media/truncate.filter";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -99,7 +100,8 @@ const MY_DATE_FORMATS = {
         DeleteCollabDialog,
         EditMediaDialog,
         DeleteMediaDialog,
-        MediaFilterPipe
+        MediaFilterPipe,
+        TruncateFilterPipe
     ],
     providers: [
         Auth,

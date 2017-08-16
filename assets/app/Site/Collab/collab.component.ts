@@ -1,5 +1,6 @@
 import {
-    Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnDestroy, OnInit, ViewChild,
+    Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, EventEmitter, Input, OnDestroy, OnInit, Output,
+    ViewChild,
     ViewContainerRef, ViewRef
 } from "@angular/core";
 import {ImageComponent} from "./image.component";
@@ -39,10 +40,13 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.collab = data;
     }
 
+    @Output() OnEditComponent : EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
+
     get collaboration(): Collab{ return this.collab; }
 
     private sub: any;
 
+    @Input()
     public isPreviewMode: boolean = false;
 
 
@@ -129,6 +133,10 @@ export class CollabComponent implements OnInit, OnDestroy{
         cmp = this._container.createComponent(this.getFactoryForTemplate(template));
 
         cmp.instance.initialise(template, cmp.hostView);
+        cmp.instance.isEditMode = this.isPreviewMode;
+        cmp.instance.OnEditItem.subscribe((data) => {
+            this.OnEditComponent.emit(data);
+        })
     }
 
 }

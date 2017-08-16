@@ -10,7 +10,9 @@ declare var Auth0Lock: any;
 @Injectable()
 export class Auth {
 
-  options = { };
+  options = {
+    rememberLastLogin: false
+  };
 
   // Configure Auth0
   lock = new Auth0Lock(myConfig.clientID, myConfig.domain, this.options);

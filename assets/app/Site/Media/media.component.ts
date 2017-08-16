@@ -1,8 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, Inject, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MediaService} from "../../CMS/media/media.service";
 import {MediaModel} from "../../CMS/media/media.model";
 import {IMediaModel} from "../../CMS/media/imedia.model";
+import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 
 @Component({
@@ -20,13 +22,17 @@ export class MediaComponent implements OnInit{
 
     public mediaSources: IMediaModel[] = [];
 
+    public selectedVideo: IMediaModel;
+
     private sub: any;
 
     private spotifyUrl: string = "https://soundcloud.com/jon-rowe-8/sets/midnight-diner";
 
     constructor(private router:Router,
                 private route: ActivatedRoute,
-                private mediaService:MediaService){
+                private mediaService:MediaService,
+                private el: ElementRef,
+                public dialog: MdDialog){
 
     }
 
@@ -45,7 +51,79 @@ export class MediaComponent implements OnInit{
             .getMediaOfType(type)
             .subscribe((sources) => {
                 this.mediaSources = sources;
+                this.selectedVideo = this.mediaSources[0];
             });
+    }
+
+    PlayVideo(mediaModel:IMediaModel){
+        this.selectedVideo = mediaModel;
+    }
+
+
+
+}
+
+
+/*
+
+ MODAL VIDEO PLAYER
+
+ */
+@Component({
+    selector: 'modal-video-player',
+    template: `
+        <div fxFlex fxLayout="row" fxFlexAlign="center center">
+            <!--<div fxFlex="1 1 auto" #content>-->
+                <div fxFlex="0 1 auto">
+                    <iframe [src]="safeResourceURL"
+                            frameborder="0"
+                            allowfullscreen class="video"></iframe>
+                </div>
+
+            <!--</div>-->
+        </div>
+    `,
+    styles: [
+            `
+            .video-panel{
+                width: 90vw;
+                height: 80vh;
+            }
+            .container {
+                position: relative;
+                /*width: 560px;*/
+                /*height: 315px;*/
+                width: 100%;
+                /*height: 0;*/
+                padding-bottom: 56.25%;
+            }
+            .video {
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                width: 80%;
+                height: 80%;
+            }
+
+            :host {
+                display: block;
+                width: 80vw;
+                height: 80vh;
+            }
+        `
+    ]
+})
+export class ModalVideoPlayer {
+
+
+    safeResourceURL: SafeResourceUrl;
+
+    constructor(public dialogRef: MdDialogRef<ModalVideoPlayer>,
+                @Inject(MD_DIALOG_DATA)
+                public data: IMediaModel,
+                private sanitizer: DomSanitizer) {
+
+        this.safeResourceURL = this.sanitizer.bypassSecurityTrustResourceUrl(data.url);
     }
 
 

@@ -1,15 +1,22 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from "@angular/core";
 import {CollabService} from "./collab.service";
 import {Collab} from "./collab.model";
-import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
+import {MD_DIALOG_DATA, MdDialog, MdDialogRef, MdTabGroup} from "@angular/material";
 import {ArtistService} from "../artists/artist.service";
 import {Artist} from "../artists/artist.model";
 import {CollabEditorService} from "./collab.editor.service";
 import {CollabComponent} from "../../Site/Collab/collab.component";
+import {IMediaModel} from "../media/imedia.model";
+import {MediaModel} from "../media/media.model";
+import {TextEditorComponent} from "./text.editor.component";
+import {ImageUploaderComponent} from "./image.uploader.component";
+import {EmbedVideoComponent} from "./embed.video.component";
+import {EmbedAudioomponent} from "./embed.audio.component";
 
 @Component({
     selector: 'cms-collab',
-    templateUrl: './collab.component.html'
+    templateUrl: './collab.component.html',
+    styleUrls: ['./collab.component.css']
 })
 export class CmsCollabComponent implements OnInit{
 
@@ -43,7 +50,7 @@ export class CmsCollabComponent implements OnInit{
 
     private _getAllCollabs():void {
         this.collabService
-            .getAll()
+            .getAll(false)
             .subscribe((collabs) => {
                 this.collabs = collabs;
             });
@@ -196,6 +203,11 @@ export class EditCollabDialog {
     public selectedArtist: Artist;
 
     @ViewChild('preview') collabComponent: CollabComponent;
+    @ViewChild('mediaTabs') mediaTabs:MdTabGroup;
+    @ViewChild('textEditor') textEditor:TextEditorComponent;
+    @ViewChild('imageEditor') imageEditor:ImageUploaderComponent;
+    @ViewChild('videoEditor') videoEditor:EmbedVideoComponent;
+    @ViewChild('audioEditor') audioEditor:EmbedAudioomponent;
 
     constructor(public dialogRef: MdDialogRef<EditCollabDialog>,
                 @Inject(MD_DIALOG_DATA)
@@ -209,10 +221,6 @@ export class EditCollabDialog {
 
     }
 
-    ngAfterContentInit(){
-        this.collabComponent.isPreviewMode = true;
-    }
-
     onCancel(){
         this.data.collab.reset(this.clonedCollab);
         this.dialogRef.close();
@@ -223,6 +231,27 @@ export class EditCollabDialog {
         this.data.collab.artist_id = this.selectedArtist.artist_id;
         this.data.collab.templates = mydata;
         this.dialogRef.close(this.data.collab);
+    }
+
+    DoEdit(data:IMediaModel){
+        //select tab
+        //populate data
+        switch( data.type ){
+            case MediaModel.AUDIO:
+                this.mediaTabs.selectedIndex = 3;
+                break;
+            case MediaModel.VIDEO:
+                this.mediaTabs.selectedIndex = 2;
+                break;
+            case MediaModel.IMAGE:
+                this.mediaTabs.selectedIndex = 1;
+                this.imageEditor.editMedia(data);
+                break;
+            case MediaModel.TEXT:
+                this.mediaTabs.selectedIndex = 0;
+                this.textEditor.editMedia(data);
+                break;
+        }
     }
 }
 

@@ -16,7 +16,7 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
              (mouseenter)="widgets?.OnMouseEnter($event)" 
              (mouseleave)="widgets?.OnMouseLeave($event)">
             <div fxFlex #content>
-                <h1 *ngIf="data.title != undefined">{{data.title}}</h1>
+                <h1 *ngIf="data.title != undefined" [class.heading]="isHeading">{{data.title}}</h1>
                 <p>{{data.content}}</p>
             </div>
         </div>
@@ -25,6 +25,19 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
         `
             h1, p {
                 color: white;
+                padding-right: 10px;
+            }
+            
+            @media screen  and (max-width: 599px){
+                .heading{
+                    font-size: 40px;
+                }
+            }
+
+            @media screen  and (min-width: 600px){
+                .heading{
+                    font-size: 64px;
+                }
             }
 
             invisible {
@@ -49,7 +62,7 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
 })
 export class TextComponent extends ComponentTemplate{
 
-
+    public isHeading: boolean = true;
 
     constructor(collabEditorService: CollabEditorService){
         super(collabEditorService);
