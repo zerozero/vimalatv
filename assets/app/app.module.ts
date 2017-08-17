@@ -17,6 +17,7 @@ import {CollabService} from "./CMS/collab/collab.service";
 import {PageNotFoundComponent} from "./pagenotfound.component";
 import {MediaService} from "./CMS/media/media.service";
 import {CommonModule} from "@angular/common";
+import {QuotesService} from "./CMS/home/quote.service";
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import {CommonModule} from "@angular/common";
         GigService,
         ArtistService,
         CollabService,
-        MediaService
+        MediaService,
+        QuotesService
     ],
     bootstrap: [AppComponent]
 })

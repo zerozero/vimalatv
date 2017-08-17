@@ -24,7 +24,7 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthGuard} from "./auth/auth-guard.service";
 import {Auth} from "./auth/auth.service";
 import {TabsComponent} from "./tabs/tabs.component";
-import {HomeComponent} from "./home/home.component";
+import {DeleteQuoteDialog, EditQuoteDialog, HomeComponent} from "./home/home.component";
 import {CmsBioComponent} from "./bio/bio.component";
 import {DeleteMediaDialog, EditMediaDialog, MediaComponent} from "./media/media.component";
 import {CmsCollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
@@ -101,7 +101,9 @@ const MY_DATE_FORMATS = {
         EditMediaDialog,
         DeleteMediaDialog,
         MediaFilterPipe,
-        TruncateFilterPipe
+        TruncateFilterPipe,
+        EditQuoteDialog,
+        DeleteQuoteDialog
     ],
     providers: [
         Auth,
@@ -121,6 +123,8 @@ const MY_DATE_FORMATS = {
         DeleteCollabDialog,
         EditMediaDialog,
         DeleteMediaDialog,
+        EditQuoteDialog,
+        DeleteQuoteDialog
     ]
 })
 

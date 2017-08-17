@@ -12,6 +12,7 @@ var gigRoutes = require('./routes/gig');
 var artistRoutes = require('./routes/artist');
 var collabRoutes = require('./routes/collab');
 var mediaRoutes = require('./routes/media');
+var quoteRoutes = require('./routes/quote');
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/__collab', collabRoutes);
 app.use('/__artist', artistRoutes);
 app.use('/__gig', gigRoutes);
 app.use('/__media', mediaRoutes);
+app.use('/__quote', quoteRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

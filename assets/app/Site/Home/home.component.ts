@@ -3,8 +3,9 @@ import {
   OnInit,
   OnDestroy
 }                                     from '@angular/core';
-import {Quote}                        from './quote.model';
+import {Quote}                        from '../../CMS/home/quote.model';
 import {routerTransition} from "../../router.animations";
+import {QuotesService} from "../../CMS/home/quote.service";
 
 
 @Component({
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   idx: number = 0;
   id:any;
 
-  constructor() {}
+  constructor(private quoteService:QuotesService) {}
 
   ngOnInit() {
     this._getAll();
@@ -36,25 +37,20 @@ export class HomeComponent implements OnInit, OnDestroy{
   private _getAll():void {
 
     this.quotes = [];
-    this.quotes.push( new Quote("The most uplifting moments came from Vimala Rowe's quietly wrenching account of the classic Strange Fruit", "The Guardian", "1"));
-    // this.quotes.push( new Quote("marvelous", "you", "2"));
-    // this.quotes.push( new Quote("superb", "someone", "3"));
-
-    this.nextQuote();
-      this.id = setInterval(() => {
-        this.nextQuote();
-      }, 3000);
 
 
-    // this.quotationEditorService
-    //     .getAll("quotes",true, this.config.product)
-    //     .subscribe((quotes) => {
-    //       this.quotes = quotes;
-    //       this.nextQuote();
-    //       this.id = setInterval(() => {
-    //         this.nextQuote();
-    //       }, 3000);
-    //     });
+
+
+    this.quoteService
+        .getAllEnabled()
+        .subscribe((quotes) => {
+          this.quotes = quotes;
+          this.nextQuote();
+          this.id = setInterval(() => {
+            this.nextQuote();
+          }, 5000);
+        });
+
   }
 
   public nextQuote(){

@@ -10,12 +10,43 @@ h1 {
 
 }
 
+
+@media screen  and (max-width: 599px) and (orientation: portrait){
+    .main-content{
+        height: 100%;
+        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background-position: -80px 0px;
+        background-size: cover;
+        overflow: hidden;
+    }
+}
+
+@media screen  and (max-width: 599px) and (orientation: landscape){
+    .main-content{
+        height: 100%;
+        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background-position: 0px 0px;
+        background-size: cover;
+        overflow: hidden;
+    }
+}
+
 @media screen  and (min-width: 600px){
     .vimalarowe div h1 {
         font-size: 72pt;
     }
     .quote div h1{
         font-size: 32pt;
+    }
+    .quotes-text{
+        width: 300px;
+    }
+    .main-content{
+        height: 100%;
+        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background-position: 0px 0px;
+        background-size: cover;
+        overflow: hidden;
     }
 }
 
@@ -26,11 +57,19 @@ h1 {
     .quote div h1{
         font-size: 48pt;
     }
+    .quotes-text{
+        width: 500px;
+    }
+    .main-content{
+
+    }
 }
 
 .quote div h1{
-    text-align: right;
-    margin: 0px;
+    text-align: left;
+    margin: 10px;
+    height: 0px;
+    overflow-y: visible;
 }
 
 img{
@@ -42,6 +81,7 @@ img{
     text-align: right;
     /*font-size: 72pt;*/
     margin: 0px;
+    padding-right: 52px;
 }
 
 .gold{
@@ -49,9 +89,14 @@ img{
 }
 
 
-.main-content{
-    height: 100%;
-    background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
-    background-size: cover;
-    overflow: hidden;
+
+
+.quotes-text{
+    position: relative;
+    top: -240px;
+    overflow-y: visible;
+}
+
+.quote-container{
+    padding-right: 52px;
 }
