@@ -1,7 +1,7 @@
 import {Injectable, ViewContainerRef, ViewRef} from "@angular/core";
 
 @Injectable()
-export class CollabEditorService{
+export class DynamicPageEditorService{
 
     private _container: ViewContainerRef;
 
@@ -26,7 +26,7 @@ export class CollabEditorService{
         this._container.remove(d)
     }
 
-    public getCollabData():any{
+    public getPageData():any{
 
         // for (var i=0; i<this._container.length; i++){
         //     let vr :ViewRef = this._container.get(i);

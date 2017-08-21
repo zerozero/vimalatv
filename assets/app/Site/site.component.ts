@@ -2,19 +2,19 @@ import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
-import {CollabEditorService} from "../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../CMS/collab/page.editor.service";
 import {MediaService} from "../CMS/media/media.service";
 import {MediaModel} from "../CMS/media/media.model";
 import {MdSidenav} from "@angular/material";
-import {CollabService} from "../CMS/collab/collab.service";
-import {Collab} from "../CMS/collab/collab.model";
+import {DynamicPageService} from "../CMS/collab/dynamic.page.service";
+import {DynamicPage} from "../CMS/collab/dynamic.page.model";
 
 
 @Component({
     selector: 'app-site',
     templateUrl: './site.component.html',
     styleUrls: ['./site.component.css'],
-    providers: [CollabEditorService]        //needed for collab.component
+    providers: [DynamicPageEditorService]        //needed for collab.component
 })
 
 export class SiteComponent implements OnInit{
@@ -26,13 +26,13 @@ export class SiteComponent implements OnInit{
     classes : string = 'flat-menu-panel';
 
     artists: Artist[] = [];
-    collabs:Collab[] = [];
+    collabs:DynamicPage[] = [];
 
     public typeVideo: string = MediaModel.VIDEO;
     public typeAudio: string = MediaModel.AUDIO;
 
     constructor(private router:Router,
-                private collabService:CollabService,
+                private collabService:DynamicPageService,
                 private artistService:ArtistService){
 
     }
@@ -67,7 +67,7 @@ export class SiteComponent implements OnInit{
         return result ? result[0].name : "not found";
     }
 
-    showCollaboration(collab: Collab){
+    showCollaboration(collab: DynamicPage){
         this._sidenav.close();
         this.router.navigateByUrl('/collab/'+collab.artist_id);
     }

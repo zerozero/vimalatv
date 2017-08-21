@@ -1,18 +1,59 @@
 var express = require('express');
 var router = express.Router();
-var Collab = require('../models/collab');
+var Page = require('../models/page');
+// var Bio = require('../models/bio');
 var util = require('util');
 var DIR = './uploads/';
 var multer = require('multer');
-// var upload = multer({dest: DIR});
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 var cloudinary = require('cloudinary');
 
-router.get('/', function(req,res,next){
 
-    console.log(util.inspect(req.query));
-    Collab.find( req.query.filterDisabled ? {enabled:true} : {} )
+router.get('/bio', function(req,res,next){
+
+
+    Page.find( req.query.filterDisabled ? {enabled:true} : {type:'bio'} )
+        .exec(function(err,bios){
+            if (err) {
+                return res.status(500).json({
+                    title:'An Error Occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                data: bios
+            });
+        });
+});
+
+router.post('/bio', function(req,res,next){
+    var page = new Page({
+        type: 'bio',
+        artist_id: req.body.artist_id,
+        templates: req.body.templates,
+        enabled: req.body.enabled
+    });
+    page.save(function(err,result){
+        if (err){
+            console.log(err);
+            return res.status(500).json({
+                title:'An Error Occurred',
+                error: err
+            })
+        }
+        res.status(201).json({
+            title:'Saved Page',
+            data:result
+        });
+    });
+
+});
+
+router.get('/collab', function(req,res,next){
+
+    Page.find( req.query.filterDisabled ? {enabled:true} : {type:'collaboration'} )
         .exec(function(err,collabs){
             if (err) {
                 return res.status(500).json({
@@ -27,10 +68,10 @@ router.get('/', function(req,res,next){
         });
 });
 
-router.get('/:id', function(req,res,next){
+router.get('/collab/:id', function(req,res,next){
+
     var id = req.params.id;
-    console.log("the id = "+id);
-    Collab.find({artist_id: id})
+    Page.find({artist_id: id})
         .exec(function(err,collabs){
             if (err) {
                 return res.status(500).json({
@@ -38,7 +79,7 @@ router.get('/:id', function(req,res,next){
                     error: err
                 });
             }
-            console.log(collabs);
+
             res.status(200).json({
                 message: 'Success',
                 data: collabs
@@ -47,7 +88,8 @@ router.get('/:id', function(req,res,next){
 });
 
 router.post('/', function(req,res,next){
-    var collab = new Collab({
+    var collab = new Page({
+        type: 'collaboration',
         artist_id: req.body.artist_id,
         templates: req.body.templates,
         enabled: req.body.enabled
@@ -61,7 +103,7 @@ router.post('/', function(req,res,next){
             })
         }
         res.status(201).json({
-            title:'Saved Collab',
+            title:'Saved Page',
             data:result
         });
     });
@@ -70,14 +112,7 @@ router.post('/', function(req,res,next){
 
 //N.B. when uploading from ng2-file-uploader the fieldname for the form request is 'file'
 //this must match the value set for the multer middleware
-router.post('/upload', upload.array('file', 12), function(req,res,next){
-    // console.log("uploadFiles......"+util.inspect(req.files,false,1));
-    // console.log('uploading..'+req.files.length+' files');
-
-
-    // cloudinary.uploader
-    //     .upload_stream((result) => console.log(result))
-    //     .end(req.files.avatar.data)
+router.post('/collab/upload', upload.array('file', 12), function(req,res,next){
 
     cloudinary.uploader.upload_stream(function(result){
         res.status(201).json({
@@ -86,25 +121,10 @@ router.post('/upload', upload.array('file', 12), function(req,res,next){
         });
     }).end(req.files[0]['buffer']);
 
-
-    return;
-    // console.log("cloudinary result "+util.inspect(req));
-    cloudinary.uploader.upload(req.files[0]['buffer'], function(result) {
-
-        //we save these urls to the database for later retrieval by the app
-        //images with these specs are created on demand by cloudinary the first time they are requested
-        var thumb = (cloudinary.url(result.public_id+'.'+result.format, { secure: true, width: 250, height: 250, background: '#fff', crop: 'pad' } ));
-        var display = (cloudinary.url(result.public_id+'.'+result.format, { secure: true, width: 200, height: 273, background: '#fff',crop: 'pad' } ));
-
-        // UploadDAO
-        //     ['uploadFile'](result, req.body, thumb, display)
-        //     .then(file => res.status(201).json(file))
-        // .catch(error => res.status(400).json(error));
-    });
 });
 
-router.patch('/:id', function (req, res, next){
-    Collab.findById(req.params.id, function(err, collab){
+router.patch('collab/:id', function (req, res, next){
+    Page.findById(req.params.id, function(err, collab){
         if (err){
             return res.status(500).json({
                 title:'An Error Occurred',
@@ -113,8 +133,8 @@ router.patch('/:id', function (req, res, next){
         }
         if (!collab){
             return res.status(500).json({
-                title:'No Collab Found',
-                error: {message: 'Collab not found!'}
+                title:'No Page Found',
+                error: {message: 'Page not found!'}
             });
         }
         collab.name = req.body.name;
@@ -128,15 +148,15 @@ router.patch('/:id', function (req, res, next){
                 })
             }
             res.status(200).json({
-                title:'Updated Collab',
+                title:'Updated Page',
                 data:result
             });
         })
     })
 });
 
-router.delete('/:id', function (req, res, next){
-    Collab.findById(req.params.id, function(err, collab){
+router.delete('collab/:id', function (req, res, next){
+    Page.findById(req.params.id, function(err, collab){
         if (err){
             return res.status(500).json({
                 title:'An Error Occurred',
@@ -145,8 +165,8 @@ router.delete('/:id', function (req, res, next){
         }
         if (!collab){
             return res.status(500).json({
-                title:'No Collab Found',
-                error: {message: 'Collab not found!'}
+                title:'No Page Found',
+                error: {message: 'Page not found!'}
             });
         }
         collab.remove(function(err, result){
@@ -157,7 +177,7 @@ router.delete('/:id', function (req, res, next){
                 })
             }
             res.status(200).json({
-                title:'Deleted Collab',
+                title:'Deleted Page',
                 data:result
             });
         })

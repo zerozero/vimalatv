@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from "@angular/core";
 import {ComponentTemplate} from "./component.template";
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 
 @Component({
     moduleId: module.id.toString(),
@@ -59,7 +59,7 @@ export class ImageComponent extends ComponentTemplate{
 
 
 
-    constructor(collabEditorService: CollabEditorService){
+    constructor(collabEditorService: DynamicPageEditorService){
         super(collabEditorService);
     }
 

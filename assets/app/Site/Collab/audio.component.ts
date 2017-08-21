@@ -1,7 +1,7 @@
 import {Component, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {ComponentTemplate} from "./component.template";
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 
 @Component({
@@ -52,7 +52,7 @@ export class AudioComponent extends ComponentTemplate{
 
     safeResourceURL: SafeResourceUrl;
 
-    constructor(collabEditorService: CollabEditorService, private sanitizer: DomSanitizer){
+    constructor(collabEditorService: DynamicPageEditorService, private sanitizer: DomSanitizer){
         super(collabEditorService);
     }
 

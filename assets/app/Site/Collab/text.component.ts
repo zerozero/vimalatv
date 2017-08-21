@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 import {ComponentTemplate, IComponentTemplate} from "./component.template";
 @Component({
     moduleId: module.id.toString(),
@@ -64,7 +64,7 @@ export class TextComponent extends ComponentTemplate{
 
     public isHeading: boolean = true;
 
-    constructor(collabEditorService: CollabEditorService){
+    constructor(collabEditorService: DynamicPageEditorService){
         super(collabEditorService);
     }
 

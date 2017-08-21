@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {CollabEditorService} from "./collab.editor.service";
+import {DynamicPageEditorService} from "./page.editor.service";
 import { MediaModel} from "../media/media.model";
 import {IMediaModel} from "../media/imedia.model";
 
@@ -69,7 +69,7 @@ export class TextEditorComponent implements OnInit{
 
     private isEditing: boolean = false;
 
-    constructor(private collabEditorService: CollabEditorService){}
+    constructor(private collabEditorService: DynamicPageEditorService){}
 
     ngOnInit(): void {
 

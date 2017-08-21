@@ -9,11 +9,11 @@ import {TextComponent} from "./text.component";
 import {AudioComponent} from "./audio.component";
 import {routerTransition} from "../../router.animations";
 import {ActivatedRoute} from "@angular/router";
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 import {IComponentTemplate} from "./component.template";
 
-import {Collab} from "../../CMS/collab/collab.model";
-import {CollabService} from "../../CMS/collab/collab.service";
+import {DynamicPage} from "../../CMS/collab/dynamic.page.model";
+import {DynamicPageService} from "../../CMS/collab/dynamic.page.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 import {MediaModel} from "../../CMS/media/media.model";
 
@@ -32,17 +32,17 @@ export class CollabComponent implements OnInit, OnDestroy{
 
     @ViewChild('vc', {read: ViewContainerRef}) _container: ViewContainerRef;
 
-    collab : Collab;
+    collab : DynamicPage;
     artist_id : string;
 
     @Input()
-    set collaboration(data: Collab) {
+    set collaboration(data: DynamicPage) {
         this.collab = data;
     }
 
     @Output() OnEditComponent : EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
 
-    get collaboration(): Collab{ return this.collab; }
+    get collaboration(): DynamicPage{ return this.collab; }
 
     private sub: any;
 
@@ -58,8 +58,8 @@ export class CollabComponent implements OnInit, OnDestroy{
     constructor(
         private _resolver: ComponentFactoryResolver,
         private route: ActivatedRoute,
-        private collabService:CollabService,
-        private collabEditorService: CollabEditorService) {
+        private collabService:DynamicPageService,
+        private collabEditorService: DynamicPageEditorService) {
 
     }
 
@@ -78,7 +78,7 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.audFactory = this._resolver.resolveComponentFactory(AudioComponent);
 
 
-        //if we are in CMS mode this.collab will be populated by the parent component
+        //if we are in CMS mode this.page will be populated by the parent component
         if (this.collab)
             this.render(this.collab.templates);
 

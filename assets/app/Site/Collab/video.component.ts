@@ -1,6 +1,6 @@
 import {Component, Input, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 import {ComponentTemplate} from "./component.template";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 import {isNullOrUndefined} from "util";
@@ -70,7 +70,7 @@ export class VideoComponent extends ComponentTemplate{
         this.safeResourceURL = this.sanitizer.bypassSecurityTrustResourceUrl(mediaModel.url+"?rel=0");
     }
 
-    constructor(collabEditorService: CollabEditorService, private sanitizer: DomSanitizer){
+    constructor(collabEditorService: DynamicPageEditorService, private sanitizer: DomSanitizer){
         super(collabEditorService);
     }
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit} from "@angular/core";
+import {Component, ElementRef, Inject, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MediaService} from "../../CMS/media/media.service";
 import {MediaModel} from "../../CMS/media/media.model";
@@ -12,7 +12,7 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
     templateUrl: './media.component.html',
     styleUrls: ['./media.component.css']
 })
-export class MediaComponent implements OnInit{
+export class MediaComponent implements OnInit, OnDestroy{
 
     public typeVideo: string = MediaModel.VIDEO;
     public typeAudio: string = MediaModel.AUDIO;
@@ -44,6 +44,11 @@ export class MediaComponent implements OnInit{
             this.mediaType = params.type;
         });
 
+    }
+
+
+    ngOnDestroy(){
+        this.sub.unsubscribe();
     }
 
     _getMediaOfType( type: string ){

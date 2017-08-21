@@ -1,10 +1,10 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from "@angular/core";
-import {CollabService} from "./collab.service";
-import {Collab} from "./collab.model";
+import {Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {DynamicPageService} from "./dynamic.page.service";
+import {DynamicPage} from "./dynamic.page.model";
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef, MdTabGroup} from "@angular/material";
 import {ArtistService} from "../artists/artist.service";
 import {Artist} from "../artists/artist.model";
-import {CollabEditorService} from "./collab.editor.service";
+import {DynamicPageEditorService} from "./page.editor.service";
 import {CollabComponent} from "../../Site/Collab/collab.component";
 import {IMediaModel} from "../media/imedia.model";
 import {MediaModel} from "../media/media.model";
@@ -12,47 +12,63 @@ import {TextEditorComponent} from "./text.editor.component";
 import {ImageUploaderComponent} from "./image.uploader.component";
 import {EmbedVideoComponent} from "./embed.video.component";
 import {EmbedAudioomponent} from "./embed.audio.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-    selector: 'cms-collab',
-    templateUrl: './collab.component.html',
-    styleUrls: ['./collab.component.css']
+    selector: 'cms-page',
+    templateUrl: './dynamic.page.component.html',
+    styleUrls: ['./dynamic.page.component.css']
 })
-export class CmsCollabComponent implements OnInit{
+export class CmsDynamicPageComponent implements OnInit, OnDestroy{
 
-    collabs: Collab[] = [];
+    pages: DynamicPage[] = [];
     artists: Artist[] = [];
     unusedArtists: Artist[] = [];
 
-    selectedValue: string;
 
+
+    selectedValue: string;
+    protected sub: any;
 
     constructor(
-        private collabService:CollabService,
-        private artistService:ArtistService,
-        private el: ElementRef,
-        public dialog: MdDialog){
+        protected pageService:DynamicPageService,
+        protected artistService:ArtistService,
+        protected el: ElementRef,
+        public dialog: MdDialog,
+        protected activatedRoute: ActivatedRoute){
 
     }
 
+
+
     ngOnInit(): void {
-            this._getAllCollabs();
-            this._getAllArtists();
-            this._getUnusedArtists();
+
+        this._getAllPages();
+        this._getAllArtists();
+        this._getUnusedArtists();
+
+        this.sub = this.activatedRoute.data.subscribe(data => {
+            console.log(data.type);
+        });
+
+    }
+
+    ngOnDestroy(){
+         this.sub.unsubscribe();
     }
 
     private getArtistName( id: string ):string{
-            let artist: Artist = this.artists.find((artist) => {
-                return artist.artist_id == id;
-            });
-            return artist ? artist.name : "";
+        let artist: Artist = this.artists.find((artist) => {
+            return artist.artist_id == id;
+        });
+        return artist ? artist.name : "";
     }
 
-    private _getAllCollabs():void {
-        this.collabService
+    protected _getAllPages():void {
+        this.pageService
             .getAll(false)
-            .subscribe((collabs) => {
-                this.collabs = collabs;
+            .subscribe((pages) => {
+                this.pages = pages;
             });
     }
 
@@ -75,11 +91,11 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    createCollab(){
-        let collab = new Collab(null,  "",[],false);
+    createPage(){
+        let page = new DynamicPage(null,  "",[],false);
         let wd = this.el.nativeElement.clientWidth * 0.9;
         let ht = this.el.nativeElement.clientHeight* 0.9;
-        let dialogRef = this.dialog.open(EditCollabDialog, {data:{collab:collab,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
+        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.save(result);
@@ -89,11 +105,11 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    editItem(collab:Collab){
+    editItem(page:DynamicPage){
 
         let wd = this.el.nativeElement.clientWidth * 0.9;
         let ht = this.el.nativeElement.clientHeight* 0.9;
-        let dialogRef = this.dialog.open(EditCollabDialog, {data:{collab:collab,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
+        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.update(result);
@@ -103,8 +119,8 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    deleteItem(collab: Collab){
-        let dialogRef = this.dialog.open(DeleteCollabDialog, {data:collab, disableClose: true,});
+    deleteItem(page: DynamicPage){
+        let dialogRef = this.dialog.open(DeletePageDialog, {data:page, disableClose: true,});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.delete(result);
@@ -114,18 +130,18 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    changeEnabled(collab:Collab, enabled: boolean){
+    changeEnabled(page:DynamicPage, enabled: boolean){
 
-        collab.enabled = enabled;
-        this.update(collab);
+        page.enabled = enabled;
+        this.update(page);
     }
 
     /*
 
      */
-    save( collab: Collab ){
-        this.collabService
-            .add(collab)
+    save( page: DynamicPage ){
+        this.pageService
+            .add(page)
             .subscribe(
                 (data) => {
                     console.log(data);
@@ -139,9 +155,9 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    update( collab: Collab){
-        this.collabService
-            .update(collab)
+    update( page: DynamicPage){
+        this.pageService
+            .update(page)
             .subscribe(
                 (data) => {
                     console.log(data);
@@ -156,9 +172,9 @@ export class CmsCollabComponent implements OnInit{
     /*
 
      */
-    delete(collab:Collab){
-        this.collabService
-            .delete(collab)
+    delete(page:DynamicPage){
+        this.pageService
+            .delete(page)
             .subscribe(
                 (data) => {
                     // this.filterCollabs();
@@ -178,8 +194,8 @@ export class CmsCollabComponent implements OnInit{
 
  */
 @Component({
-    selector: 'edit-collab-dialog',
-    templateUrl: './edit.collab.modal.component.html',
+    selector: 'edit-page-dialog',
+    templateUrl: './edit.page.modal.component.html',
     styles: [
             `
             .collab-container{
@@ -193,14 +209,19 @@ export class CmsCollabComponent implements OnInit{
             .artist-select{
                 max-width: 240px;
             }
+
+            .invisible {
+                display: none !important;
+            }
         `
     ],
-    providers: [CollabEditorService]
+    providers: [DynamicPageEditorService]
 })
-export class EditCollabDialog {
+export class EditPageDialog {
 
-    public clonedCollab: Collab;
+    public clonedPage: DynamicPage;
     public selectedArtist: Artist;
+    public isArtistRequired = false;
 
     @ViewChild('preview') collabComponent: CollabComponent;
     @ViewChild('mediaTabs') mediaTabs:MdTabGroup;
@@ -209,28 +230,32 @@ export class EditCollabDialog {
     @ViewChild('videoEditor') videoEditor:EmbedVideoComponent;
     @ViewChild('audioEditor') audioEditor:EmbedAudioomponent;
 
-    constructor(public dialogRef: MdDialogRef<EditCollabDialog>,
+    constructor(public dialogRef: MdDialogRef<EditPageDialog>,
                 @Inject(MD_DIALOG_DATA)
                 public data: any,
-                private collabEditorService: CollabEditorService) {
+                private pageEditorService: DynamicPageEditorService) {
 
-        this.clonedCollab = data.collab.clone();
+        this.clonedPage = data.page.clone();
+        this.isArtistRequired = data.artists.length > 0;
+        if (!this.isArtistRequired)
+            return;
         this.selectedArtist = data.artists.find((artist) => {
-            return artist.artist_id == data.collab.artist_id;
+            return artist.artist_id == data.page.artist_id;
         });
 
     }
 
     onCancel(){
-        this.data.collab.reset(this.clonedCollab);
+        this.data.page.reset(this.clonedPage);
         this.dialogRef.close();
     }
 
     onSubmit(){
-        let mydata = this.collabEditorService.getCollabData();
-        this.data.collab.artist_id = this.selectedArtist.artist_id;
-        this.data.collab.templates = mydata;
-        this.dialogRef.close(this.data.collab);
+        let mydata = this.pageEditorService.getPageData();
+        if (this.isArtistRequired)
+            this.data.page.artist_id = this.selectedArtist.artist_id;
+        this.data.page.templates = mydata;
+        this.dialogRef.close(this.data.page);
     }
 
     DoEdit(data:IMediaModel){
@@ -263,7 +288,7 @@ export class EditCollabDialog {
 
 
 @Component({
-    selector: 'delete-collab-dialog',
+    selector: 'delete-page-dialog',
     templateUrl: './confirm.delete.collab.component.html',
     styles: [
             `
@@ -277,9 +302,9 @@ export class EditCollabDialog {
         `
     ]
 })
-export class DeleteCollabDialog {
-    constructor(public dialogRef: MdDialogRef<DeleteCollabDialog>,
-                @Inject(MD_DIALOG_DATA) public data: Collab) {}
+export class DeletePageDialog {
+    constructor(public dialogRef: MdDialogRef<DeletePageDialog>,
+                @Inject(MD_DIALOG_DATA) public data: DynamicPage) {}
 
     onDecline(){
         this.dialogRef.close();

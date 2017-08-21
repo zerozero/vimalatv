@@ -1,5 +1,5 @@
 import {ElementRef, EventEmitter, OnChanges, Output, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
-import {CollabEditorService} from "../../CMS/collab/collab.editor.service";
+import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 
 
@@ -24,7 +24,7 @@ export class ComponentTemplate implements IComponentTemplate{
     @ViewChild('content', {read: ElementRef}) _content: ElementRef;
     @ViewChild('widgets') widgets: any;
 
-    constructor(private collabEditorService: CollabEditorService){
+    constructor(private collabEditorService: DynamicPageEditorService){
 
     }
 

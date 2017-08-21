@@ -14,7 +14,7 @@ h1 {
 @media screen  and (max-width: 599px) and (orientation: portrait){
     .main-content{
         height: 100%;
-        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background: url("../../../images/cover-pic@x1.jpg") no-repeat;
         background-position: -80px 0px;
         background-size: cover;
         overflow: hidden;
@@ -24,11 +24,12 @@ h1 {
 @media screen  and (max-width: 599px) and (orientation: landscape){
     .main-content{
         height: 100%;
-        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background: url("../../../images/cover-pic@x1.jpg") no-repeat;
         background-position: 0px 0px;
         background-size: cover;
         overflow: hidden;
     }
+
 }
 
 @media screen  and (min-width: 600px){
@@ -43,11 +44,20 @@ h1 {
     }
     .main-content{
         height: 100%;
-        background: url("../../../images/Vimala-Rowe-website-cover-pic.jpg") no-repeat;
+        background: url("../../../images/cover-pic@x1.jpg") no-repeat;
         background-position: 0px 0px;
         background-size: cover;
         overflow: hidden;
     }
+
+
+    img{
+        -ms-transform: scale(1,1); /* IE 9 */
+        -webkit-transform: scale(1,1); /* Safari */
+        transform: scale(1,1);
+    }
+
+
 }
 
 @media screen  and (min-width: 1280px){
@@ -60,13 +70,16 @@ h1 {
     .quotes-text{
         width: 500px;
     }
-    .main-content{
-
+    img{
+        -ms-transform: scale(2, 2); /* IE 9 */
+        -webkit-transform: scale(2, 2); /* Safari */
+        transform: scale(2, 2);
+        padding-top: 90px;
     }
 }
 
 .quote div h1{
-    text-align: left;
+    text-align: right;
     margin: 10px;
     height: 0px;
     overflow-y: visible;
@@ -100,3 +113,5 @@ img{
 .quote-container{
     padding-right: 52px;
 }
+
+

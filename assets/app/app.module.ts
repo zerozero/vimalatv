@@ -13,7 +13,7 @@ import {CmsModule} from "./CMS/cms.module";
 import {GigService} from "./CMS/gigs/gig.service";
 import {HttpModule} from "@angular/http";
 import {ArtistService} from "./CMS/artists/artist.service";
-import {CollabService} from "./CMS/collab/collab.service";
+import {DynamicPageService} from "./CMS/collab/dynamic.page.service";
 import {PageNotFoundComponent} from "./pagenotfound.component";
 import {MediaService} from "./CMS/media/media.service";
 import {CommonModule} from "@angular/common";
@@ -33,7 +33,7 @@ import {QuotesService} from "./CMS/home/quote.service";
     providers: [
         GigService,
         ArtistService,
-        CollabService,
+        DynamicPageService,
         MediaService,
         QuotesService
     ],

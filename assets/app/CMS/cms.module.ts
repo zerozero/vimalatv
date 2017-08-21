@@ -27,7 +27,7 @@ import {TabsComponent} from "./tabs/tabs.component";
 import {DeleteQuoteDialog, EditQuoteDialog, HomeComponent} from "./home/home.component";
 import {CmsBioComponent} from "./bio/bio.component";
 import {DeleteMediaDialog, EditMediaDialog, MediaComponent} from "./media/media.component";
-import {CmsCollabComponent, DeleteCollabDialog, EditCollabDialog} from "./collab/collab.component";
+import {CmsDynamicPageComponent, DeletePageDialog, EditPageDialog} from "./collab/dynamic.page.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
 import {ContactComponent} from "./contact/contact.component";
@@ -83,7 +83,7 @@ const MY_DATE_FORMATS = {
         HomeComponent,
         CmsBioComponent,
         MediaComponent,
-        CmsCollabComponent,
+        CmsDynamicPageComponent,
         ArtistComponent,
         GigsComponent,
         ReviewsComponent,
@@ -96,8 +96,8 @@ const MY_DATE_FORMATS = {
         EditGigDialog,
         EditArtistDialog,
         DeleteArtistDialog,
-        EditCollabDialog,
-        DeleteCollabDialog,
+        EditPageDialog,
+        DeletePageDialog,
         EditMediaDialog,
         DeleteMediaDialog,
         MediaFilterPipe,
@@ -119,8 +119,8 @@ const MY_DATE_FORMATS = {
         EditGigDialog,
         EditArtistDialog,
         DeleteArtistDialog,
-        EditCollabDialog,
-        DeleteCollabDialog,
+        EditPageDialog,
+        DeletePageDialog,
         EditMediaDialog,
         DeleteMediaDialog,
         EditQuoteDialog,
