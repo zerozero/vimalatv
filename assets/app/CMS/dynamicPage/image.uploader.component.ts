@@ -16,7 +16,7 @@ import {isNullOrUndefined} from "util";
 
 declare var $:any;
 
-const URL = '/__collab/upload/';
+const URL = '/__page/upload/';
 
 @Component({
   selector: 'image-uploader-component',

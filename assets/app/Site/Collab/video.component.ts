@@ -1,6 +1,6 @@
 import {Component, Input, ViewRef} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
 import {ComponentTemplate} from "./component.template";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 import {isNullOrUndefined} from "util";

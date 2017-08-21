@@ -1,18 +1,22 @@
 import {Component} from "@angular/core";
-import {CmsDynamicPageComponent} from "../collab/dynamic.page.component";
-import {DynamicPage} from "../collab/dynamic.page.model";
+import {CmsDynamicPageComponent} from "../dynamicPage/dynamic.page.component";
+import {DynamicPage} from "../dynamicPage/dynamic.page.model";
 import {Artist} from "../artists/artist.model";
+import {DynamicPageService} from "../dynamicPage/dynamic.page.service";
 @Component({
     selector: 'cms-bio',
-    templateUrl: '../collab/dynamic.page.component.html',
-    styleUrls: ['../collab/dynamic.page.component.css']
+    templateUrl: '../dynamicPage/dynamic.page.component.html',
+    styleUrls: ['../dynamicPage/dynamic.page.component.css']
 })
 export class CmsBioComponent extends CmsDynamicPageComponent{
 
 
+
+
     ngOnInit(): void {
 
-        this._getBioPages();
+        this.endpoint = DynamicPageService.BIO_ENDPOINT;
+        this._getPages();
         this.artists = [new Artist(null,'Biography', true)];
         this.sub = this.activatedRoute.data.subscribe(data => {
             console.log(data.type);
@@ -24,29 +28,9 @@ export class CmsBioComponent extends CmsDynamicPageComponent{
     }
 
 
-    protected _getBioPages():void {
-        this.pageService
-            .getPages('__page/bio/:id',false)
-            .subscribe((pages) => {
-                this.pages = pages;
-            });
+    protected _getPages():void {
+        this._getPagesOfType(this.endpoint,false);
     }
 
-
-    /*
-
-     */
-    save( collab: DynamicPage ){
-        this.pageService
-            .addPage('__page/bio/:id', collab)
-            .subscribe(
-                (data) => {
-                    console.log(data);
-                },
-                (err) => {
-                    console.error(err);
-                }
-            );
-    }
 
 }

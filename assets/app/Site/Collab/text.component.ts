@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 
-import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
 import {ComponentTemplate, IComponentTemplate} from "./component.template";
 @Component({
     moduleId: module.id.toString(),

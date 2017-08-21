@@ -2,12 +2,12 @@ import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {ArtistService} from "../CMS/artists/artist.service";
 import {Artist} from "../CMS/artists/artist.model";
-import {DynamicPageEditorService} from "../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../CMS/dynamicPage/page.editor.service";
 import {MediaService} from "../CMS/media/media.service";
 import {MediaModel} from "../CMS/media/media.model";
 import {MdSidenav} from "@angular/material";
-import {DynamicPageService} from "../CMS/collab/dynamic.page.service";
-import {DynamicPage} from "../CMS/collab/dynamic.page.model";
+import {DynamicPageService} from "../CMS/dynamicPage/dynamic.page.service";
+import {DynamicPage} from "../CMS/dynamicPage/dynamic.page.model";
 
 
 @Component({

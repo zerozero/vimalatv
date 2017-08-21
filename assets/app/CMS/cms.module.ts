@@ -27,21 +27,22 @@ import {TabsComponent} from "./tabs/tabs.component";
 import {DeleteQuoteDialog, EditQuoteDialog, HomeComponent} from "./home/home.component";
 import {CmsBioComponent} from "./bio/bio.component";
 import {DeleteMediaDialog, EditMediaDialog, MediaComponent} from "./media/media.component";
-import {CmsDynamicPageComponent, DeletePageDialog, EditPageDialog} from "./collab/dynamic.page.component";
+import {CmsDynamicPageComponent, DeletePageDialog, EditPageDialog} from "./dynamicPage/dynamic.page.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
 import {ReviewsComponent} from "./reviews/reviews.component";
 import {ContactComponent} from "./contact/contact.component";
 import {FormsModule} from "@angular/forms";
 import {ArtistComponent, DeleteArtistDialog, EditArtistDialog} from "./artists/artist.component";
-import {ImageUploaderComponent} from "./collab/image.uploader.component";
+import {ImageUploaderComponent} from "./dynamicPage/image.uploader.component";
 import {FileUploadModule} from "ng2-file-upload";
-import {TextEditorComponent} from "./collab/text.editor.component";
-import {EmbedVideoComponent} from "./collab/embed.video.component";
-import {EmbedAudioomponent} from "./collab/embed.audio.component";
+import {TextEditorComponent} from "./dynamicPage/text.editor.component";
+import {EmbedVideoComponent} from "./dynamicPage/embed.video.component";
+import {EmbedAudioomponent} from "./dynamicPage/embed.audio.component";
 import {MyCommonModule} from "../common.module";
 import {MediaFilterPipe} from "./media/media.filter";
 import {CommonModule} from "@angular/common";
 import {TruncateFilterPipe} from "./media/truncate.filter";
+import {CmsCollabComponent} from "./collab/collab.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     return new AuthHttp( new AuthConfig({}), http, options);
@@ -82,6 +83,7 @@ const MY_DATE_FORMATS = {
         TabsComponent,
         HomeComponent,
         CmsBioComponent,
+        CmsCollabComponent,
         MediaComponent,
         CmsDynamicPageComponent,
         ArtistComponent,

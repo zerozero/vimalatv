@@ -1,5 +1,5 @@
 import {ElementRef, EventEmitter, OnChanges, Output, SimpleChanges, ViewChild, ViewRef} from "@angular/core";
-import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 
 

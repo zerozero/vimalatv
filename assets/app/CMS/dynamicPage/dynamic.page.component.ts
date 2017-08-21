@@ -23,12 +23,12 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
 
     pages: DynamicPage[] = [];
     artists: Artist[] = [];
-    unusedArtists: Artist[] = [];
 
 
 
     selectedValue: string;
     protected sub: any;
+    protected endpoint:string;
 
     constructor(
         protected pageService:DynamicPageService,
@@ -44,8 +44,6 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
 
         this._getAllPages();
-        this._getAllArtists();
-        this._getUnusedArtists();
 
         this.sub = this.activatedRoute.data.subscribe(data => {
             console.log(data.type);
@@ -57,11 +55,12 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
          this.sub.unsubscribe();
     }
 
-    private getArtistName( id: string ):string{
-        let artist: Artist = this.artists.find((artist) => {
-            return artist.artist_id == id;
-        });
-        return artist ? artist.name : "";
+    protected _getPagesOfType(type:string,filterEnabled:boolean){
+        this.pageService
+            .getPages(type,filterEnabled)
+            .subscribe((pages) => {
+                this.pages = pages;
+            });
     }
 
     protected _getAllPages():void {
@@ -72,21 +71,57 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
             });
     }
 
-    private _getAllArtists():void {
-        this.artistService
-            .getAll()
-            .subscribe((artists) => {
-                this.artists = artists;
-            });
+    /*
+
+     */
+    protected _addPageOfType(endpoint:string, page: DynamicPage ){
+        this.pageService
+            .addPage(endpoint, page)
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
     }
 
-    private _getUnusedArtists():void{
-        this.unusedArtists = [];
-        this.artists.forEach((artist) => {
-            let id = artist.artist_id;
-            //todo: search for existing collaborations with this artist id
-        });
+    /*
+
+     */
+    protected _updatePageOfType( endpoint:string, page: DynamicPage){
+        this.pageService
+            .updatePage(endpoint,page)
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                },
+                (err) => {
+                    console.error(err);
+                }
+            )
     }
+
+    /*
+
+     */
+    protected _deletePageOfType( endpoint:string, page:DynamicPage){
+        this.pageService
+            .deletePage(endpoint, page)
+            .subscribe(
+                (data) => {
+                    // this.filterCollabs();
+                },
+                (err) => {
+                    console.error(err);
+                }
+            )
+    }
+
+
+
+
 
     /*
 
@@ -136,54 +171,70 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
         this.update(page);
     }
 
+
     /*
 
      */
-    save( page: DynamicPage ){
-        this.pageService
-            .add(page)
-            .subscribe(
-                (data) => {
-                    console.log(data);
-                },
-                (err) => {
-                    console.error(err);
-                }
-            );
+    save( dynamicPage: DynamicPage ){
+        this._addPageOfType(this.endpoint,dynamicPage);
+    }
+
+    update( dynamicPage: DynamicPage ){
+        this._updatePageOfType(this.endpoint,dynamicPage);
+    }
+
+    delete( dynamicPage: DynamicPage ){
+        this._deletePageOfType(this.endpoint,dynamicPage);
     }
 
     /*
 
      */
-    update( page: DynamicPage){
-        this.pageService
-            .update(page)
-            .subscribe(
-                (data) => {
-                    console.log(data);
-                    // this.filterCollabs();
-                },
-                (err) => {
-                    console.error(err);
-                }
-            )
-    }
+    // save( page: DynamicPage ){
+    //     this.pageService
+    //         .add(page)
+    //         .subscribe(
+    //             (data) => {
+    //                 console.log(data);
+    //             },
+    //             (err) => {
+    //                 console.error(err);
+    //             }
+    //         );
+    // }
 
     /*
 
      */
-    delete(page:DynamicPage){
-        this.pageService
-            .delete(page)
-            .subscribe(
-                (data) => {
-                    // this.filterCollabs();
-                },
-                (err) => {
-                    console.error(err);
-                }
-            )
-    }
+    // update( page: DynamicPage){
+    //     this.pageService
+    //         .update(page)
+    //         .subscribe(
+    //             (data) => {
+    //                 console.log(data);
+    //                 // this.filterCollabs();
+    //             },
+    //             (err) => {
+    //                 console.error(err);
+    //             }
+    //         )
+    // }
+
+    /*
+
+     */
+    // delete(page:DynamicPage){
+    //     this.pageService
+    //         .delete(page)
+    //         .subscribe(
+    //             (data) => {
+    //                 // this.filterCollabs();
+    //             },
+    //             (err) => {
+    //                 console.error(err);
+    //             }
+    //         )
+    // }
 }
 
 

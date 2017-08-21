@@ -9,6 +9,9 @@ export class DynamicPageService{
 
     static ENDPOINT: string = '/__page/:id';
 
+    public static BIO_ENDPOINT: string = '__page/bio/:id';
+    public static COLLAB_ENDPOINT: string = '__page/collab/:id';
+
     pages: DynamicPage[] = [];
 
     constructor(@Inject(Http) private _http: Http) {
@@ -43,7 +46,7 @@ export class DynamicPageService{
 
         return this._http
             .post(endpoint
-                .replace(':id', ''), body, {headers})
+                .replace('/:id', ''), body, {headers})
             .map((response: Response) => {
                 const result = response.json().data;
                 const page = new DynamicPage(result._id, result.artist_id,result.templates, result.enabled);
@@ -53,6 +56,28 @@ export class DynamicPageService{
             .catch((error:Response) => Observable.throw(error.json()));
 
 
+    }
+
+    updatePage( endpoint:string, page: DynamicPage ):Observable<any>{
+        let body = JSON.stringify(page);
+
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+
+        return this._http
+            .patch(endpoint
+                .replace(':id', page.page_id), body, {headers})
+            .map((r) => r.json());
+    }
+
+    deletePage( endpoint:string, page: DynamicPage ):Observable<any>{
+        this.pages.splice(this.pages.indexOf(page), 1);
+        return this._http
+            .delete(endpoint
+                .replace(':id', page.page_id))
+            .map((response:Response) => response.json)
+            .catch((error:Response) => Observable.throw(error.json()));
     }
 
 

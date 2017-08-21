@@ -9,11 +9,11 @@ import {TextComponent} from "./text.component";
 import {AudioComponent} from "./audio.component";
 import {routerTransition} from "../../router.animations";
 import {ActivatedRoute} from "@angular/router";
-import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
 import {IComponentTemplate} from "./component.template";
 
-import {DynamicPage} from "../../CMS/collab/dynamic.page.model";
-import {DynamicPageService} from "../../CMS/collab/dynamic.page.service";
+import {DynamicPage} from "../../CMS/dynamicPage/dynamic.page.model";
+import {DynamicPageService} from "../../CMS/dynamicPage/dynamic.page.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 import {MediaModel} from "../../CMS/media/media.model";
 

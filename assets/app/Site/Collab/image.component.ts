@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from "@angular/core";
 import {ComponentTemplate} from "./component.template";
-import {DynamicPageEditorService} from "../../CMS/collab/page.editor.service";
+import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
 
 @Component({
     moduleId: module.id.toString(),
