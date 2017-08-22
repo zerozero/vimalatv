@@ -9,6 +9,7 @@ import {GigsComponent} from "./gigs/gigs.component";
 import {ArtistComponent} from "./artists/artist.component";
 import {CmsBioComponent} from "./bio/bio.component";
 import {CmsCollabComponent} from "./collab/collab.component";
+import {CmsReviewsComponent} from "./reviews/reviews.component";
 const CMS_ROUTES: Routes = [
     {
         path:'cms', component: CmsComponent
@@ -20,7 +21,7 @@ const CMS_ROUTES: Routes = [
             { path: 'media', component: MediaComponent },
             { path: 'artist', component: ArtistComponent },
             { path: 'collab', component: CmsCollabComponent },
-            { path: 'reviews', component: CmsDynamicPageComponent, data: {type: '__reviews'} },
+            { path: 'reviews', component: CmsReviewsComponent },
             { path: 'contact', component: ContactComponent }
         ]
     }

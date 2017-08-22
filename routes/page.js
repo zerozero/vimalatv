@@ -9,7 +9,7 @@ var upload = multer({ storage: storage });
 var cloudinary = require('cloudinary');
 
 
-router.get(['/bio','/collab'], function(req,res,next){
+router.get(['/bio','/collab','/reviews'], function(req,res,next){
 
     var type = req.path.substr(1);
     Page.find( req.query.filterDisabled ? {enabled:true, type:type} : {type:type} )
@@ -29,10 +29,11 @@ router.get(['/bio','/collab'], function(req,res,next){
 
 
 
-router.post(['/bio','/collab'], function(req,res,next){
+router.post(['/bio','/collab','/reviews'], function(req,res,next){
     var type = req.path.substr(1);
     var page = new Page({
         type: type,
+        artist_id: req.body.artist_id,
         templates: req.body.templates,
         enabled: req.body.enabled
     });
@@ -55,7 +56,7 @@ router.post(['/bio','/collab'], function(req,res,next){
 
 
 
-router.patch(['/bio/:id','/collab/:id'], function (req, res, next){
+router.patch(['/bio/:id','/collab/:id','/reviews/:id'], function (req, res, next){
 
     Page.findById(req.params.id, function(err, page){
         if (err){
@@ -72,6 +73,7 @@ router.patch(['/bio/:id','/collab/:id'], function (req, res, next){
         }
 
         page.enabled = req.body.enabled;
+        page.artist_id = req.body.artist_id;
         page.templates = req.body.templates;
         page.save(function(err, result){
             if (err){
@@ -90,7 +92,7 @@ router.patch(['/bio/:id','/collab/:id'], function (req, res, next){
 
 
 
-router.delete(['/bio/:id','/collab/:id'], function (req, res, next){
+router.delete(['/bio/:id','/collab/:id','/reviews/:id'], function (req, res, next){
 
     Page.findById(req.params.id, function(err, page){
         if (err){

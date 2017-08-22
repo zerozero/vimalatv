@@ -29,7 +29,7 @@ import {CmsBioComponent} from "./bio/bio.component";
 import {DeleteMediaDialog, EditMediaDialog, MediaComponent} from "./media/media.component";
 import {CmsDynamicPageComponent, DeletePageDialog, EditPageDialog} from "./dynamicPage/dynamic.page.component";
 import {EditGigDialog, DeleteGigDialog, GigsComponent} from "./gigs/gigs.component";
-import {ReviewsComponent} from "./reviews/reviews.component";
+import {CmsReviewsComponent} from "./reviews/reviews.component";
 import {ContactComponent} from "./contact/contact.component";
 import {FormsModule} from "@angular/forms";
 import {ArtistComponent, DeleteArtistDialog, EditArtistDialog} from "./artists/artist.component";
@@ -88,7 +88,7 @@ const MY_DATE_FORMATS = {
         CmsDynamicPageComponent,
         ArtistComponent,
         GigsComponent,
-        ReviewsComponent,
+        CmsReviewsComponent,
         ContactComponent,
         ImageUploaderComponent,
         TextEditorComponent,

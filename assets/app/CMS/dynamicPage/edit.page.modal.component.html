@@ -1,17 +1,18 @@
-<form class="gig-container" #artistForm="ngForm" (ngSubmit)="onSubmit()">
+<form class="gig-container" #f="ngForm" (ngSubmit)="onSubmit()">
     <div fxLayout="column" fxLayoutGap="40px">
 
         <h4 fxFlex>{{ data.page.page_id ? 'Edit' : 'Create' }} Page</h4>
-
-        <md-select class="artist-select"
+        <h4 *ngIf="!isCategoryRequired()">{{ data.categories[0].title }}</h4>
+        <md-select class="cat-select"
+                   *ngIf="isCategoryRequired()"
                    fxFlex="0 0 auto"
                    placeholder="Page"
-                   [(ngModel)]="selectedArtist"
+                   [(ngModel)]="selectedCategory"
                    name="sel"
                    ngDefaultControl
-                   required>
-            <md-option *ngFor="let artist of data.artists" [value]="artist">
-                {{artist.name}}
+                   [required]="isCategoryRequired() ? true : undefined">
+            <md-option *ngFor="let category of data.categories" [value]="category">
+                {{category.title}}
             </md-option>
         </md-select>
 
@@ -37,7 +38,7 @@
                     fxFlex="0 0 auto"
                     color="accent"
                     type="submit"
-                    [disabled]="!artistForm.form.valid">SAVE
+                    [disabled]="!f.form.valid">SAVE
             </button>
             <button md-raised-button
                     fxFlex="0 0 auto"

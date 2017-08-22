@@ -11,6 +11,7 @@ export class DynamicPageService{
 
     public static BIO_ENDPOINT: string = '__page/bio/:id';
     public static COLLAB_ENDPOINT: string = '__page/collab/:id';
+    public static REVIEWS_ENDPOINT: string = '__page/reviews/:id';
 
     pages: DynamicPage[] = [];
 

@@ -3,6 +3,7 @@ import {CmsDynamicPageComponent} from "../dynamicPage/dynamic.page.component";
 import {DynamicPage} from "../dynamicPage/dynamic.page.model";
 import {Artist} from "../artists/artist.model";
 import {DynamicPageService} from "../dynamicPage/dynamic.page.service";
+import {ICategory} from "../dynamicPage/category";
 @Component({
     selector: 'cms-bio',
     templateUrl: '../dynamicPage/dynamic.page.component.html',
@@ -17,7 +18,11 @@ export class CmsBioComponent extends CmsDynamicPageComponent{
 
         this.endpoint = DynamicPageService.BIO_ENDPOINT;
         this._getPages();
-        this.artists = [new Artist(null,'Biography', true)];
+        let cat:ICategory = {
+            title:'Biography',
+            id:''
+        };
+        this.categories = [cat];
         this.sub = this.activatedRoute.data.subscribe(data => {
             console.log(data.type);
         });
@@ -32,5 +37,8 @@ export class CmsBioComponent extends CmsDynamicPageComponent{
         this._getPagesOfType(this.endpoint,false);
     }
 
+    getPreview( id: string ):string{
+        return this.categories[0].title;
+    }
 
 }

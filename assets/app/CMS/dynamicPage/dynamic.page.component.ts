@@ -13,6 +13,13 @@ import {ImageUploaderComponent} from "./image.uploader.component";
 import {EmbedVideoComponent} from "./embed.video.component";
 import {EmbedAudioomponent} from "./embed.audio.component";
 import {ActivatedRoute} from "@angular/router";
+import {ICategory} from "./category";
+import {isNullOrUndefined} from "util";
+
+
+export interface IDynamicPage {
+    getPreview( value: any ):string;
+}
 
 @Component({
     selector: 'cms-page',
@@ -22,7 +29,7 @@ import {ActivatedRoute} from "@angular/router";
 export class CmsDynamicPageComponent implements OnInit, OnDestroy{
 
     pages: DynamicPage[] = [];
-    artists: Artist[] = [];
+    categories: any[] = [];
 
 
 
@@ -130,7 +137,7 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
         let page = new DynamicPage(null,  "",[],false);
         let wd = this.el.nativeElement.clientWidth * 0.9;
         let ht = this.el.nativeElement.clientHeight* 0.9;
-        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
+        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,categories:this.categories}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.save(result);
@@ -144,7 +151,7 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
 
         let wd = this.el.nativeElement.clientWidth * 0.9;
         let ht = this.el.nativeElement.clientHeight* 0.9;
-        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,artists:this.artists}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
+        let dialogRef = this.dialog.open(EditPageDialog, {data:{page:page,categories:this.categories}, disableClose: true, width:wd.toString() + 'px', height:ht.toString() + 'px'});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
                 this.update(result);
@@ -187,54 +194,7 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
         this._deletePageOfType(this.endpoint,dynamicPage);
     }
 
-    /*
 
-     */
-    // save( page: DynamicPage ){
-    //     this.pageService
-    //         .add(page)
-    //         .subscribe(
-    //             (data) => {
-    //                 console.log(data);
-    //             },
-    //             (err) => {
-    //                 console.error(err);
-    //             }
-    //         );
-    // }
-
-    /*
-
-     */
-    // update( page: DynamicPage){
-    //     this.pageService
-    //         .update(page)
-    //         .subscribe(
-    //             (data) => {
-    //                 console.log(data);
-    //                 // this.filterCollabs();
-    //             },
-    //             (err) => {
-    //                 console.error(err);
-    //             }
-    //         )
-    // }
-
-    /*
-
-     */
-    // delete(page:DynamicPage){
-    //     this.pageService
-    //         .delete(page)
-    //         .subscribe(
-    //             (data) => {
-    //                 // this.filterCollabs();
-    //             },
-    //             (err) => {
-    //                 console.error(err);
-    //             }
-    //         )
-    // }
 }
 
 
@@ -257,7 +217,7 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
                 width: 100%;
             }
             
-            .artist-select{
+            .cat-select{
                 max-width: 240px;
             }
 
@@ -271,8 +231,7 @@ export class CmsDynamicPageComponent implements OnInit, OnDestroy{
 export class EditPageDialog {
 
     public clonedPage: DynamicPage;
-    public selectedArtist: Artist;
-    public isArtistRequired = false;
+    public selectedCategory: ICategory;
 
     @ViewChild('preview') collabComponent: CollabComponent;
     @ViewChild('mediaTabs') mediaTabs:MdTabGroup;
@@ -287,13 +246,17 @@ export class EditPageDialog {
                 private pageEditorService: DynamicPageEditorService) {
 
         this.clonedPage = data.page.clone();
-        this.isArtistRequired = data.artists.length > 0;
-        if (!this.isArtistRequired)
+
+        if ( isNullOrUndefined(data.page.artist_id) || data.page.artist_id === "")
             return;
-        this.selectedArtist = data.artists.find((artist) => {
-            return artist.artist_id == data.page.artist_id;
+        this.selectedCategory = data.categories.find((category) => {
+            return category.id == data.page.artist_id;
         });
 
+    }
+
+    isCategoryRequired():boolean{
+        return this.data.categories.length > 1;
     }
 
     onCancel(){
@@ -303,8 +266,8 @@ export class EditPageDialog {
 
     onSubmit(){
         let mydata = this.pageEditorService.getPageData();
-        if (this.isArtistRequired)
-            this.data.page.artist_id = this.selectedArtist.artist_id;
+        if (this.isCategoryRequired())
+            this.data.page.artist_id = this.selectedCategory.id;
         this.data.page.templates = mydata;
         this.dialogRef.close(this.data.page);
     }

@@ -1,23 +1,24 @@
 import {Component} from "@angular/core";
-import {CmsDynamicPageComponent} from "../dynamicPage/dynamic.page.component";
+import {CmsDynamicPageComponent, IDynamicPage} from "../dynamicPage/dynamic.page.component";
 import {DynamicPage} from "../dynamicPage/dynamic.page.model";
 import {Artist} from "../artists/artist.model";
 import {DynamicPageService} from "../dynamicPage/dynamic.page.service";
+import {ICategory} from "../dynamicPage/category";
 @Component({
     selector: 'cms-bio',
     templateUrl: '../dynamicPage/dynamic.page.component.html',
     styleUrls: ['../dynamicPage/dynamic.page.component.css']
 })
-export class CmsCollabComponent extends CmsDynamicPageComponent{
+export class CmsCollabComponent extends CmsDynamicPageComponent implements IDynamicPage{
 
+
+    artists: Artist[] = [];
 
     ngOnInit(): void {
 
         this.endpoint = DynamicPageService.COLLAB_ENDPOINT;
         this._getPages();
-
         this._getAllArtists();
-        // this._getUnusedArtists();
         this.sub = this.activatedRoute.data.subscribe(data => {
             console.log(data.type);
         });
@@ -34,7 +35,7 @@ export class CmsCollabComponent extends CmsDynamicPageComponent{
 
 
 
-    private getArtistName( id: string ):string{
+    getPreview( id: string ):string{
         let artist: Artist = this.artists.find((artist) => {
             return artist.artist_id == id;
         });
@@ -46,16 +47,17 @@ export class CmsCollabComponent extends CmsDynamicPageComponent{
             .getAll()
             .subscribe((artists) => {
                 this.artists = artists;
+                artists.forEach((artist) => {
+                    let cat:ICategory = {
+                        title:artist.name,
+                        id:artist.artist_id
+                    };
+                    this.categories.push(cat);
+                })
             });
     }
 
-    // private _getUnusedArtists():void{
-    //     this.unusedArtists = [];
-    //     this.artists.forEach((artist) => {
-    //         let id = artist.artist_id;
-    //         //todo: search for existing collaborations with this artist id
-    //     });
-    // }
+
 
 
 }
