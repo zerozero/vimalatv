@@ -18,6 +18,7 @@ import {PageNotFoundComponent} from "./pagenotfound.component";
 import {MediaService} from "./CMS/media/media.service";
 import {CommonModule} from "@angular/common";
 import {QuotesService} from "./CMS/home/quote.service";
+import {ContactService} from "./CMS/contact/contact.service";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import {QuotesService} from "./CMS/home/quote.service";
         ArtistService,
         DynamicPageService,
         MediaService,
-        QuotesService
+        QuotesService,
+        ContactService
     ],
     bootstrap: [AppComponent]
 })

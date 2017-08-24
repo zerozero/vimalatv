@@ -1,3 +1,50 @@
-<div>
-    CONTACT
+<div class="containerCMS" fxLayout="column" fxLayoutAlign="start stretch" fxFlex="1 0 auto">
+    <form class="form-container" #contactForm="ngForm" (ngSubmit)="onSubmit()">
+        <div fxLayout="column" fxLayoutGap="40px">
+
+            <div fxFlex="100px"></div>
+            <p>
+                <md-input-container class="full-width">
+                    <input mdInput type="text"
+                           placeholder="twitter"
+                           [(ngModel)]="contact.twitterUrl"
+                           name="twitter">
+                </md-input-container>
+            </p>
+            <p>
+                <md-input-container class="full-width">
+                    <input mdInput type="text"
+                           placeholder="facebook"
+                           [(ngModel)]="contact.fbUrl"
+                           name="facebook">
+                </md-input-container>
+            </p>
+            <p>
+                <md-input-container class="full-width">
+                    <input mdInput type="text"
+                           placeholder="instagram"
+                           [(ngModel)]="contact.instaUrl"
+                           name="instagram">
+                </md-input-container>
+            </p>
+            <p>
+                <md-input-container class="full-width">
+                    <input mdInput type="text"
+                           placeholder="email"
+                           [(ngModel)]="contact.email"
+                           name="email">
+                </md-input-container>
+            </p>
+            <div fxFlex></div>
+            <div fxFlex fxlayout="row" fxLayoutAlign="end center">
+                <button md-raised-button
+                        fxFlex="0 0 auto"
+                        color="accent"
+                        type="submit"
+                        [disabled]="contactForm.form.pristine">SUBMIT</button>
+
+            </div>
+
+        </div>
+    </form>
 </div>
