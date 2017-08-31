@@ -32,7 +32,7 @@ export class SiteComponent implements OnInit{
     public typeAudio: string = MediaModel.AUDIO;
 
     constructor(private router:Router,
-                private collabService:DynamicPageService,
+                private dynamicPageService:DynamicPageService,
                 private artistService:ArtistService){
 
     }
@@ -53,8 +53,8 @@ export class SiteComponent implements OnInit{
 
     _getCollabs(){
 
-        this.collabService
-            .getAll(true)
+        this.dynamicPageService
+            .getPages( DynamicPageService.COLLAB_ENDPOINT, true)
             .subscribe((collabs) => {
                 this.collabs = collabs;
             });

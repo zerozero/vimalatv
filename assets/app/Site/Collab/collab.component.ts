@@ -3,84 +3,77 @@ import {
     ViewChild,
     ViewContainerRef, ViewRef
 } from "@angular/core";
-import {ImageComponent} from "./image.component";
-import {VideoComponent} from "./video.component";
-import {TextComponent} from "./text.component";
-import {AudioComponent} from "./audio.component";
+import {ImageComponent} from "../DynamicPage/image.component";
+import {VideoComponent} from "../DynamicPage/video.component";
+import {TextComponent} from "../DynamicPage/text.component";
+import {AudioComponent} from "../DynamicPage/audio.component";
 import {routerTransition} from "../../router.animations";
 import {ActivatedRoute} from "@angular/router";
 import {DynamicPageEditorService} from "../../CMS/dynamicPage/page.editor.service";
-import {IComponentTemplate} from "./component.template";
+import {IComponentTemplate} from "../DynamicPage/component.template";
 
 import {DynamicPage} from "../../CMS/dynamicPage/dynamic.page.model";
 import {DynamicPageService} from "../../CMS/dynamicPage/dynamic.page.service";
 import {IMediaModel} from "../../CMS/media/imedia.model";
 import {MediaModel} from "../../CMS/media/media.model";
+import {DynamicPageComponent} from "../DynamicPage/dynamic.page.component";
 
 
 
 @Component({
     moduleId: module.id.toString(),
     selector: 'app-collab',
-    templateUrl: './collab.component.html',
-    styleUrls: ['./collab.component.css']
+    templateUrl: '../DynamicPage/dynamic.page.component.html',
+    styleUrls: ['../DynamicPage/dynamic.page.component.css']
     // animations: [routerTransition()],
     // host: {'[@routerTransition]': ''}
 })
-export class CollabComponent implements OnInit, OnDestroy{
+export class CollabComponent extends DynamicPageComponent implements OnInit, OnDestroy{
 
 
-    @ViewChild('vc', {read: ViewContainerRef}) _container: ViewContainerRef;
+    // @ViewChild('vc', {read: ViewContainerRef}) _container: ViewContainerRef;
 
-    collab : DynamicPage;
+    // page : DynamicPage;
     artist_id : string;
 
-    @Input()
-    set collaboration(data: DynamicPage) {
-        this.collab = data;
-    }
+    // @Input()
+    // set collaboration(data: DynamicPage) {
+    //     this.page = data;
+    // }
+    //
+    // @Output() OnEditComponent : EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
+    //
+    // get collaboration(): DynamicPage{ return this.page; }
+    //
+    // private sub: any;
+    //
+    // @Input()
+    // public isPreviewMode: boolean = false;
+    //
+    //
+    // txtFactory: ComponentFactory<TextComponent>;
+    // imgFactory: ComponentFactory<ImageComponent>;
+    // vidFactory: ComponentFactory<VideoComponent>;
+    // audFactory: ComponentFactory<AudioComponent>;
 
-    @Output() OnEditComponent : EventEmitter<IMediaModel> = new EventEmitter<IMediaModel>();
-
-    get collaboration(): DynamicPage{ return this.collab; }
-
-    private sub: any;
-
-    @Input()
-    public isPreviewMode: boolean = false;
-
-
-    txtFactory: ComponentFactory<TextComponent>;
-    imgFactory: ComponentFactory<ImageComponent>;
-    vidFactory: ComponentFactory<VideoComponent>;
-    audFactory: ComponentFactory<AudioComponent>;
-
-    constructor(
-        private _resolver: ComponentFactoryResolver,
-        private route: ActivatedRoute,
-        private collabService:DynamicPageService,
-        private collabEditorService: DynamicPageEditorService) {
-
-    }
+    // constructor(
+    //     private _resolver: ComponentFactoryResolver,
+    //     private route: ActivatedRoute,
+    //     private dynamicPageService:DynamicPageService,
+    //     private collabEditorService: DynamicPageEditorService) {
+    //
+    //     super(_resolver,route,dynamicPageService,collabEditorService);
+    // }
 
     ngOnInit(): void {
+        this.endpoint = DynamicPageService.COLLAB_ENDPOINT;
         this.sub = this.route.params.subscribe(params => {
             if (params.artist_id !== this.artist_id)
-                this._getOneCollab(params.artist_id);
+                this._getOnePage(params.artist_id);
             this.artist_id = params.artist_id;
         });
 
-        this.collabEditorService.initialise(this._container);
-
-        this.txtFactory = this._resolver.resolveComponentFactory(TextComponent);
-        this.imgFactory = this._resolver.resolveComponentFactory(ImageComponent);
-        this.vidFactory = this._resolver.resolveComponentFactory(VideoComponent);
-        this.audFactory = this._resolver.resolveComponentFactory(AudioComponent);
-
-
-        //if we are in CMS mode this.page will be populated by the parent component
-        if (this.collab)
-            this.render(this.collab.templates);
+        super.ngOnInit();
 
     }
 
@@ -88,24 +81,24 @@ export class CollabComponent implements OnInit, OnDestroy{
         this.sub.unsubscribe();
     }
 
-    private _getOneCollab(id:string):void {
-        this.collabService
-            .getOne(id)
-            .subscribe((collabs) => {
+    // private _getOneCollab(id:string):void {
+    //     this.dynamicPageService
+    //         .getOnePage(DynamicPageService.COLLAB_ENDPOINT, id)
+    //         .subscribe((collabs) => {
+    //
+    //             this.page = collabs[0];
+    //             this.render(this.page.templates);
+    //         });
+    // }
 
-                this.collab = collabs[0];
-                this.render(this.collab.templates);
-            });
-    }
-
-    private render( templates: IMediaModel[] ){
-
-        this._container.clear();
-
-        templates.forEach((template) => {
-            this.createComponent(template);
-        });
-    }
+    // private render( templates: IMediaModel[] ){
+    //
+    //     this._container.clear();
+    //
+    //     templates.forEach((template) => {
+    //         this.createComponent(template);
+    //     });
+    // }
 
     ngAfterViewInit() {
 
@@ -113,30 +106,30 @@ export class CollabComponent implements OnInit, OnDestroy{
 
     }
 
-    private getFactoryForTemplate( template: IMediaModel ): ComponentFactory<any>{
-        if (template.type == MediaModel.IMAGE){
-            return this.imgFactory;
-        }else if (template.type == MediaModel.TEXT){
-            return this.txtFactory;
-        }else if (template.type == MediaModel.VIDEO){
-            return this.vidFactory
-        }else if (template.type == MediaModel.AUDIO){
-            return this.audFactory;
-        }
-        return null;
-    }
-
-    public createComponent( template: IMediaModel ){
-
-        var cmp: ComponentRef<IComponentTemplate>;
-
-        cmp = this._container.createComponent(this.getFactoryForTemplate(template));
-
-        cmp.instance.initialise(template, cmp.hostView);
-        cmp.instance.isEditMode = this.isPreviewMode;
-        cmp.instance.OnEditItem.subscribe((data) => {
-            this.OnEditComponent.emit(data);
-        })
-    }
+    // private getFactoryForTemplate( template: IMediaModel ): ComponentFactory<any>{
+    //     if (template.type == MediaModel.IMAGE){
+    //         return this.imgFactory;
+    //     }else if (template.type == MediaModel.TEXT){
+    //         return this.txtFactory;
+    //     }else if (template.type == MediaModel.VIDEO){
+    //         return this.vidFactory
+    //     }else if (template.type == MediaModel.AUDIO){
+    //         return this.audFactory;
+    //     }
+    //     return null;
+    // }
+    //
+    // public createComponent( template: IMediaModel ){
+    //
+    //     var cmp: ComponentRef<IComponentTemplate>;
+    //
+    //     cmp = this._container.createComponent(this.getFactoryForTemplate(template));
+    //
+    //     cmp.instance.initialise(template, cmp.hostView);
+    //     cmp.instance.isEditMode = this.isPreviewMode;
+    //     cmp.instance.OnEditItem.subscribe((data) => {
+    //         this.OnEditComponent.emit(data);
+    //     })
+    // }
 
 }

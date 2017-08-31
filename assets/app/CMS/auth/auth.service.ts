@@ -11,7 +11,7 @@ declare var Auth0Lock: any;
 export class Auth {
 
   options = {
-    rememberLastLogin: false
+    rememberLastLogin: true
   };
 
   // Configure Auth0

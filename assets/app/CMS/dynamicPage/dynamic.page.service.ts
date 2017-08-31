@@ -37,6 +37,26 @@ export class DynamicPageService{
             .catch((error: Response) => Observable.throw(error.json()));
     }
 
+    getOnePage( endpoint: string, id:string ):Observable<any> {
+
+        let url: string = (endpoint
+            .replace(':id', id));
+
+        return this._http
+            .get(url)
+            .map((r:Response) => {
+                const pages = r.json().data;
+                let transformedPages: DynamicPage[] = [];
+                for (let page of pages){
+                    transformedPages.push( new DynamicPage(page._id, page.artist_id, page.templates, page.enabled));
+                }
+                this.pages = transformedPages;
+                return transformedPages;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
+
+    }
+
     addPage(endpoint: string, page: DynamicPage ):Observable<any>{
 
         let body = JSON.stringify(page);
