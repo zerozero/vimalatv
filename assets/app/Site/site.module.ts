@@ -19,6 +19,7 @@ import {SiteComponent} from "./site.component";
 import {CommonModule} from "@angular/common";
 import {VideoThumbnail} from "./Media/video.thumbnail.component";
 import {MdGridListModule} from "@angular/material";
+import {DynamicPageComponent} from "./DynamicPage/dynamic.page.component";
 
 
 //refactor
@@ -37,6 +38,7 @@ import {MdGridListModule} from "@angular/material";
         GigsComponent,
         MediaComponent,
         ReviewsComponent,
+        DynamicPageComponent,
         ImageComponent,
         TextComponent,
         CollabWidgetsComponent,

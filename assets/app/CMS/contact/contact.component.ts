@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit{
     constructor(private contactService:ContactService){}
 
     ngOnInit(): void {
+        console.log("poo");
         this._getAll();
     }
 

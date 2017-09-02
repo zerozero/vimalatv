@@ -26,8 +26,6 @@ export class MediaComponent implements OnInit, OnDestroy{
 
     private sub: any;
 
-    private spotifyUrl: string = "https://soundcloud.com/jon-rowe-8/sets/midnight-diner";
-
     constructor(private router:Router,
                 private route: ActivatedRoute,
                 private mediaService:MediaService,
