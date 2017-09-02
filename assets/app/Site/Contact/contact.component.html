@@ -7,13 +7,24 @@
              <!--fxLayoutAlign="center center">-->
             <!---->
             <div class="contact-container"
-                 fxFlex="0 0 auto"
+                 fxFlex="0 1 auto"
                  fxLayout="column true"
-                 fxLayoutAlign="space-around center">
-                <h2>{{contact.fbUrl}}</h2>
-                <h2>{{contact.twitterUrl}}</h2>
-                <h2>{{contact.instaUrl}}</h2>
-                <h2>{{contact.email}}</h2>
+                 fxLayoutAlign="space-around center"
+                 fxLayoutGap="16px">
+                <!--<div fxLayout="row">-->
+                    <!--<h2>{{contact.fbUrl}}</h2>-->
+                <!--</div>-->
+                <!--<div fxLayout="row">-->
+                    <!--<h2>{{contact.twitterUrl}}</h2>-->
+                <!--</div>-->
+                <!--<div fxLayout="row">-->
+                    <!--<h2>{{contact.instaUrl}}</h2>-->
+                <!--</div>-->
+                <img src="../../../images/fb.png" (click)="openPage(contact.fbUrl)" class="social-thumb"/>
+                <img src="../../../images/twitter.png" (click)="openPage(contact.twitterUrl)" class="social-thumb"/>
+                <img src="../../../images/insta.png" (click)="openPage(contact.instaUrl)" class="social-thumb"/>
+                <img src="../../../images/email-plane.png" (click)="sendMail(contact.email)" class="social-thumb"/>
+                <md-icon>email</md-icon>
 
             </div>
         <!--</div>-->

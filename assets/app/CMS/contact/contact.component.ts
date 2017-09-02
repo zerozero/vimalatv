@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {Contact} from "./contact.model";
 import {ContactService} from "./contact.service";
+import {isNullOrUndefined} from "util";
 @Component({
     selector: 'cms-contact',
     templateUrl: './contact.component.html',
@@ -16,7 +17,6 @@ export class ContactComponent implements OnInit{
     constructor(private contactService:ContactService){}
 
     ngOnInit(): void {
-        console.log("poo");
         this._getAll();
     }
 
@@ -29,10 +29,33 @@ export class ContactComponent implements OnInit{
             });
     }
 
-    onSubmit(){
+    onSubmit() {
         this.contactForm.form.markAsPristine();
+
+        if (isNullOrUndefined(this.contact.id)) {
+            this.save();
+        } else {
+            this.update();
+        }
+    }
+
+    private save(){
         this.contactService
             .add(this.contact)
+            .subscribe(
+                (data) => {
+                    console.log(data);
+                    this.contact = data;
+                },
+                (err) => {
+                    console.error(err);
+                }
+            );
+    }
+
+    private update(){
+        this.contactService
+            .update(this.contact)
             .subscribe(
                 (data) => {
                     console.log(data);

@@ -26,4 +26,12 @@ export class ContactComponent implements OnInit{
             });
     }
 
+    public openPage( url: string ){
+        window.open(url, '_blank');
+    }
+
+    public sendMail( address: string ){
+        window.open("mailTo:"+address, '_self');
+    }
+
 }

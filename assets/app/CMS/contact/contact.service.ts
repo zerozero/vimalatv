@@ -33,6 +33,7 @@ export class ContactService{
                         result.instaUrl,
                         result.email
                     );
+                    this.contact = transformedContact;
                     return transformedContact;
                 }
                 return null;
