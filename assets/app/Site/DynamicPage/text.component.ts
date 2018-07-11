@@ -36,7 +36,7 @@ import {ComponentTemplate, IComponentTemplate} from "./component.template";
 
             @media screen  and (min-width: 600px){
                 .heading{
-                    font-size: 64px;
+                    font-size: 40px;
                 }
             }
 

@@ -45,7 +45,8 @@ router.post('/', function(req,res,next){
         description: req.body.description,
         website: req.body.website,
         ticketUrl: req.body.ticketUrl,
-        enabled: req.body.enabled
+        enabled: req.body.enabled,
+        permanent: req.body.permanent
     });
     gig.save(function(err,result){
         if (err){
@@ -82,10 +83,11 @@ router.patch('/:id', function (req, res, next){
        gig.website = req.body.website;
        gig.ticketUrl = req.body.ticketUrl;
        gig.enabled = req.body.enabled;
+       gig.permanent = req.body.permanent;
        gig.save(function(err, result){
            if (err){
                return res.status(500).json({
-                   title:'An Error Occurred',
+                   title:'An Error Did Occurred',
                    error: err
                })
            }

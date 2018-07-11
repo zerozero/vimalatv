@@ -1,3 +1,18 @@
+node, npm & n
+===
+
+use n to manage node version if necessary. Originall built with node v6.11.1
+
+$ n 6.11.1
+
+$ mongod
+$ mongo
+$npm run build
+$ npm start
+
+http://localhost:3000
+http://localhost:3000/cms
+
 mLab
 ====
 

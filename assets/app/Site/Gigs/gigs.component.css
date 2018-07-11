@@ -26,6 +26,14 @@ button{
     color: #ff4081;
 }
 
+.date-line-previous{
+    color: #ffb3c9;
+}
+
+.description-line-previous{
+    color: #e7c130;
+}
+
 .mat-subheader{
     color:#e7c130 !important;
     font-size: 22px !important;
