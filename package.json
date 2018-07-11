@@ -9,7 +9,7 @@
     "start": "node ./bin/www",
     "build": "del public/js/app && webpack --config webpack.config.dev.js --bail --progress --profile --watch --verbose",
     "build:prod": "del public/js/app && webpack --config webpack.config.prod4.js --progress --profile --verbose --display-entrypoints",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build:prod"
   },
   "dependencies": {
     "@angular/animations": "^4.1.3",
