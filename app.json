@@ -4,16 +4,20 @@
   },
   "env": {
     "CLOUDINARY_URL": {
-      "required": true
+      "required": true,
+      "value":"cloudinary://626785482432199:9xrQ_-iT0TUmYbvEnMEQWlbW8tc@hkgka4c5k"
     },
     "MONGODB_URI": {
-      "required": true
+      "required": true,
+      "value":"mongodb://heroku_pxj9qp18:80aeiititnhalvs4u9uemgcebl@ds151202.mlab.com:51202/heroku_pxj9qp18"
     },
     "NPM_CONFIG_PRODUCTION": {
-      "required": true
+      "required": true,
+      "value":"false"
     },
     "PAPERTRAIL_API_TOKEN": {
-      "required": true
+      "required": true,
+      "value":"iew2iD7bdDVxBXp57ryV"
     }
   },
   "formation": {
