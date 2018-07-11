@@ -13,7 +13,8 @@ import {routerTransition} from "../../router.animations";
 export class GigsComponent implements OnInit{
 
     gigs: Gig[] = [];
-    filteredGigs: Gig[];
+    upcomingGigs: Gig[];
+    previousGigs: Gig[];
 
     constructor(
         private gigService:GigService) {}
@@ -27,20 +28,36 @@ export class GigsComponent implements OnInit{
             .getAllEnabled()
             .subscribe((gigs) => {
                 this.gigs = gigs;
-                this.filterGigs();
+                this.filterUpcomingGigs();
+                this.filterPreviousGigs();
             });
     }
 
-    filterGigs(){
+    filterPreviousGigs(){
+        let now = new Date();
+        let midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0).getTime();
+        this.previousGigs = this.gigs.filter((gig) => {
+            let gigTime = gig.date.getTime();
+            return (gigTime < midnight && gig.permanent)
+        });
+
+        this.previousGigs.sort( (gig1: Gig, gig2: Gig ):number => {
+            if ( gig1.date.getTime() > gig2.date.getTime() ) return -1;
+            if ( gig1.date.getTime() < gig2.date.getTime() ) return 1;
+            return 0;
+        });
+    }
+
+    filterUpcomingGigs(){
 
         let now = new Date();
         let midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0).getTime();
-        this.filteredGigs = this.gigs.filter((gig) => {
+        this.upcomingGigs = this.gigs.filter((gig) => {
             let gigTime = gig.date.getTime();
             return (gigTime >= midnight)
         });
 
-        this.filteredGigs.sort( (gig1: Gig, gig2: Gig ):number => {
+        this.upcomingGigs.sort( (gig1: Gig, gig2: Gig ):number => {
             if ( gig1.date.getTime() > gig2.date.getTime() ) return -1;
             if ( gig1.date.getTime() < gig2.date.getTime() ) return 1;
             return 0;

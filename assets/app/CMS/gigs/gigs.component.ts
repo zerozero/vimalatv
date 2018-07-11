@@ -34,8 +34,14 @@ export class GigsComponent implements OnInit{
             });
     }
 
-    changeEnabled(gig:Gig, enabled: boolean){
-        console.log(enabled);
+    changeEnabled(gig:Gig, enabled: boolean, permanent: boolean){
+        gig.permanent = permanent;
+        gig.enabled = enabled;
+        this.update(gig);
+    }
+
+    changePermanence(gig:Gig, permanent: boolean, enabled: boolean){
+        gig.permanent = permanent;
         gig.enabled = enabled;
         this.update(gig);
     }
@@ -46,7 +52,7 @@ export class GigsComponent implements OnInit{
             let midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0).getTime();
             this.filteredGigs = this.gigs.filter((gig) => {
                 let gigTime = gig.date.getTime();
-                return (gigTime >= midnight)
+                return (gigTime >= midnight || gig.permanent)
             });
         }else{
             this.filteredGigs = this.gigs;
@@ -62,7 +68,7 @@ export class GigsComponent implements OnInit{
 
      */
     createItem(){
-        let gig = new Gig(null, new Date(), "", "", false);
+        let gig = new Gig(null, new Date(), "", "", false, false);
         let dialogRef = this.dialog.open(EditGigDialog, {data:gig, disableClose: true});
         dialogRef.afterClosed().subscribe(result => {
             if (result)
@@ -186,6 +192,9 @@ export class EditGigDialog {
         this.clonedGig = data.clone();
     }
 
+    getVenue(){
+        return "Venue From Fn";
+    }
 
     onCancel(){
         this.data.reset(this.clonedGig);

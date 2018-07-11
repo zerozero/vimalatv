@@ -54,7 +54,7 @@ export class GigService{
                 const gigs = r.json().data;
                 let transformedGigs: Gig[] = [];
                 for (let gig of gigs){
-                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.website, gig.ticketUrl));
+                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.permanent, gig.website, gig.ticketUrl));
                 }
                 this.gigs = transformedGigs;
                 return transformedGigs;
@@ -66,7 +66,7 @@ export class GigService{
     getAllEnabled():Observable<any> {
 
         let url: string = (GigService.ENDPOINT
-            .replace('/:id', '?filterDisabled=true'));
+            .replace('/:id', '?filterDisabled=false'));
 
         return this._http
             .get(url)
@@ -74,7 +74,7 @@ export class GigService{
                 const gigs = r.json().data;
                 let transformedGigs: Gig[] = [];
                 for (let gig of gigs){
-                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.website, gig.ticketUrl));
+                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.permanent, gig.website, gig.ticketUrl));
                 }
                 this.gigs = transformedGigs;
                 return transformedGigs;
@@ -95,7 +95,7 @@ export class GigService{
                 const gigs = r.json().data;
                 let transformedGigs: Gig[] = [];
                 for (let gig of gigs){
-                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.website, gig.ticketUrl));
+                    transformedGigs.push( new Gig(gig._id, new Date(gig.date), gig.venue,gig.description, gig.enabled, gig.permanent, gig.website, gig.ticketUrl));
                 }
                 this.gigs = transformedGigs;
                 return transformedGigs;
@@ -131,7 +131,7 @@ export class GigService{
             .replace(':id', ''), body, {headers})
             .map((response: Response) => {
                 const result = response.json().data;
-                const gig = new Gig(result._id, new Date(result.date), result.venue,result.description, result.enabled, result.website, result.ticketUrl);
+                const gig = new Gig(result._id, new Date(result.date), result.venue,result.description, result.enabled, result.permanent, result.website, result.ticketUrl);
                 this.gigs.push(gig);
                 return gig;
             })

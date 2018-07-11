@@ -7,7 +7,7 @@
                 class="checkbox"
                 [(ngModel)]="historyOff"
                 (change)="filterGigs()"
-                labelPosition="before">Hide past events</md-checkbox>
+                labelPosition="before">Hide past events (unless permanent)</md-checkbox>
     </div>
     <div fxLayout="row" fxLayoutAlign="center start" fxFlex="1 0 auto">
         <md-list class="gig-list" fxFlex="1 1 auto">
@@ -35,9 +35,14 @@
                 </button>
                 <md-slide-toggle
                         #slideToggle
-                        (change)="changeEnabled(gig, slideToggle.checked)"
+                        (change)="changeEnabled(gig, slideToggle.checked, permToggle.checked)"
                         [checked]="gig.enabled"
                         [disabled]="isPast(gig.date)">Enabled</md-slide-toggle>
+                <md-slide-toggle
+                        #permToggle
+                        (change)="changePermanence(gig, permToggle.checked, slideToggle.checked)"
+                        [checked]="gig.permanent"
+                        [disabled]="false">Permanent</md-slide-toggle>
             </md-list-item>
 
         </md-list>

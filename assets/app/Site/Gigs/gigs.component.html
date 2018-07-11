@@ -6,7 +6,7 @@
                 <div fxFlex.gt-sm="10vh" fxFlex="80px"></div>
                 <md-list class="gig-list" fxFlex="1 1 auto">
                     <h4 md-subheader>Upcoming Dates</h4>
-                    <md-list-item *ngFor="let gig of filteredGigs">
+                    <md-list-item *ngFor="let gig of upcomingGigs">
 
                             <h4 md-line class="date-line">{{gig.date | date:'fullDate'}} </h4>
                             <h4 md-line><md-icon class="website-link"
@@ -19,6 +19,16 @@
                             <button *ngIf="gigService.hasTicketURL(gig)" class="buy-tickets-large" md-raised-button
                                     (click)="gigService.buyTickets(gig)"
                                     color="accent">Tickets</button>
+
+                    </md-list-item>
+                </md-list>
+                <md-list class="gig-list" fxFlex="1 1 auto">
+                    <h4 md-subheader>Previous Gigs</h4>
+                    <md-list-item *ngFor="let gig of previousGigs">
+
+                        <h4 md-line class="description-line-previous">{{gig.date | date:'fullDate'}} </h4>
+                        <h4 md-line class="description-line-previous">{{gig.venue}}</h4>
+                        <h4 md-line class="description-line-previous">{{gig.description}}</h4>
 
                     </md-list-item>
                 </md-list>
