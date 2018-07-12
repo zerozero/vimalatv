@@ -35,6 +35,12 @@ button{
 }
 
 .mat-subheader{
+    color:#ff4081 !important;
+    font-size: 22px !important;
+    margin-bottom: 26px !important;
+}
+
+.subheader-previous{
     color:#e7c130 !important;
     font-size: 22px !important;
     margin-bottom: 26px !important;

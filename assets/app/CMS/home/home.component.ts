@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {Quote} from "./quote.model";
 import {MD_DIALOG_DATA, MdDialog, MdDialogRef} from "@angular/material";
 import {QuotesService} from "./quote.service";
+import {StarRatingColor} from '../../star-rating/star-rating.component';
+
 
 @Component({
     selector: 'cms-home',
@@ -9,6 +11,10 @@ import {QuotesService} from "./quote.service";
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit{
+
+    starColor:StarRatingColor = StarRatingColor.accent;
+    starColorP:StarRatingColor = StarRatingColor.primary;
+    starColorW:StarRatingColor = StarRatingColor.warn;
 
     quotes: Quote[] = [];
 
@@ -72,6 +78,16 @@ export class HomeComponent implements OnInit{
         this.update(quote);
     }
 
+    onRatingUpdated(rating, quote){
+
+        if (quote.stars == rating) /*toggle off*/
+            quote.stars = 0;
+        else
+            quote.stars = rating;
+
+        this.update(quote);
+    }
+
     /*
 
      */
@@ -123,7 +139,7 @@ export class HomeComponent implements OnInit{
 
 /*
 
- EDIT ARTIST DIALOG
+ EDIT QUOTE DIALOG
 
  */
 @Component({

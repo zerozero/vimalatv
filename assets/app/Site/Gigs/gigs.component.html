@@ -3,7 +3,7 @@
     <div class="containerSite" fxLayout="row" fxLayoutAlign="center start">
         <div class="list-container" >
             <div fxLayout="column" fxFlex.gt-sm="50vw" fxFlex="90vw">
-                <div fxFlex.gt-sm="10vh" fxFlex="80px"></div>
+                <div  fxFlex="80px"></div>
                 <md-list class="gig-list" fxFlex="1 1 auto">
                     <h4 md-subheader>Upcoming Dates</h4>
                     <md-list-item *ngFor="let gig of upcomingGigs">
@@ -23,7 +23,7 @@
                     </md-list-item>
                 </md-list>
                 <md-list class="gig-list" fxFlex="1 1 auto">
-                    <h4 md-subheader>Previous Gigs</h4>
+                    <h4 md-subheader class="subheader-previous">Previous Gigs</h4>
                     <md-list-item *ngFor="let gig of previousGigs">
 
                         <h4 md-line class="description-line-previous">{{gig.date | date:'fullDate'}} </h4>
