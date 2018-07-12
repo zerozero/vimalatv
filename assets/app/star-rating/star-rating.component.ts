@@ -14,10 +14,9 @@ export class StarRatingComponent implements OnInit {
   @Input('color') private color: string;
   @Output() private ratingUpdated = new EventEmitter();
 
-  private snackBarDuration: number = 2000;
-  private ratingArr = [];
+  public ratingArr = [];
 
-  constructor(/*private snackBar: MatSnackBar*/) {
+  constructor() {
   }
 
 
@@ -27,10 +26,6 @@ export class StarRatingComponent implements OnInit {
     }
   }
   onClick(rating:number) {
-    // console.log(rating)
-    // this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
-    //   duration: this.snackBarDuration
-    // });
     this.ratingUpdated.emit(rating);
     return false;
   }
