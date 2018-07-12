@@ -1,0 +1,38 @@
+{
+  "name": "vimalatv",
+  "scripts": {
+  },
+  "env": {
+    "CLOUDINARY_URL": {
+      "required": true,
+      "value":"cloudinary://626785482432199:9xrQ_-iT0TUmYbvEnMEQWlbW8tc@hkgka4c5k"
+    },
+    "MONGODB_URI": {
+      "required": true,
+      "value":"mongodb://heroku_pxj9qp18:80aeiititnhalvs4u9uemgcebl@ds151202.mlab.com:51202/heroku_pxj9qp18"
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "required": true,
+      "value":"false"
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true,
+      "value":"iew2iD7bdDVxBXp57ryV"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "cloudinary",
+    "mongolab",
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
