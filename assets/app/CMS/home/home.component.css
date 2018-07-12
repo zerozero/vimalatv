@@ -11,3 +11,11 @@ md-slide-toggle{
 .inline-fab{
     margin-left: 12px;
 }
+
+.md-icon-button{
+    color: #ff4081;
+}
+
+mat-star-rating{
+    width: 200px;
+}
