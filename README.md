@@ -1,7 +1,7 @@
 node, npm & n
 ===
 
-use n to manage node version if necessary. Originall built with node v6.11.1
+use n to manage node version if necessary. Originally built with node v6.11.1
 
 $ n 6.11.1
 
