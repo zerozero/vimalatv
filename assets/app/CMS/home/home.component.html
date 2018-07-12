@@ -9,6 +9,7 @@
             <md-list-item *ngFor="let quote of quotes">
 
                 <h4 md-line>{{quote.text | truncateFilter:100}}</h4>
+                <mat-star-rating [rating]="quote.stars" [starCount]="5" [color]="starColor" (ratingUpdated)="onRatingUpdated($event,quote)"></mat-star-rating>
                 <button (click)="editItem(quote)"
                         class="inline-fab"
                         md-mini-fab><md-icon>edit</md-icon>

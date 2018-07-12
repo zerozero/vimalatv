@@ -26,7 +26,7 @@ export class QuotesService{
                 const quotes = r.json().data;
                 let transformedQuotes: Quote[] = [];
                 for (let quote of quotes){
-                    transformedQuotes.push( new Quote(quote._id, quote.text, quote.enabled));
+                    transformedQuotes.push( new Quote(quote._id, quote.text, quote.enabled, quote.stars));
                 }
                 this.quotes = transformedQuotes;
                 return transformedQuotes;
@@ -46,7 +46,7 @@ export class QuotesService{
                 const quotes = r.json().data;
                 let transformedQuotes: Quote[] = [];
                 for (let quote of quotes){
-                    transformedQuotes.push( new Quote(quote._id, quote.text,quote.enabled));
+                    transformedQuotes.push( new Quote(quote._id, quote.text,quote.enabled, quote.stars));
                 }
                 this.quotes = transformedQuotes;
                 return transformedQuotes;
@@ -82,7 +82,7 @@ export class QuotesService{
                 .replace(':id', ''), body, {headers})
             .map((response: Response) => {
                 const result = response.json().data;
-                const quote = new Quote(result._id, result.text, result.enabled);
+                const quote = new Quote(result._id, result.text, result.enabled,result.stars);
                 this.quotes.push(quote);
                 return quote;
             })

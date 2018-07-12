@@ -8,10 +8,13 @@ import {
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
+import {StarRatingComponent} from './star-rating/star-rating.component';
+
 
 @NgModule({
     declarations: [
-        CollabComponent
+        CollabComponent,
+        StarRatingComponent
     ],
     imports: [
         BrowserModule,
@@ -26,6 +29,7 @@ import {CommonModule} from "@angular/common";
     exports: [
         BrowserModule,
         CollabComponent,
+        StarRatingComponent,
         MdToolbarModule,
         MdButtonModule,
         MdSidenavModule,
