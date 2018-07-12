@@ -44,7 +44,9 @@
     "ng2-file-upload": "^1.2.1",
     "rxjs": "^5.4.0",
     "serve-favicon": "~2.4.2",
-    "zone.js": "0.8.12",
+    "zone.js": "^0.8.12"
+  },
+  "devDependencies": {
     "@ngtools/webpack": "^1.5.2",
     "@types/core-js": "^0.9.41",
     "@types/node": "^7.0.23",
@@ -66,8 +68,5 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1",
     "webpack-merge": "^4.1.0"
-  },
-  "devDependencies": {
-
   }
 }
