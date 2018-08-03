@@ -21,7 +21,7 @@ export class StarRatingComponent implements OnInit {
 
 
   ngOnInit() {
-    for (let index = 0; index < this.starCount; index++) {
+    for (let index = 0; index < this.rating; index++) {
       this.ratingArr.push(index);
     }
   }
