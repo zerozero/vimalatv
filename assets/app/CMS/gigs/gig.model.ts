@@ -11,7 +11,16 @@ export class Gig{
                 public website?: string,
                 public ticketUrl?: string) {}
 
-    public clone():Gig{
+
+    public clone(): Gig{
+        return Object.assign({}, this);
+    }
+
+    public reset( data: Gig): Gig{
+        return Object.assign({}, data);
+    }
+
+    /*public clone():Gig{
         return new Gig(this.gig_id, this.date, this.venue, this.description, this.enabled, this.permanent, this.website, this.ticketUrl);
     }
 
@@ -24,6 +33,6 @@ export class Gig{
         this.permanent = original.permanent;
         this.website = original.website;
         this.ticketUrl = original.ticketUrl;
-    }
+    }*/
 }
 
