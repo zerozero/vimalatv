@@ -15,7 +15,7 @@ export class CmsBioComponent extends CmsDynamicPageComponent{
 
 
     ngOnInit(): void {
-
+        console.log("I am BIO");
         this.endpoint = DynamicPageService.BIO_ENDPOINT;
         this._getPages();
         let cat:ICategory = {

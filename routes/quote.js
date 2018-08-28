@@ -24,7 +24,8 @@ router.get('/', function(req,res,next){
 router.post('/', function(req,res,next){
     var quote = new Quote({
         text: req.body.text,
-        enabled: req.body.enabled
+        enabled: req.body.enabled,
+        stars: req.body.stars
     });
     quote.save(function(err,result){
         if (err){
@@ -57,6 +58,7 @@ router.patch('/:id', function (req, res, next){
         }
         quote.text = req.body.text;
         quote.enabled = req.body.enabled;
+        quote.stars = req.body.stars;
         quote.save(function(err, result){
             if (err){
                 return res.status(500).json({

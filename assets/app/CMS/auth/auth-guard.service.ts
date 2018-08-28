@@ -8,31 +8,34 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 }                           from '@angular/router';
-import { Auth }      from './auth.service';
-import { Location } from '@angular/common';
+import {UniversalAuth} from './universalAuth.service';
+// import { Auth }      from './auth.service';
+ import { Location } from '@angular/common';
 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private authService: Auth, private router: Router, private location: Location) {}
+  constructor(private authService: UniversalAuth, private router: Router, private location: Location) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let url: string = state.url;
 
-    return this.checkLogin(url);
+    // return this.checkLogin(url);
+    return true;
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.authenticated()) {
+    if (this.authService.isAuthenticated()){
       return true;
     }
-    // this.authService.login();
-    this.router.navigateByUrl('/login');
-    return false;
+    this.authService.login();
+    // this.router.navigateByUrl('/login');
+    // return true;
   }
 
   locationHasAccessToken():boolean
   {
+    // return true;
     return location.href.indexOf('access_token') > -1;
   }
 }

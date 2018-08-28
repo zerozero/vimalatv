@@ -22,7 +22,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {Http, RequestOptions} from "@angular/http";
 import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthGuard} from "./auth/auth-guard.service";
-import {Auth} from "./auth/auth.service";
+// import {Auth} from "./auth/auth.service";
+import {UniversalAuth} from './auth/universalAuth.service';
 import {TabsComponent} from "./tabs/tabs.component";
 import {DeleteQuoteDialog, EditQuoteDialog, HomeComponent} from "./home/home.component";
 import {CmsBioComponent} from "./bio/bio.component";
@@ -108,7 +109,8 @@ const MY_DATE_FORMATS = {
         DeleteQuoteDialog
     ],
     providers: [
-        Auth,
+        // Auth,
+        UniversalAuth,
         AuthGuard,
         {
             provide: AuthHttp,

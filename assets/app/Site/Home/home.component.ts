@@ -6,6 +6,7 @@ import {
 import {Quote}                        from '../../CMS/home/quote.model';
 import {routerTransition} from "../../router.animations";
 import {QuotesService} from "../../CMS/home/quote.service";
+import {StarRatingColor} from '../../star-rating/star-rating.component';
 
 
 @Component({
@@ -33,7 +34,10 @@ export class HomeComponent implements OnInit, OnDestroy{
       clearInterval(this.id);
     }
   }
-
+    hasStars( quote:Quote){
+      if (quote == undefined) return false;
+      return quote.stars != undefined && quote.stars > 0;
+    }
   private _getAll():void {
 
     this.quotes = [];

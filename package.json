@@ -28,6 +28,7 @@
     "@angular/router": "^4.0.0",
     "@angular/upgrade": "^4.0.0",
     "angular2-jwt": "^0.2.3",
+    "auth0-js": "^9.7.3",
     "body-parser": "~1.17.1",
     "cloudinary": "^1.9.0",
     "cookie-parser": "~1.4.3",
@@ -44,7 +45,7 @@
     "ng2-file-upload": "^1.2.1",
     "rxjs": "^5.4.0",
     "serve-favicon": "~2.4.2",
-    "zone.js": "0.8.12"
+    "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "@ngtools/webpack": "^1.5.2",

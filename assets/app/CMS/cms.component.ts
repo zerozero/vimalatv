@@ -1,7 +1,8 @@
 
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {Auth} from "./auth/auth.service";
+// import {Auth} from "./auth/auth.service";
+import {UniversalAuth} from './auth/universalAuth.service';
 
 @Component({
     selector: 'app-cms',
@@ -12,19 +13,23 @@ import {Auth} from "./auth/auth.service";
 export class CmsComponent{
 
     constructor(
-        private router: Router, private auth:Auth){}
+        private router: Router, private auth:UniversalAuth){
+        // auth.handleAuthentication();
+    }
 
     authenticated(){
-        return this.auth.authenticated();
+            return true;
+        // console.log(this.auth.isAuthenticated());
+        // return this.auth.isAuthenticated();
     }
 
     logout(){
         this.auth.logout();
-        this.router.navigateByUrl('/cms');
+        // this.router.navigateByUrl('/cms');
     }
 
     login(){
-        this.router.navigateByUrl('/cms');
+        // this.router.navigateByUrl('/cms');
         this.auth.login();
     }
 }
