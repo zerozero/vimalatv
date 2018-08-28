@@ -10,6 +10,7 @@ import {ArtistComponent} from "./artists/artist.component";
 import {CmsBioComponent} from "./bio/bio.component";
 import {CmsCollabComponent} from "./collab/collab.component";
 import {CmsReviewsComponent} from "./reviews/reviews.component";
+import {AuthGuard} from './auth/auth-guard.service';
 const CMS_ROUTES: Routes = [
     {
         path:'cms', component: CmsComponent

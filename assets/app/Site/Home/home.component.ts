@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     }
   }
     hasStars( quote:Quote){
+      if (quote == undefined) return false;
       return quote.stars != undefined && quote.stars > 0;
     }
   private _getAll():void {

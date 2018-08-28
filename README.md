@@ -7,11 +7,17 @@ $ n 6.11.1
 
 $ mongod
 $ mongo
-$npm run build
+$ npm run build
 $ npm start
 
 http://localhost:3000
 http://localhost:3000/cms
+
+deploy
+======
+
+Push to github then create a pull request
+After travis CI completes (no tests) it will be available in heroku to create an app
 
 mLab
 ====

@@ -5,7 +5,7 @@
             <div fxFlex></div>
             <div fxFlex="0 1 auto" fxFlexAlign="center" class="quote-container" fxHide.lt-md="true" >
                 <img src="../../../images/double-quote.png">
-                <h1 class="body-font quotes-text">{{ quote?.text }}<br/><mat-star-rating *ngIf="hasStars(quote)" [rating]="quote.stars" [starCount]="5"></mat-star-rating></h1>
+                <h1 class="body-font quotes-text">{{ quote?.text }}<br/><mat-star-rating *ngIf="hasStars(quote)" [rating]="quote.stars" [starCount]="quote.stars"></mat-star-rating></h1>
             </div>
     </div>
     <div fxFlex="1 0 auto"></div>

@@ -28,6 +28,7 @@
     "@angular/router": "^4.0.0",
     "@angular/upgrade": "^4.0.0",
     "angular2-jwt": "^0.2.3",
+    "auth0-js": "^9.7.3",
     "body-parser": "~1.17.1",
     "cloudinary": "^1.9.0",
     "cookie-parser": "~1.4.3",
