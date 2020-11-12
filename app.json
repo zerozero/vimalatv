@@ -9,7 +9,7 @@
     },
     "MONGODB_URI": {
       "required": true,
-      "value":"mongodb://heroku_pxj9qp18:80aeiititnhalvs4u9uemgcebl@ds151202.mlab.com:51202/heroku_pxj9qp18"
+      "value":"mongodb://heroku_pxj9qp18:80aeiititnhalvs4u9uemgcebl@cluster1-shard-00-00.ddlvd.mongodb.net:27017,cluster1-shard-00-01.ddlvd.mongodb.net:27017,cluster1-shard-00-02.ddlvd.mongodb.net:27017/heroku_pxj9qp18?ssl=true&replicaSet=atlas-2b9nik-shard-0&authSource=admin&retryWrites=true&w=majority"
     },
     "NPM_CONFIG_PRODUCTION": {
       "required": true,
